@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="80dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@layout/bg_repeat"
+        android:tileMode="repeat"
+        android:dither="true"
+        android:id="@+id/linearLayout">
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:id="@+id/home_btn"
+            android:background="@drawable/icon_trans_house"
+            android:padding="1dp"
+            android:focusableInTouchMode="true" />
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:id="@+id/exercise_btn"
+            android:background="@drawable/icon_white_exercise"
+            android:padding="1dp"
+            android:hapticFeedbackEnabled="true"
+            android:layout_marginTop="5dp" />
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:id="@+id/revise_btn"
+            android:background="@drawable/icon_white_progress"
+            android:padding="1dp"
+            android:hapticFeedbackEnabled="true"
+            android:layout_marginTop="5dp" />
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:id="@+id/sensor_btn"
+            android:background="@drawable/icon_white_sensor"
+            android:padding="1dp"
+            android:layout_marginTop="5dp" />
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:id="@+id/email_btn"
+            android:background="@drawable/icon_white_contact"
+            android:padding="1dp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+</RelativeLayout>
