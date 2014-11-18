@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/possiblebg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Home"
+            android:id="@+id/textView"
+            android:textColor="@android:color/white"
+            android:textSize="100dp"
+            android:textIsSelectable="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="49dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile"
+            android:layout_below="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:background="@drawable/circular_profile" />
+
+        <ImageView
+            android:layout_width="152px"
+            android:layout_height="152px"
+            android:id="@+id/menubg"
+            android:background="@layout/bg_repeat"
+            android:layout_alignTop="@+id/profile"
+            android:layout_toEndOf="@+id/profile"
+            android:layout_marginStart="-162px"
+            android:layout_marginTop="53px"/>
+
+        <ImageView
+            android:layout_width="148px"
+            android:layout_height="148px"
+            android:id="@+id/menu"
+            android:background="@drawable/menu"
+            android:layout_alignTop="@+id/profile"
+            android:layout_toEndOf="@+id/profile"
+            android:layout_marginLeft="-162px"
+            android:layout_marginTop="53px"/>
+
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="243px"
+            android:layout_height="243px"
+            android:layout_marginTop="9px"
+            android:layout_marginLeft="9px"
+            android:layout_below="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:background="@drawable/default_profile" />
+    </RelativeLayout>
+</RelativeLayout><!-- From: file:/C:/Users/Darren/Documents/Repos/FinalYear/New_design/app/src/main/res/layout/home.xml -->
