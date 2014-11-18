@@ -56,6 +56,16 @@
             android:background="@drawable/icon_white_contact"
             android:padding="1dp"
             android:layout_marginTop="5dp" />
+
     </LinearLayout>
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageButton"
+        android:background="@drawable/icon_white_logout"
+        android:padding="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"/>
 
 </RelativeLayout>

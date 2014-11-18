@@ -20,6 +20,45 @@
             android:textSize="100dp"
             android:textIsSelectable="true"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="49dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile"
+            android:layout_below="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:background="@drawable/circular_profile" />
+
+        <ImageView
+            android:layout_width="152px"
+            android:layout_height="152px"
+            android:id="@+id/menubg"
+            android:background="@layout/bg_repeat"
+            android:layout_alignTop="@+id/profile"
+            android:layout_toEndOf="@+id/profile"
+            android:layout_marginStart="-162px"
+            android:layout_marginTop="53px"/>
+
+        <ImageView
+            android:layout_width="148px"
+            android:layout_height="148px"
+            android:id="@+id/menu"
+            android:background="@drawable/menu"
+            android:layout_alignTop="@+id/profile"
+            android:layout_toEndOf="@+id/profile"
+            android:layout_marginLeft="-162px"
+            android:layout_marginTop="53px"/>
+
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="243px"
+            android:layout_height="243px"
+            android:layout_marginTop="9px"
+            android:layout_marginLeft="9px"
+            android:layout_below="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:background="@drawable/default_profile" />
     </RelativeLayout>
 </RelativeLayout>
