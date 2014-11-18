@@ -1,0 +1,9 @@
+<bitmap
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/pattern2"
+    android:layout_height="100dp"
+    android:layout_width="100dp"
+    android:tileMode="repeat"
+    android:dither="true"/>
+
+<!-- From: file:/C:/Users/Darren/Documents/Repos/FinalYear/New_design/app/src/main/res/layout/bg_repeat.xml -->
