@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
-    android:interpolator="@android:anim/linear_interpolator"
-    android:valueFrom="0"
-    android:valueTo="1"
-    android:propertyName="alpha"
-    android:duration="500" /><!-- From: file:/C:/Users/Darren/Documents/Repos/FinalYear/New_design/app/src/main/res/animator/fade_in.xml -->

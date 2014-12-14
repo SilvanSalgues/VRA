@@ -2,9 +2,44 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jar="C:\Users\Darren\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-b484f13c0c028fc8ce81436fef8d2616ecda5272.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="27bbd3982cdfe4468a9bf99c8c773734a9049e33">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-2930e36d477e3bc6c5674f89820ec36546cf4e7d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-b484f13c0c028fc8ce81436fef8d2616ecda5272.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e128103d5281ddd26195a7f980b36d0d005a4e56">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-903f1d07f2df68148d28a3883bdd1b88f000a8b8.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="27bbd3982cdfe4468a9bf99c8c773734a9049e33">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-2930e36d477e3bc6c5674f89820ec36546cf4e7d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
         sha1="8694693636ab36910c8100ce527c258ff3ebece0">
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-885a0c8986bc0185cf587127808205b2402c4a9b.jar" />
     </item>
@@ -18,23 +53,58 @@
     <item
         jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
         jumboMode="false"
-        revision="20.0.0"
+        revision="21.1.2"
         sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-e48e5dc22ae3e93546b76c98c6187c9d86b15f70.jar" />
     </item>
     <item
         jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\libs\internal_impl-20.0.0.jar"
         jumboMode="false"
-        revision="20.0.0"
+        revision="21.1.1"
         sha1="27bbd3982cdfe4468a9bf99c8c773734a9049e33">
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-2930e36d477e3bc6c5674f89820ec36546cf4e7d.jar" />
     </item>
     <item
-        jar="C:\Users\Darren\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="e128103d5281ddd26195a7f980b36d0d005a4e56">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-903f1d07f2df68148d28a3883bdd1b88f000a8b8.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-e48e5dc22ae3e93546b76c98c6187c9d86b15f70.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-885a0c8986bc0185cf587127808205b2402c4a9b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-b484f13c0c028fc8ce81436fef8d2616ecda5272.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-885a0c8986bc0185cf587127808205b2402c4a9b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-e48e5dc22ae3e93546b76c98c6187c9d86b15f70.jar" />
     </item>
 
 </items>
