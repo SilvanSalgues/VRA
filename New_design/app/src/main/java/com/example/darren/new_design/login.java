@@ -2,10 +2,10 @@ package com.example.darren.new_design;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.Bundle;
 
 
 public class login extends Activity {

@@ -72,6 +72,13 @@
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-903f1d07f2df68148d28a3883bdd1b88f000a8b8.jar" />
     </item>
     <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.jjoe64\graphview\3.1.4\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5ae526f646cab07cb2f513854798bf98989e9c47">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-356eba7619eae8e047e9df25cc988980a555bb27.jar" />
+    </item>
+    <item
         jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"

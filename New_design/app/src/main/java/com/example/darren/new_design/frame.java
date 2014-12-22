@@ -1,18 +1,19 @@
 package com.example.darren.new_design;
 
-import android.widget.ImageButton;
 import android.app.ActionBar;
-import android.view.View;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+public class frame extends Activity {
 
-public class frame extends FragmentActivity{
-
-    ImageButton exercise_btn, revise_btn, sensor_btn, email_btn, home_btn;
+    ImageButton exercise_btn, revise_btn, sensor_btn,messenger_btn, home_btn, logout_btn;
+    Fragment newFragment;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,20 +29,22 @@ public class frame extends FragmentActivity{
         exercise_btn = (ImageButton) findViewById(R.id.exercise_btn);
         revise_btn = (ImageButton) findViewById(R.id.revise_btn);
         sensor_btn = (ImageButton) findViewById(R.id.sensor_btn);
-        email_btn = (ImageButton) findViewById(R.id.email_btn);
+        messenger_btn = (ImageButton) findViewById(R.id.messenger_btn);
+        logout_btn = (ImageButton) findViewById(R.id.logout_btn);
 
         home_btn.setOnClickListener(BtnOnClickListener);
         exercise_btn.setOnClickListener(BtnOnClickListener);
         revise_btn.setOnClickListener(BtnOnClickListener);
         sensor_btn.setOnClickListener(BtnOnClickListener);
-        email_btn.setOnClickListener(BtnOnClickListener);
+        messenger_btn.setOnClickListener(BtnOnClickListener);
+        logout_btn.setOnClickListener(BtnOnClickListener);
 
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
         if (savedInstanceState == null){
-            home myFragment = new home();
-            ft.add(R.id.content_layout, myFragment);
+            newFragment = new home();
+            ft.replace(R.id.content_layout, newFragment);
             ft.commit();
         }
     }
@@ -49,7 +52,6 @@ public class frame extends FragmentActivity{
     ImageButton.OnClickListener BtnOnClickListener = new ImageButton.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Fragment newFragment;
             enabletabs();
             if(v == home_btn){
                 home_btn.setEnabled(false);
@@ -67,12 +69,15 @@ public class frame extends FragmentActivity{
                 sensor_btn.setEnabled(false);
                 newFragment = new sensor();
             }
-            else if(v == email_btn){
-                email_btn.setEnabled(false);
-                newFragment = new email();
+            else if(v == messenger_btn){
+                messenger_btn.setEnabled(false);
+                newFragment = new messenger();
+            }
+            else if(v == logout_btn){
+                Intent intent = new Intent(getApplicationContext(), login.class);
+                startActivity(intent);
             }
             else{
-
                 home_btn.setEnabled(false);
                 newFragment = new home();
             }
@@ -81,17 +86,14 @@ public class frame extends FragmentActivity{
             toggleicons(exercise_btn);
             toggleicons(revise_btn);
             toggleicons(sensor_btn);
-            toggleicons(email_btn);
+            toggleicons(messenger_btn);
 
-            FragmentManager fm1 = getSupportFragmentManager();
+
+            FragmentManager fm1 = getFragmentManager();
             FragmentTransaction ft1 = fm1.beginTransaction();
-            //ft1.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
             ft1.replace(R.id.content_layout, newFragment)
                     .addToBackStack(null)
                     .commit();
-
-            //FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
         }
 
     };
@@ -101,7 +103,7 @@ public class frame extends FragmentActivity{
         exercise_btn.setEnabled(true);
         revise_btn.setEnabled(true);
         sensor_btn.setEnabled(true);
-        email_btn.setEnabled(true);
+        messenger_btn.setEnabled(true);
     }
 
     void toggleicons(ImageButton button)
@@ -120,7 +122,7 @@ public class frame extends FragmentActivity{
             {
                 button.setBackground(getResources().getDrawable(R.drawable.icon_white_sensor));
             }
-            else if(button.getId() == R.id.email_btn)
+            else if(button.getId() == R.id.messenger_btn)
             {
                 button.setBackground(getResources().getDrawable(R.drawable.icon_white_contact));
             }
@@ -140,7 +142,7 @@ public class frame extends FragmentActivity{
             {
                 button.setBackground(getResources().getDrawable(R.drawable.icon_trans_sensor));
             }
-            else if(button.getId() == R.id.email_btn)
+            else if(button.getId() == R.id.messenger_btn)
             {
                 button.setBackground(getResources().getDrawable(R.drawable.icon_trans_contact));
             }

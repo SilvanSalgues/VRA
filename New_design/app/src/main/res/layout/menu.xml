@@ -52,17 +52,18 @@
         <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="80dp"
-            android:id="@+id/email_btn"
+            android:id="@+id/messenger_btn"
             android:background="@drawable/icon_white_contact"
             android:padding="1dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:focusableInTouchMode="false" />
 
     </LinearLayout>
 
     <ImageButton
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:id="@+id/imageButton"
+        android:id="@+id/logout_btn"
         android:background="@drawable/icon_white_logout"
         android:padding="1dp"
         android:layout_alignParentBottom="true"

@@ -8,18 +8,212 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/possiblebg">
+        android:background="@drawable/background">
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollView">
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:baselineAligned="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView4"
+                    android:text="Device Info"
+                    android:layout_marginTop="5dip"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/deviceInfo"
+                    android:text="No Sensor Found"
+                    android:textSize="18sp"
+                    android:textIsSelectable="false"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView7"
+                    android:text="Data Recieved"
+                    android:layout_marginTop="5dip"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TimeStamp (4 bytes): "
+                    android:id="@+id/timestamp"
+                    android:textSize="18sp"
+                    android:textIsSelectable="false"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Packet number (1 bytes): "
+                    android:id="@+id/packetnumber"
+                    android:textSize="18sp"
+                    android:textIsSelectable="false"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AccelData (6 bytes): \nX: \nY: \nZ: "
+                    android:id="@+id/accelData"
+                    android:textSize="18sp"
+                    android:textIsSelectable="false"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Battery Voltage (1 bytes): "
+                    android:id="@+id/batteryVoltage"
+                    android:textSize="18sp"
+                    android:textIsSelectable="false"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GyroData (6 bytes): \nX: \nY: \nZ: "
+                    android:id="@+id/gyroData"
+                    android:textSize="18sp"
+                    android:textIsSelectable="false"
+                    android:textColor="@android:color/white"
+                    android:singleLine="false"
+                    />
+
+            </LinearLayout>
+
+        </ScrollView>
+   <!--     <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="180dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/arrow_nw"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/arrow_directional"
+                android:layout_margin="3dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/arrow_n"
+                android:background="@drawable/arrow_directional"
+                android:layout_toEndOf="@+id/arrow_nw"
+                android:layout_above="@+id/arrow_w"
+                android:layout_margin="3dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/arrow_ne"
+                android:background="@drawable/arrow_directional"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/arrow_n"
+                android:layout_margin="3dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/arrow_w"
+                android:background="@drawable/arrow_directional"
+                android:layout_below="@+id/arrow_nw"
+                android:layout_margin="3dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/arrow_center"
+                android:background="@drawable/arrow_center"
+                android:layout_toEndOf="@+id/arrow_w"
+                android:layout_below="@+id/arrow_n"
+                android:layout_margin="3dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/arrow_e"
+                android:background="@drawable/arrow_directional"
+                android:layout_toEndOf="@+id/arrow_center"
+                android:layout_below="@+id/arrow_ne"
+                android:layout_margin="3dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/arrow_sw"
+                android:background="@drawable/arrow_directional"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/arrow_w"
+                android:layout_margin="3dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/arrow_s"
+                android:background="@drawable/arrow_directional"
+                android:layout_toEndOf="@+id/arrow_sw"
+                android:layout_below="@+id/arrow_center"
+                android:layout_margin="3dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/arrow_se"
+                android:background="@drawable/arrow_directional"
+                android:layout_toEndOf="@+id/arrow_s"
+                android:layout_below="@+id/arrow_e"
+                android:layout_margin="3dp" />
+
+
+        </RelativeLayout>-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Sensor"
-            android:id="@+id/textView"
+            android:id="@+id/welcome"
             android:textColor="@android:color/white"
             android:textSize="100dp"
             android:textIsSelectable="true"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
+
+        <FrameLayout
+            android:layout_width="500dp"
+            android:layout_height="500dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/container_3D"
+            android:layout_margin="5dp" />
+
     </RelativeLayout>
 </RelativeLayout><!-- From: file:/C:/Users/Darren/Documents/Repos/FinalYear/New_design/app/src/main/res/layout/sensor.xml -->
