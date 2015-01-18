@@ -1,0 +1,17 @@
+diff a/New_design/.idea/workspace.xml b/New_design/.idea/workspace.xml	(rejected hunks)
+@@ -28,13 +28,13 @@
+       </config>
+     </shared>
+     <layouts>
+-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/exercise.xml">
++      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/container.xml">
+         <config>
+           <state>Landscape</state>
+           <theme>@style/AppTheme</theme>
+         </config>
+       </layout>
+-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/frame.xml">
++      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/exercise.xml">
+         <config>
+           <state>Landscape</state>
+           <theme>@style/AppTheme</theme>
