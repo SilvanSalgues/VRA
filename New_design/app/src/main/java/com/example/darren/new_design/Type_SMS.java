@@ -6,28 +6,24 @@ package com.example.darren.new_design;
 public class Type_SMS {
 
 	/**
-	 * Item text
+	 * Message text
 	 */
 	@com.google.gson.annotations.SerializedName("text")
 	private String mText;
 
 	/**
-	 * Item Id
+	 * Message Id
 	 */
 	@com.google.gson.annotations.SerializedName("id")
 	private String mId;
 
 	/**
-	 * Indicates if the item is completed
+	 * Indicates if the Message is completed
 	 */
 	@com.google.gson.annotations.SerializedName("complete")
 	private boolean mComplete;
 
-	/**
-	 * ToDoItem constructor
-	 */
 	public Type_SMS() {
-
 	}
 
 	@Override
@@ -97,7 +93,8 @@ public class Type_SMS {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		return o instanceof Type_SMS && ((Type_SMS) o).mId == mId;
+	public boolean equals(Object o)
+    {
+        return o instanceof Type_SMS && ((Type_SMS) o).mId == mId;
 	}
 }

@@ -59,7 +59,7 @@ public class Activity_container extends Activity {
             }
             else if(v == exercise_btn){
                 exercise_btn.setEnabled(false);
-                newFragment = new Fragment_exercise();
+                newFragment = new Fragment_exercise_intro();
             }
             else if(v == revise_btn){
                 revise_btn.setEnabled(false);
@@ -124,7 +124,7 @@ public class Activity_container extends Activity {
             }
             else if(button.getId() == R.id.messenger_btn)
             {
-                button.setBackground(getResources().getDrawable(R.drawable.icon_white_contact));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_white_messenger));
             }
             else
                 button.setBackground(getResources().getDrawable(R.drawable.icon_white_house));
@@ -144,7 +144,7 @@ public class Activity_container extends Activity {
             }
             else if(button.getId() == R.id.messenger_btn)
             {
-                button.setBackground(getResources().getDrawable(R.drawable.icon_trans_contact));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_trans_messenger));
             }
             else
                 button.setBackground(getResources().getDrawable(R.drawable.icon_trans_house));

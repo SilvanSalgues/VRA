@@ -37,15 +37,18 @@ class Adapter_Contact extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View v = convertView;
-        v = inflater.inflate(R.layout.row_contact, null);
+        View row = convertView;
 
-        TextView contact_name = (TextView)v.findViewById(R.id.contact_name);
-        TextView phone_number = (TextView)v.findViewById(R.id.new_messages);
+        if (row == null) {
+            row = inflater.inflate(R.layout.row_contact, null);
+        }
+
+        TextView contact_name = (TextView)row.findViewById(R.id.contact_name);
+        TextView phone_number = (TextView)row.findViewById(R.id.new_messages);
 
         final Type_Contact Contact = data.get(position);
         contact_name.setText(Contact.getName());
         phone_number.setText(Contact.getPhone());
-        return v;
+        return row;
     }
 }

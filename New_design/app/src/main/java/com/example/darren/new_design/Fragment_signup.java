@@ -18,10 +18,10 @@ public class Fragment_signup extends Fragment {
     FragmentManager fm;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.signup, container, false);
+        View InputFragmentView = inflater.inflate(R.layout.signup, container, false);
 
-        up_signup = (TextView) view.findViewById(R.id.up_signin);
-        up_create = (Button) view.findViewById(R.id.up_create);
+        up_signup = (TextView) InputFragmentView.findViewById(R.id.up_signin);
+        up_create = (Button) InputFragmentView.findViewById(R.id.up_create);
 
         fm = getFragmentManager();
         up_signup.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +44,6 @@ public class Fragment_signup extends Fragment {
                 startActivity(intent);
             }
         });
-        return view;
+        return InputFragmentView;
     }
 }

@@ -55,14 +55,10 @@ public class Bluetooth_RFduinoService extends Service {
     private String mBluetoothDeviceAddress;
     private BluetoothGatt mBluetoothGatt;
 
-    public final static String ACTION_CONNECTED =
-            "com.rfduino.ACTION_CONNECTED";
-    public final static String ACTION_DISCONNECTED =
-            "com.rfduino.ACTION_DISCONNECTED";
-    public final static String ACTION_DATA_AVAILABLE =
-            "com.rfduino.ACTION_DATA_AVAILABLE";
-    public final static String EXTRA_DATA =
-            "com.rfduino.EXTRA_DATA";
+    public final static String ACTION_CONNECTED = "com.rfduino.ACTION_CONNECTED";
+    public final static String ACTION_DISCONNECTED = "com.rfduino.ACTION_DISCONNECTED";
+    public final static String ACTION_DATA_AVAILABLE = "com.rfduino.ACTION_DATA_AVAILABLE";
+    public final static String EXTRA_DATA = "com.rfduino.EXTRA_DATA";
 
     public final static UUID UUID_SERVICE = Bluetooth_Helper.sixteenBitUuid(0x2220);
     public final static UUID UUID_RECEIVE = Bluetooth_Helper.sixteenBitUuid(0x2221);

@@ -18,10 +18,10 @@ public class Fragment_signin extends Fragment {
     FragmentManager fm;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.signin, container, false);
+        View InputFragmentView = inflater.inflate(R.layout.signin, container, false);
 
-        in_signin = (TextView) view.findViewById(R.id.in_signup);
-        in_Login = (Button) view.findViewById(R.id.in_Login);
+        in_signin = (TextView) InputFragmentView.findViewById(R.id.in_signup);
+        in_Login = (Button) InputFragmentView.findViewById(R.id.in_Login);
 
 
         fm = getFragmentManager();
@@ -45,6 +45,6 @@ public class Fragment_signin extends Fragment {
                 startActivity(intent);
             }
         });
-        return view;
+        return InputFragmentView;
     }
 }

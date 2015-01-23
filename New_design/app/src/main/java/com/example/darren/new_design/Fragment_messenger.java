@@ -4,19 +4,16 @@ import static com.microsoft.windowsazure.mobileservices.MobileServiceQueryOperat
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.microsoft.windowsazure.mobileservices.*;
@@ -29,7 +26,7 @@ import java.util.List;
 
 
 
-public class Fragment_messenger extends Fragment implements ListView.OnItemClickListener{
+public class Fragment_messenger extends Fragment{//} implements ListView.OnItemClickListener{
 
     ArrayList<Type_Contact> fetch = new ArrayList<>();
     Adapter_Contact adapter;
@@ -63,7 +60,6 @@ public class Fragment_messenger extends Fragment implements ListView.OnItemClick
     public static final String SENDER_ID = "403438380650"; // YOUR_GOOGLE_GCM_PROJECT_NUMBER
     private GoogleCloudMessaging gcm;
     private String regid;
-    private Context context;
     Button buttonAddToDo;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,7 +86,7 @@ public class Fragment_messenger extends Fragment implements ListView.OnItemClick
         lv = (ListView) InputFragmentView.findViewById(R.id.listview);
         adapter = new Adapter_Contact(getActivity(), fetch);
         lv.setAdapter(adapter);
-        lv.setOnItemClickListener(this);
+        //lv.setOnItemClickListener(this);
 
         Person = (TextView) InputFragmentView.findViewById(R.id.Person);
 
@@ -142,13 +138,13 @@ public class Fragment_messenger extends Fragment implements ListView.OnItemClick
         return InputFragmentView;
     }
 
-    @Override
+/*    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         String person = fetch.get(position).getName();
         Person.setText(person);
         Toast.makeText(getActivity(), person, Toast.LENGTH_SHORT).show();
-    }
+    }*/
   /*      @Override
         public boolean onCreateOptionsMenu(Menu menu) {
             // Inflate the menu; this adds items to the action bar if it is present.
@@ -201,7 +197,7 @@ public class Fragment_messenger extends Fragment implements ListView.OnItemClick
                 String msg;
                 try {
                     if (gcm == null) {
-                        gcm = GoogleCloudMessaging.getInstance(context);
+                        gcm = GoogleCloudMessaging.getInstance(getActivity());
                     }
                     regid = gcm.register(SENDER_ID);
                     msg = "Device registered, registration ID=" + regid;

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#5b000000">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#fffdfff4"
+        android:id="@+id/relativeLayout"
+        android:layout_margin="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exercise Name and Number"
+            android:id="@+id/exercise_name"
+            android:textSize="30sp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:layout_margin="5dp" />
+
+        <VideoView
+            android:layout_width="500dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/videoView"
+            android:layout_below="@+id/exercise_name"
+            android:layout_above="@+id/Duration"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duration : 1:00"
+            android:id="@+id/Duration"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:layout_alignStart="@+id/exercise_name"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:text="Start Extercise"
+            android:id="@+id/start_exercise"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date &amp; Time"
+            android:id="@+id/exercise_date"
+            android:layout_below="@+id/exercise_name"
+            android:layout_alignEnd="@+id/start_exercise"
+            android:layout_marginRight="20dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="General Description
+Step 1
+Step 2"
+            android:id="@+id/general_desc"
+            android:layout_below="@+id/exercise_date"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@+id/videoView"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="30sp"
+            android:layout_above="@+id/start_exercise"
+            android:background="#ffbdfff0" />
+
+    </RelativeLayout>
+</RelativeLayout>

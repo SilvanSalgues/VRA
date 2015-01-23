@@ -53,7 +53,7 @@
             android:layout_width="fill_parent"
             android:layout_height="80dp"
             android:id="@+id/messenger_btn"
-            android:background="@drawable/icon_white_contact"
+            android:background="@drawable/icon_white_messenger"
             android:padding="1dp"
             android:layout_marginTop="5dp"
             android:focusableInTouchMode="false" />

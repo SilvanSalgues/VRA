@@ -190,7 +190,7 @@ public class Fragment_sensor extends Fragment {
                 public void run() {
                     deviceInfoText.setText(Bluetooth_Helper.getDeviceInfoText(bluetoothDevice, rssi, scanRecord));
                     Intent rfduinoIntent = new Intent(getActivity(), Bluetooth_RFduinoService.class);
-                    getActivity().bindService(rfduinoIntent, rfduinoServiceConnection,  getActivity().BIND_AUTO_CREATE);
+                    getActivity().bindService(rfduinoIntent, rfduinoServiceConnection, getActivity().BIND_AUTO_CREATE);
                     bound = true;
                 }
             });

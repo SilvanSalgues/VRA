@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 
 /**
- * Adapter to bind a ToDoItem List to a view
+ * Adapter to bind a Type_SMS List to a view
  */
 public class Adapter_SMS extends ArrayAdapter<Type_SMS> {
 
@@ -33,7 +33,7 @@ public class Adapter_SMS extends ArrayAdapter<Type_SMS> {
     }
 
     /**
-     * Returns the view for a specific item on the list
+     * Returns the view for a specific SMS on the list
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -54,10 +54,10 @@ public class Adapter_SMS extends ArrayAdapter<Type_SMS> {
 
         checkBox.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View arg0) {
-				if (checkBox.isChecked()) {
-					checkBox.setEnabled(false);
+            @Override
+            public void onClick(View arg0) {
+                if (checkBox.isChecked()) {
+                    checkBox.setEnabled(false);
                     if (mContext instanceof Activity_container) {
                         Activity_container activity = (Activity_container) mContext;
                         FragmentManager fm = activity.getFragmentManager();
@@ -66,10 +66,10 @@ public class Adapter_SMS extends ArrayAdapter<Type_SMS> {
                         fragment.checkItem(currentItem);
 
                     }
-				}
-			}
-		});
-		return row;
-	}
+                }
+            }
+        });
+        return row;
+    }
 
 }
