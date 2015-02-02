@@ -8,108 +8,162 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/background">
+        android:background="@android:color/white">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Welcome &lt;Bob>"
+            android:text="WELCOME DARREN MC NEELY"
             android:id="@+id/welcome"
-            android:textColor="@android:color/white"
-            android:textSize="38sp"
-            android:textIsSelectable="false"
-            android:layout_marginStart="100dp"
+            android:textColor="#ff306b65"
+            android:textSize="24sp"
+            android:textIsSelectable="true"
+            android:typeface="normal"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/last_active"
+            android:layout_alignStart="@+id/graph_container" />
+
+        <TextView
+            android:layout_width="550dp"
+            android:layout_height="wrap_content"
+            android:text="Donec id elit non mi porta gravida at eget metus. Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo."
+            android:id="@+id/under_welcome"
+            android:layout_below="@+id/welcome"
+            android:layout_alignStart="@+id/welcome"
+            android:textColor="#ff98a4a0"
             android:layout_marginTop="5dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:typeface="sans" />
+            android:layout_marginBottom="15dp"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:elevation="4dp"
+            android:background="#fffaf9ff"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/under_welcome"
+            android:id="@+id/graph_container"
+            android:paddingLeft="30dp"
+            android:paddingRight="50dp"
+            android:layout_above="@+id/profile"
+            android:focusable="true">
+
+            <com.jjoe64.graphview.GraphView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/graph"
+                android:layout_above="@+id/Week"
+                android:layout_below="@+id/Dizziness"
+                android:layout_marginLeft="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WEEK"
+                android:id="@+id/Week"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#ff306b65"
+                android:layout_marginBottom="4dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textIsSelectable="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DIZZINESS"
+                android:id="@+id/Dizziness"
+                android:textColor="#ff306b65"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textIsSelectable="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp" />
+        </RelativeLayout>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/profile"
-            android:background="@drawable/circular_profile"
+            android:background="@drawable/profile"
+            android:visibility="visible"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="53dp"
+            android:layout_alignStart="@+id/graph_container"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="20dp" />
 
-        <ImageView
-            android:layout_width="152px"
-            android:layout_height="152px"
-            android:id="@+id/menubg"
-            android:background="@layout/bg_repeat"
-            android:layout_alignTop="@+id/profile"
-            android:layout_toEndOf="@+id/profile"
-            android:layout_marginStart="-162px"
-            android:layout_marginTop="53px"/>
-
-        <ImageView
-            android:layout_width="148px"
-            android:layout_height="148px"
-            android:id="@+id/menu"
-            android:background="@drawable/menu"
-            android:layout_alignTop="@+id/profile"
-            android:layout_toEndOf="@+id/profile"
-            android:layout_marginLeft="-162px"
-            android:layout_marginTop="53px"/>
-
-        <ImageView
-            android:id="@+id/profile_pic"
-            android:layout_width="243px"
-            android:layout_height="243px"
-            android:layout_marginLeft="9px"
-            android:background="@drawable/default_profile"
-            android:layout_alignTop="@+id/profile"
-            android:layout_alignStart="@+id/profile" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EXERCISE COMPLETE "
+            android:id="@+id/exercise_complete"
+            android:textColor="#ff44d0ba"
+            android:textSize="16sp"
+            android:textIsSelectable="true"
+            android:textStyle="bold"
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/last_active"
+            android:layout_toStartOf="@+id/last_active_time" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You have completed &lt;10> exercises"
-            android:id="@+id/textView"
-            android:layout_below="@+id/welcome"
-            android:layout_alignStart="@+id/welcome"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            android:textIsSelectable="false" />
+            android:text="8"
+            android:id="@+id/exercise_complete_number"
+            android:textColor="#ff44d0ba"
+            android:textSize="16sp"
+            android:textIsSelectable="true"
+            android:textStyle="bold"
+            android:layout_below="@+id/last_active_time"
+            android:layout_alignEnd="@+id/last_active_time" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Last Active 10:39"
-            android:id="@+id/Last_Active"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
+            android:text="LAST ACTIVE"
+            android:id="@+id/last_active"
+            android:textColor="#FF44D0BA"
+            android:textSize="16sp"
             android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/exercise_complete"
+            android:singleLine="true"
+            android:layout_marginTop="20dp"
+            android:textIsSelectable="true"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:39"
+            android:id="@+id/last_active_time"
+            android:textColor="#FF44D0BA"
+            android:textSize="16sp"
+            android:singleLine="true"
+            android:textIsSelectable="true"
+            android:textStyle="normal|bold"
+            android:layout_above="@+id/exercise_complete"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentStart="true"
-            android:id="@+id/layout"
-            android:layout_above="@+id/profile"
-            android:layout_margin="10dp"
-            android:layout_marginTop="5dp">
-
-        </LinearLayout>
+            android:layout_marginRight="30dp" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/layout"
-            android:background="@android:color/white"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignEnd="@id/profile"
-            android:layout_toEndOf="@+id/menubg"
-            android:layout_marginLeft="20dp">
+            android:background="#ff306b65"
+            android:id="@+id/relativeLayout2"
+            android:visibility="visible"
+            android:layout_alignEnd="@+id/graph_container"
+            android:layout_alignTop="@+id/profile"
+            android:layout_toEndOf="@+id/other_info"
+            android:layout_marginLeft="100dp"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -120,7 +174,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:visibility="invisible" />
 
             <ImageView
                 android:layout_width="25dp"
@@ -130,7 +185,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:visibility="invisible" />
 
             <View
                 android:layout_width="fill_parent"
@@ -138,8 +194,44 @@
                 android:background="#c0c0c0"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/imageView"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:visibility="invisible" />
 
         </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DARREN MC NEELY"
+            android:id="@+id/Name"
+            android:textColor="#ff306b65"
+            android:textSize="18sp"
+            android:textIsSelectable="false"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/profile"
+            android:layout_toEndOf="@+id/profile"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Donec id elit non mi porta gravida at eget metus. Sed posuere consectetur est at lobortis."
+            android:id="@+id/other_info"
+            android:textColor="#ff98a4a0"
+            android:layout_below="@+id/Name"
+            android:layout_alignStart="@+id/Name"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp" />
+
+        <ImageButton
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:id="@+id/edit_profile"
+            android:background="@drawable/edit_profile"
+            android:layout_below="@+id/other_info"
+            android:layout_alignStart="@+id/other_info"
+            android:layout_marginTop="10dp" />
+
     </RelativeLayout>
+
 </RelativeLayout>

@@ -7,66 +7,67 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="80dp"
+        android:layout_width="90dp"
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
-        android:background="@layout/bg_repeat"
+        android:background="#ff1c7480"
         android:tileMode="repeat"
         android:dither="true"
         android:id="@+id/linearLayout">
 
         <ImageButton
             android:layout_width="fill_parent"
-            android:layout_height="80dp"
+            android:layout_height="87dp"
             android:id="@+id/home_btn"
-            android:background="@drawable/icon_trans_house"
+            android:background="@drawable/icon_home_selected"
             android:padding="1dp"
             android:focusableInTouchMode="true" />
 
         <ImageButton
             android:layout_width="fill_parent"
-            android:layout_height="80dp"
+            android:layout_height="87dp"
             android:id="@+id/exercise_btn"
-            android:background="@drawable/icon_white_exercise"
+            android:background="@drawable/icon_exercise_unselected"
             android:padding="1dp"
             android:hapticFeedbackEnabled="true"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="1dp" />
 
         <ImageButton
             android:layout_width="fill_parent"
-            android:layout_height="80dp"
+            android:layout_height="87dp"
             android:id="@+id/revise_btn"
-            android:background="@drawable/icon_white_progress"
+            android:background="@drawable/icon_progress_unselected"
             android:padding="1dp"
             android:hapticFeedbackEnabled="true"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="1dp" />
 
         <ImageButton
             android:layout_width="fill_parent"
-            android:layout_height="80dp"
+            android:layout_height="87dp"
             android:id="@+id/sensor_btn"
-            android:background="@drawable/icon_white_sensor"
+            android:background="@drawable/icon_sensor_unselected"
             android:padding="1dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="1dp" />
 
         <ImageButton
             android:layout_width="fill_parent"
-            android:layout_height="80dp"
+            android:layout_height="87dp"
             android:id="@+id/messenger_btn"
-            android:background="@drawable/icon_white_messenger"
+            android:background="@drawable/icon_messenger_unselected"
             android:padding="1dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
             android:focusableInTouchMode="false" />
 
-    </LinearLayout>
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="87dp"
+            android:id="@+id/logout_btn"
+            android:background="@drawable/btns_logout_unselected"
+            android:padding="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="1dp" />
 
-    <ImageButton
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:id="@+id/logout_btn"
-        android:background="@drawable/icon_white_logout"
-        android:padding="1dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
+    </LinearLayout>
 
 </RelativeLayout>

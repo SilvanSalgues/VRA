@@ -112,42 +112,42 @@ public class Activity_container extends Activity {
 
             if(button.getId() == R.id.exercise_btn)
             {
-                button.setBackground(getResources().getDrawable(R.drawable.icon_white_exercise));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_exercise_unselected));
             }
             else if(button.getId() == R.id.revise_btn)
             {
-                button.setBackground(getResources().getDrawable(R.drawable.icon_white_progress));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_progress_unselected));
             }
             else if(button.getId() == R.id.sensor_btn)
             {
-                button.setBackground(getResources().getDrawable(R.drawable.icon_white_sensor));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_sensor_unselected));
             }
             else if(button.getId() == R.id.messenger_btn)
             {
-                button.setBackground(getResources().getDrawable(R.drawable.icon_white_messenger));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_messenger_unselected));
             }
             else
-                button.setBackground(getResources().getDrawable(R.drawable.icon_white_house));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_home_unselected));
         }
         else{
             if(button.getId() == R.id.exercise_btn)
             {
-                button.setBackground(getResources().getDrawable(R.drawable.icon_trans_exercise));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_exercise_selected));
             }
             else if(button.getId() == R.id.revise_btn)
             {
-                button.setBackground(getResources().getDrawable(R.drawable.icon_trans_progress));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_progress_selected));
             }
             else if(button.getId() == R.id.sensor_btn)
             {
-                button.setBackground(getResources().getDrawable(R.drawable.icon_trans_sensor));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_sensor_selected));
             }
             else if(button.getId() == R.id.messenger_btn)
             {
-                button.setBackground(getResources().getDrawable(R.drawable.icon_trans_messenger));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_messenger_selected));
             }
             else
-                button.setBackground(getResources().getDrawable(R.drawable.icon_trans_house));
+                button.setBackground(getResources().getDrawable(R.drawable.icon_home_selected));
         }
     }
 
