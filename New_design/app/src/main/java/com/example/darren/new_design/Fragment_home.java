@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
@@ -24,7 +23,6 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 public class Fragment_home extends Fragment{
 
     ImageButton profile;
-    ImageView imgFavorite;
     TextView Welcome;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,7 +100,8 @@ public class Fragment_home extends Fragment{
                 Path.Direction.CCW);
 
         canvas.clipPath(path);
-        Bitmap sourceBitmap = scaleBitmapImage;
+        Bitmap sourceBitmap;
+        sourceBitmap = scaleBitmapImage;
         canvas.drawBitmap(
                 sourceBitmap,
                 new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap

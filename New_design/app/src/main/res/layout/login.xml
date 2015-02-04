@@ -2,24 +2,79 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="#FF50B7B0">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"
+        android:focusableInTouchMode="false"
+        android:background="@drawable/logo"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/VRA"
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LOGO"
-        android:id="@+id/textView2"
-        android:layout_centerHorizontal="true"
+        android:text="VRA"
+        android:id="@+id/VRA"
         android:layout_gravity="center_horizontal|top"
         android:textSize="30sp"
         android:textIsSelectable="true"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="8dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/logo" />
 
     <FrameLayout
-        android:layout_width="450dp"
-        android:layout_height="350dp"
+        android:layout_width="320dp"
+        android:layout_height="fill_parent"
+        android:id="@+id/content_login"
+        android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:id="@+id/content_login">
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp">
     </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vestibular Rehabilitation Application "
+        android:id="@+id/logo_text"
+        android:layout_below="@+id/VRA"
+        android:layout_alignStart="@+id/VRA"
+        android:textColor="@android:color/white"
+        android:layout_alignEnd="@+id/content_login"
+        android:textSize="15sp"
+        android:textIsSelectable="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TERMS OF SERVICE"
+        android:id="@+id/terms"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:textIsSelectable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PRIVACY POLICY"
+        android:id="@+id/policy"
+        android:textColor="@android:color/white"
+        android:layout_alignBottom="@+id/terms"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:textStyle="bold"
+        android:textIsSelectable="true" />
+
 </RelativeLayout>

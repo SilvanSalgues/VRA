@@ -2,81 +2,114 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@drawable/rounded_corner">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="SIGN UP"
         android:id="@+id/up_signup"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp" />
+        android:textSize="25sp"
+        android:textColor="#FF50B7B0"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign In"
         android:id="@+id/up_signin"
-
-        android:layout_alignTop="@+id/up_signup"
-        android:layout_toStartOf="@id/up_signup"
-        android:textSize="20sp" />
+        android:textSize="18sp"
+        android:textColor="#ff44d0ba"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/up_create"
+        android:layout_marginBottom="10dp" />
 
 
     <EditText
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/up_name"
         android:layout_below="@id/up_signup"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="5dp"
+        android:background="#FF50B7B0"
+        android:textSize="15sp"
+        android:textColorHint="#FFFFFF"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:hint="NAME"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Email"
+        android:layout_height="50dp"
         android:ems="10"
         android:id="@+id/up_email"
         android:layout_below="@id/up_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:inputType="textEmailAddress" />
+        android:layout_marginTop="5dp"
+        android:inputType="textEmailAddress"
+        android:background="#FF50B7B0"
+        android:textSize="15sp"
+        android:textColorHint="#FFFFFF"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:hint="EMAIL"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/up_pass"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/up_email"
-        android:layout_alignStart="@+id/up_name" />
+        android:layout_alignStart="@+id/up_name"
+        android:background="#FF50B7B0"
+        android:textSize="15sp"
+        android:textColorHint="#FFFFFF"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:hint="PASSWORD"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/up_verifypass"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/up_pass"
-        android:layout_alignStart="@+id/up_name" />
+        android:layout_alignStart="@+id/up_name"
+        android:background="#FF50B7B0"
+        android:textSize="15sp"
+        android:textColorHint="#FFFFFF"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:hint="VERIFY PASSWORD"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Account"
+        android:text="CREATE ACCOUNT"
         android:id="@+id/up_create"
         android:layout_below="@+id/up_verifypass"
         android:layout_alignEnd="@+id/up_verifypass"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="5dp"
+        android:layout_alignStart="@+id/up_verifypass"
+        android:background="#ff44d0ba"
+        android:textSize="15sp"
+        android:textColor="#FFFFFF" />
 
 
 </RelativeLayout>

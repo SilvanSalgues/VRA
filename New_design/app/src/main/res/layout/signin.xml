@@ -2,58 +2,78 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@drawable/rounded_corner">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In"
+        android:text="SIGN IN"
         android:id="@+id/in_signin"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp" />
+        android:textSize="25sp"
+        android:textColor="#FF50B7B0"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:id="@+id/in_signup"
-        android:layout_marginStart="100dp"
-        android:layout_alignTop="@+id/in_signin"
-        android:layout_toEndOf="@id/in_signin"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp" />
+        android:textSize="18sp"
+        android:textColor="#ff44d0ba"
+        android:textIsSelectable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/in_Login"
+        android:layout_marginBottom="10dp" />
 
     <EditText
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
         android:id="@+id/in_name"
         android:layout_below="@id/in_signin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:background="#FF50B7B0"
+        android:hint="USERNAME"
+        android:textColorHint="#FFFFFF"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textIsSelectable="false"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:inputType="textPassword"
-        android:ems="10"
         android:id="@+id/in_pass"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/in_name"
-        android:layout_alignStart="@+id/in_name" />
+        android:layout_alignStart="@+id/in_name"
+        android:background="#FF50B7B0"
+        android:hint="PASSWORD"
+        android:textColorHint="#FFFFFF"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textIsSelectable="false"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="LOGIN"
         android:id="@+id/in_Login"
         android:layout_below="@+id/in_pass"
         android:layout_alignEnd="@+id/in_pass"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="25dp"
+        android:layout_alignStart="@+id/in_pass"
+        android:background="#ff44d0ba"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
 
 
 </RelativeLayout>

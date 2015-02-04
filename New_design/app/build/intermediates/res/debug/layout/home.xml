@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:text="EXERCISE COMPLETE "
             android:id="@+id/exercise_complete"
-            android:textColor="#ff44d0ba"
+            android:textColor="@android:color/white"
             android:textSize="16sp"
             android:textIsSelectable="true"
             android:textStyle="bold"
