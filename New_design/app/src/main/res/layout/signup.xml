@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/rounded_corner">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,7 +85,7 @@
         android:layout_height="50dp"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/up_verifypass"
+        android:id="@+id/up_verify_pass"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/up_pass"
         android:layout_alignStart="@+id/up_name"
@@ -100,16 +99,17 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="CREATE ACCOUNT"
         android:id="@+id/up_create"
-        android:layout_below="@+id/up_verifypass"
-        android:layout_alignEnd="@+id/up_verifypass"
+        android:layout_below="@+id/up_verify_pass"
+        android:layout_alignEnd="@+id/up_verify_pass"
         android:layout_marginTop="5dp"
-        android:layout_alignStart="@+id/up_verifypass"
+        android:layout_alignStart="@+id/up_verify_pass"
         android:background="#ff44d0ba"
         android:textSize="15sp"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:layout_alignParentEnd="false" />
 
 
 </RelativeLayout>

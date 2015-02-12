@@ -38,7 +38,7 @@ public class Adapter_SMS extends ArrayAdapter<Type_SMS> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-
+        final int p = position;
         final Type_SMS currentItem = getItem(position);
 
         if (row == null) {

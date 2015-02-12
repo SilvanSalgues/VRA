@@ -2,29 +2,40 @@ package com.example.darren.new_design;
 
 public class Exercise_properties
 {
-        int Duration;
-        String colour;
-        float Speed;
 
-        public Exercise_properties(int duration, String colour, float speed)
-        {
-            this.Duration = duration;
-            this.colour = colour;
-            this.Speed = speed;
-        }
+    Exercise_Type Type;
+    String Name;
+    int Duration;
+    int Colour;
+    float Speed;
 
-        public String getBackground()
-        {
-        return colour;
-        }
+    public Exercise_properties( String name, Exercise_Type type, int duration, int colour, float speed)
+    {
+        this.Name = name;
+        this.Type = type;
+        this.Duration = duration;
+        this.Colour = colour;
+        this.Speed = speed;
+    }
 
-        public float getSpeed()
-        {
-            return Speed;
-        }
-
-        public int getDuration()
-        {
+    public String getName()
+    {
+        return Name;
+    }
+    public Exercise_Type getType()
+    {
+        return Type;
+    }
+    public int getDuration()
+    {
         return Duration;
-        }
+    }
+    public int getBackground()
+    {
+        return Colour;
+    }
+    public float getSpeed()
+    {
+        return Speed;
+    }
 }

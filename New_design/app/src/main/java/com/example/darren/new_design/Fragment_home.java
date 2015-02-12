@@ -1,6 +1,9 @@
 package com.example.darren.new_design;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -8,13 +11,24 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -24,10 +38,11 @@ public class Fragment_home extends Fragment{
 
     ImageButton profile;
     TextView Welcome;
+    ImageButton edit_profile;
+    //PopupWindow popWindow;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View InputFragmentView = inflater.inflate(R.layout.home, container, false);
-
 
         Welcome = (TextView) InputFragmentView.findViewById(R.id.welcome);
 
@@ -77,6 +92,21 @@ public class Fragment_home extends Fragment{
                 open();
             }
         });
+        edit_profile = (ImageButton) InputFragmentView.findViewById(R.id.edit_profile);
+
+        edit_profile.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                open_Dialog();
+                //open_Popup();
+                //popWindow.setFocusable(true); // Shows keyboard on edittext box
+                //popupWindow.update();
+
+                Toast toast = Toast.makeText(getActivity(), "show dialog", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
         return InputFragmentView;
     }
     public void open(){
@@ -114,5 +144,63 @@ public class Fragment_home extends Fragment{
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bp = (Bitmap) data.getExtras().get("data");
         profile.setImageBitmap(getRoundedShape(bp));
+    }
+
+    /*void open_Popup(){
+
+        LayoutInflater popSwitchView = (LayoutInflater) getActivity().getBaseContext().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+        View popupview = popSwitchView.inflate(R.layout.update_user, null);
+        popWindow= new PopupWindow(popupview);
+        popWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
+        popWindow.setHeight(WindowManager.LayoutParams.MATCH_PARENT);
+
+
+        //InstructBtn = (Button) popupview.findViewById(R.id.instructions_close);
+        //InstructBtn.setOnClickListener(new View.OnClickListener() {     // If the button at the bottom of the popup is pressed
+        //    @Override
+        //    public void onClick(View v) {
+        //        popupWindow.dismiss();                  // Closes popup window
+        //        mycounter.Start();
+        //    }
+        //});
+
+
+
+        //Drawable d = getResources().getDrawable(R.drawable.popbg);
+        //popWindow.setBackgroundDrawable(d);
+
+        popupview.post(new Runnable() {                 // Waits until the activity window has been displayed before loading the popup windows
+            public void run() {
+                popWindow.showAtLocation(getActivity().findViewById(R.id.home_layout), Gravity.CENTER, 0, 0);
+                popWindow.setOutsideTouchable(false);
+            }
+        });
+    }*/
+
+    public void open_Dialog() {
+        // custom dialog
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.update_user);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        //dialog.setTitle("Title...");
+
+        // set the custom dialog components - text, image and button
+        //TextView text = (TextView) dialog.findViewById(R.id.text);
+        //text.setText("Android custom dialog example!");
+        //ImageView image = (ImageView) dialog.findViewById(R.id.image);
+        //image.setImageResource(R.drawable.ic_launcher);
+
+        //Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        // if button is clicked, close the custom dialog
+        //dialogButton.setOnClickListener(new OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        dialog.dismiss();
+        //    }
+        //});
+
+        dialog.show();
     }
 }

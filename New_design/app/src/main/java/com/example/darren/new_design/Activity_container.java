@@ -92,8 +92,8 @@ public class Activity_container extends Activity {
             FragmentManager fm1 = getFragmentManager();
             FragmentTransaction ft1 = fm1.beginTransaction();
             ft1.replace(R.id.content_layout, newFragment)
-                    .addToBackStack(null)
-                    .commit();
+                    .addToBackStack(null);
+            ft1.commit();
         }
 
     };

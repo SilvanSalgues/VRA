@@ -30,7 +30,7 @@ public class Fragment_signup extends Fragment {
         up_name = (EditText) InputFragmentView.findViewById(R.id.up_name);
         up_email = (EditText) InputFragmentView.findViewById(R.id.up_email);
         up_pass = (EditText) InputFragmentView.findViewById(R.id.up_pass);
-        up_verifypass = (EditText) InputFragmentView.findViewById(R.id.up_verifypass);
+        up_verifypass = (EditText) InputFragmentView.findViewById(R.id.up_verify_pass);
 
         fm = getFragmentManager();
         up_signup.setOnClickListener(new View.OnClickListener() {

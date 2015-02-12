@@ -1,7 +1,5 @@
 package com.example.darren.new_design;
 
-import static com.microsoft.windowsazure.mobileservices.MobileServiceQueryOperations.*;
-
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.AsyncTask;
@@ -9,14 +7,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.microsoft.windowsazure.mobileservices.*;
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.NextServiceFilterCallback;
+import com.microsoft.windowsazure.mobileservices.Registration;
+import com.microsoft.windowsazure.mobileservices.RegistrationCallback;
+import com.microsoft.windowsazure.mobileservices.ServiceFilter;
+import com.microsoft.windowsazure.mobileservices.ServiceFilterRequest;
+import com.microsoft.windowsazure.mobileservices.ServiceFilterResponse;
+import com.microsoft.windowsazure.mobileservices.ServiceFilterResponseCallback;
+import com.microsoft.windowsazure.mobileservices.TableOperationCallback;
+import com.microsoft.windowsazure.mobileservices.TableQueryCallback;
 import com.microsoft.windowsazure.notifications.NotificationsManager;
 
 import java.io.IOException;
@@ -24,43 +34,30 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import static com.microsoft.windowsazure.mobileservices.MobileServiceQueryOperations.val;
 
 public class Fragment_messenger extends Fragment{//} implements ListView.OnItemClickListener{
 
     ArrayList<Type_Contact> fetch = new ArrayList<>();
-    Adapter_Contact adapter;
-    ListView lv;
+
+    Adapter_Contact adapter_contact;
+    Adapter_SMS adapter_sms;    // Adapter to sync the items list with the view
+
+    ListView Contact_listview;
     TextView Person;
 
+    EditText addSMStext;
 
+    ProgressBar progressbar;    // Progress spinner to use for table operations
 
-    public static MobileServiceClient mClient;
+    MobileServiceClient AzureClient;
+    MobileServiceTable<Type_SMS> AzureTable; // Mobile Service Table used to access data
 
-    /**
-     * Mobile Service Table used to access data
-     */
-    private MobileServiceTable<Type_SMS> mToDoTable;
-
-    /**
-     * Adapter to sync the items list with the view
-     */
-    private Adapter_SMS mAdapter;
-
-    /**
-     * EditText containing the "New To Do" text
-     */
-    private EditText mTextNewToDo;
-
-    /**
-     * Progress spinner to use for table operations
-     */
-    private ProgressBar mProgressBar;
-
-    public static final String SENDER_ID = "403438380650"; // YOUR_GOOGLE_GCM_PROJECT_NUMBER
-    private GoogleCloudMessaging gcm;
-    private String regid;
-    Button buttonAddToDo;
+    String SENDER_ID = "403438380650"; // YOUR_GOOGLE_GCM_PROJECT_NUMBER
+    GoogleCloudMessaging gcm;
+    String regid;
+    Button addSMSbtn;
+    ListView SMS_listview;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View InputFragmentView = inflater.inflate(R.layout.messenger, container, false);
@@ -78,38 +75,42 @@ public class Fragment_messenger extends Fragment{//} implements ListView.OnItemC
                 "Mark Zuckerberg",
         };
 
-
         for (int i = 0; i < values.length; i++) {
             fetch.add(new Type_Contact(values[i], i + " New message"));
         }
 
-        lv = (ListView) InputFragmentView.findViewById(R.id.listview);
-        adapter = new Adapter_Contact(getActivity(), fetch);
-        lv.setAdapter(adapter);
-        //lv.setOnItemClickListener(this);
+        adapter_contact = new Adapter_Contact(getActivity(), fetch);
+        Contact_listview = (ListView) InputFragmentView.findViewById(R.id.listview);
+        Contact_listview.setAdapter(adapter_contact);
+        Contact_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //here you can use the position to determine what checkbox to check
+                //this assumes that you have an array of your checkboxes as well. called checkbox
+                //String person = fetch.get(position).getName();
+                //Person.setText(person);
+                Toast.makeText(getActivity(), position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Person = (TextView) InputFragmentView.findViewById(R.id.Person);
-
-
-        mProgressBar = (ProgressBar) InputFragmentView.findViewById(R.id.loadingProgressBar);
-
-        // Initialize the progress bar
-        mProgressBar.setVisibility(ProgressBar.GONE);
+        progressbar = (ProgressBar) InputFragmentView.findViewById(R.id.loadingProgressBar);
+        progressbar.setVisibility(ProgressBar.GONE); // Initialize the progress bar
 
         try {
             // Create the Mobile Service Client instance, using the provided
             // Mobile Service URL and key
-            mClient = new MobileServiceClient(
+            AzureClient = new MobileServiceClient(
                     "https://androidnotification.azure-mobile.net/",
                     "NdsiKwErKQtudoOmwoLCGTWrocjkWL65",
                     getActivity()).withFilter(new ProgressFilter());
 
             // Get the Mobile Service Table instance to use
-            mToDoTable = mClient.getTable(Type_SMS.class);
+            AzureTable = AzureClient.getTable(Type_SMS.class);
 
-            mTextNewToDo = (EditText) InputFragmentView.findViewById(R.id.textNewToDo);
-            buttonAddToDo = (Button)  InputFragmentView.findViewById(R.id.buttonAddToDo);
-            buttonAddToDo.setOnClickListener(new View.OnClickListener() {
+            addSMStext = (EditText) InputFragmentView.findViewById(R.id.addSMStext);
+            addSMSbtn = (Button)  InputFragmentView.findViewById(R.id.addSMSbtn);
+            addSMSbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     addItem();
@@ -117,24 +118,24 @@ public class Fragment_messenger extends Fragment{//} implements ListView.OnItemC
             });
 
             // Create an adapter to bind the items with the view
-            mAdapter = new Adapter_SMS(getActivity(), R.layout.row_sms);
-            ListView listViewToDo = (ListView) InputFragmentView.findViewById(R.id.listViewToDo);
-            listViewToDo.setAdapter(mAdapter);
+            adapter_sms = new Adapter_SMS(getActivity(), R.layout.row_sms);
+            SMS_listview = (ListView) InputFragmentView.findViewById(R.id.SMS_listview);
+            SMS_listview.setAdapter(adapter_sms);
 
             // Load the items from the Mobile Service
             refreshItemsFromTable();
 
-            return InputFragmentView;
-        } catch (MalformedURLException e) {
+            NotificationsManager.handleNotifications(getActivity(), SENDER_ID, Notification_Handler.class);
+
+            gcm = GoogleCloudMessaging.getInstance(getActivity());
+            if (regid == null || "".equals(regid)) {
+                registerInBackground();
+            }
+
+            }
+            catch (MalformedURLException e) {
             createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
         }
-        NotificationsManager.handleNotifications(getActivity(), SENDER_ID, Notification_Handler.class);
-
-        gcm = GoogleCloudMessaging.getInstance(getActivity());
-        if (regid == null || "".equals(regid)) {
-            registerInBackground();
-        }
-
         return InputFragmentView;
     }
 
@@ -202,12 +203,12 @@ public class Fragment_messenger extends Fragment{//} implements ListView.OnItemC
                     regid = gcm.register(SENDER_ID);
                     msg = "Device registered, registration ID=" + regid;
                     String [] tags = {null};
-                    mClient.getPush().register(regid, tags, new RegistrationCallback() {
+                    AzureClient.getPush().register(regid, tags, new RegistrationCallback() {
                         @Override
                         public void onRegister(Registration registration, Exception exception) {
-                            //if (exception != null) {
+                            if (exception != null) {
                             // handle error
-                            //}
+                            }
                         }});
 
                 } catch (IOException ex) {
@@ -226,18 +227,18 @@ public class Fragment_messenger extends Fragment{//} implements ListView.OnItemC
      * @param item The item to mark
      */
     public void checkItem(Type_SMS item) {
-        if (mClient == null) {
+        if (AzureClient == null) {
             return;
         }
 
         // Set the item as completed and update it in the table
         item.setComplete(true);
 
-        mToDoTable.update(item, new TableOperationCallback<Type_SMS>() {
+        AzureTable.update(item, new TableOperationCallback<Type_SMS>() {
             public void onCompleted(Type_SMS entity, Exception exception, ServiceFilterResponse response) {
                 if (exception == null) {
                     if (entity.isComplete()) {
-                        mAdapter.remove(entity);
+                        adapter_sms.remove(entity);
                     }
                 } else {
                     createAndShowDialog(exception, "Error");
@@ -250,23 +251,23 @@ public class Fragment_messenger extends Fragment{//} implements ListView.OnItemC
     // Add a new item
 
     public void addItem() {
-        if (mClient == null) {
+        if (AzureClient == null) {
             return;
         }
 
         // Create a new item
         Type_SMS item = new Type_SMS();
 
-        item.setText(mTextNewToDo.getText().toString());
+        item.setText(addSMStext.getText().toString());
         item.setComplete(false);
 
         // Insert the new item
-        mToDoTable.insert(item, new TableOperationCallback<Type_SMS>() {
+        AzureTable.insert(item, new TableOperationCallback<Type_SMS>() {
             public void onCompleted(Type_SMS entity, Exception exception, ServiceFilterResponse response) {
 
                 if (exception == null) {
                     if (!entity.isComplete()) {
-                        mAdapter.add(entity);
+                        adapter_sms.add(entity);
                     }
                 } else {
                     createAndShowDialog(exception, "Error");
@@ -274,7 +275,7 @@ public class Fragment_messenger extends Fragment{//} implements ListView.OnItemC
 
             }
         });
-        mTextNewToDo.setText("");
+        addSMStext.setText("");
     }
 
     /**
@@ -284,14 +285,14 @@ public class Fragment_messenger extends Fragment{//} implements ListView.OnItemC
 
         // Get the items that weren't marked as completed and add them in the
         // adapter
-        mToDoTable.where().field("complete").eq(val(false)).execute(new TableQueryCallback<Type_SMS>() {
+        AzureTable.where().field("complete").eq(val(false)).execute(new TableQueryCallback<Type_SMS>() {
 
             public void onCompleted(List<Type_SMS> result, int count, Exception exception, ServiceFilterResponse response) {
                 if (exception == null) {
-                    mAdapter.clear();
+                    adapter_sms.clear();
 
                     for (Type_SMS item : result) {
-                        mAdapter.add(item);
+                        adapter_sms.add(item);
                     }
 
                 } else {
@@ -337,7 +338,7 @@ public class Fragment_messenger extends Fragment{//} implements ListView.OnItemC
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.VISIBLE);
+                    if (progressbar != null) progressbar.setVisibility(ProgressBar.VISIBLE);
                 }
             });
 
@@ -348,7 +349,7 @@ public class Fragment_messenger extends Fragment{//} implements ListView.OnItemC
 
                         @Override
                         public void run() {
-                            if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.GONE);
+                            if (progressbar != null) progressbar.setVisibility(ProgressBar.GONE);
                         }
                     });
 

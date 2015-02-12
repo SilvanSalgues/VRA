@@ -5,6 +5,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ public class Fragment_signin extends Fragment {
         View InputFragmentView = inflater.inflate(R.layout.signin, container, false);
 
         db = new Database_Manager(getActivity());
+        db.open();
 
         in_signin = (TextView) InputFragmentView.findViewById(R.id.in_signup);
         in_Login = (Button) InputFragmentView.findViewById(R.id.in_Login);
@@ -47,27 +50,76 @@ public class Fragment_signin extends Fragment {
         in_Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.open();
 
-                // Checking if the username and password is correct - if so toast message and go to next activity
-                if (db.getUser(in_name.getText().toString(),in_pass.getText().toString())) {
 
-                    Toast.makeText(getActivity().getApplicationContext(),
-                            "Successful Login", Toast.LENGTH_SHORT).show();
-
-                    db.close();
-
-                    Intent intent = new Intent(getActivity(), Activity_container.class);
-                    startActivity(intent);
-
+                if( in_name.getText().toString().length() == 0 ) {
+                    in_name.setError("USERNAME is required!");
                 }
-                // otherwise - toast sayin error !
-                else {
-                    Toast.makeText(getActivity().getApplicationContext(), "No matching username and password found",
-                            Toast.LENGTH_LONG).show();
+
+                else if ( in_pass.getText().toString().length() == 0 ){
+                    in_pass.setError( "PASSWORD is required!" );
+                }
+
+                else{
+                    // Checking if the username and password is correct - if so toast message and go to next activity
+                    if (db.getUser(in_name.getText().toString(),in_pass.getText().toString())) {
+
+                        Toast.makeText(getActivity().getApplicationContext(),
+                                "Successful Login", Toast.LENGTH_SHORT).show();
+
+                        db.close();
+
+                        Intent intent = new Intent(getActivity(), Activity_container.class);
+                        startActivity(intent);
+
+                    }
+                    // otherwise - toast sayin error !
+                    else {
+                        Toast.makeText(getActivity().getApplicationContext(), "No matching username and password found",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
+
+        in_pass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+               // if (count == 0)
+               //     in_name.setError( "USERNAME is required!" );
+
+               if( in_pass.getText().toString().length() == 0 )
+                   in_pass.setError( "PASSWORD is required!" );
+            }
+        });
+
+        in_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // if (count == 0)
+                //     in_name.setError( "USERNAME is required!" );
+
+                if( in_name.getText().toString().length() == 0 )
+                    in_name.setError( "USERNAME is required!" );
+            }
+        });
+
         return InputFragmentView;
     }
 }

@@ -1,8 +1,6 @@
 package com.example.darren.new_design;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -13,7 +11,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,28 +19,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.UUID;
 
 
-public class Fragment_sensor extends Fragment {
-
-    //private LeDeviceListAdapter mLeDeviceListAdapter;
-    private BluetoothAdapter mBluetoothAdapter;
-    private boolean mScanning;
-    private Handler mHandler;
-
-    private static final int REQUEST_ENABLE_BT = 1;
-    // Stops scanning after 10 seconds.
-    private static final long SCAN_PERIOD = 10000;
-
-    Fragment newFragment;
+public class Fragment_sensor extends Fragment implements BluetoothAdapter.LeScanCallback{
 
     float accelX = 0;
     float accelY = 0;
     float accelZ = 0;
-
-    float gyroX = 0;
-    float gyroY = 0;
-    float gyroZ = 0;
 
     private boolean bound;
 
@@ -72,29 +55,25 @@ public class Fragment_sensor extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        //view = new Cubesurfaceview(getActivity());
+
         View InputFragmentView = inflater.inflate(R.layout.sensor, container, false);
 
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
+        //Bluetooth in Android 4.3 is accessed via the BluetoothManager, rather than
+        //the old static bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        BluetoothManager manager = (BluetoothManager) getActivity().getSystemService(Context.BLUETOOTH_SERVICE);
+        bluetoothAdapter = manager.getAdapter();
 
-        if (savedInstanceState == null){
-            newFragment = new _3D_object();
-            ft.replace(R.id.container_3D, newFragment);
-            ft.commit();
-        }
-
-        bluetooth_start();
+        //Check if the device has bluetooth LE capabilities and enable bluetooth if it has not been already.
+        enable_bluetooth();
 
         // TextViews
-        deviceInfoText = (TextView) InputFragmentView.findViewById(R.id.deviceInfo);
+        deviceInfoText = (TextView) InputFragmentView.findViewById(R.id.d_Info);
         timestamp = (TextView) InputFragmentView.findViewById(R.id.timestamp);
         packetnumber = (TextView) InputFragmentView.findViewById(R.id.packetnumber);
         accelData = (TextView) InputFragmentView.findViewById(R.id.accelData);
         batteryVoltage = (TextView) InputFragmentView.findViewById(R.id.batteryVoltage);
         gyroData = (TextView) InputFragmentView.findViewById(R.id.gyroData);
 
-/*
         arrow_nw = (ImageView) InputFragmentView.findViewById(R.id.arrow_nw) ;
         arrow_n  = (ImageView) InputFragmentView.findViewById(R.id.arrow_n);
         arrow_ne  = (ImageView) InputFragmentView.findViewById(R.id.arrow_ne);
@@ -112,7 +91,6 @@ public class Fragment_sensor extends Fragment {
         arrow_sw.setRotation(-135);
         arrow_s.setRotation(180);
         arrow_se.setRotation(135);
-*/
 
         return InputFragmentView;
     }
@@ -123,8 +101,6 @@ public class Fragment_sensor extends Fragment {
         public void onServiceConnected(ComponentName name, IBinder service) {
             rfduinoService = ((Bluetooth_RFduinoService.LocalBinder) service).getService();
             if (rfduinoService.initialize()) {
-                //if (rfduinoService.connect(bluetoothDevice.getAddress())) {
-                //}
                 rfduinoService.connect(bluetoothDevice.getAddress());
             }
         }
@@ -139,17 +115,21 @@ public class Fragment_sensor extends Fragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-           /* if (RFduinoService.ACTION_CONNECTED.equals(action))
+            if (Bluetooth_RFduinoService.ACTION_CONNECTED.equals(action))
             {
-
+                bound = true;
+//                timestamp.setVisibility(View.VISIBLE);
+//                packetnumber.setVisibility(View.VISIBLE);
+//                accelData.setVisibility(View.VISIBLE);
+//                batteryVoltage.setVisibility(View.VISIBLE);
+//                gyroData.setVisibility(View.VISIBLE);
             }
-            else if (RFduinoService.ACTION_DISCONNECTED.equals(action))
-            {
-
-            }
-            else */
-
             if (Bluetooth_RFduinoService.ACTION_DISCONNECTED.equals(action)) {
+//                timestamp.setVisibility(View.INVISIBLE);
+//                packetnumber.setVisibility(View.INVISIBLE);
+//                accelData.setVisibility(View.INVISIBLE);
+//                batteryVoltage.setVisibility(View.INVISIBLE);
+//                gyroData.setVisibility(View.INVISIBLE);
                 onStop();
                 onStart();
             }
@@ -162,7 +142,6 @@ public class Fragment_sensor extends Fragment {
 
 
 
-/*
     @Override
     public void onLeScan(BluetoothDevice device, final int rssi, final byte[] scanRecord) {
         bluetoothAdapter.stopLeScan(this);
@@ -171,52 +150,29 @@ public class Fragment_sensor extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                deviceInfoText.setText(BluetoothHelper.getDeviceInfoText(bluetoothDevice, rssi, scanRecord));
-                Intent rfduinoIntent = new Intent(getActivity(), RFduinoService.class);
-                getActivity().bindService(rfduinoIntent, rfduinoServiceConnection,  getActivity().BIND_AUTO_CREATE);
+                deviceInfoText.setText(Bluetooth_Helper.getDeviceInfoText(bluetoothDevice, rssi, scanRecord));
+                Intent rfduinoIntent = new Intent(getActivity(), Bluetooth_RFduinoService.class);
+                getActivity().bindService(rfduinoIntent, rfduinoServiceConnection, Context.BIND_AUTO_CREATE);
                 bound = true;
             }
         });
     }
-*/
-
-    private BluetoothAdapter.LeScanCallback leScanCallback = new BluetoothAdapter.LeScanCallback() {
-        @Override
-        public void onLeScan(final BluetoothDevice device, final int rssi, final byte[] scanRecord) {
-            bluetoothDevice = device;
-
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    deviceInfoText.setText(Bluetooth_Helper.getDeviceInfoText(bluetoothDevice, rssi, scanRecord));
-                    Intent rfduinoIntent = new Intent(getActivity(), Bluetooth_RFduinoService.class);
-                    getActivity().bindService(rfduinoIntent, rfduinoServiceConnection, getActivity().BIND_AUTO_CREATE);
-                    bound = true;
-                }
-            });
-        }
-    };
 
     @Override
     public void onStart() {
         super.onStart();
 
         // Find Device
-        //bluetoothAdapter.startLeScan(new UUID[]{RFduinoService.UUID_SERVICE}, sensor.this);
-        bluetoothAdapter.startLeScan(leScanCallback);
+        bluetoothAdapter.startLeScan(new UUID[]{Bluetooth_RFduinoService.UUID_SERVICE}, this);
 
-
-        //registerReceiver(bluetoothStateReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         getActivity().registerReceiver(rfduinoReceiver, Bluetooth_RFduinoService.getIntentFilter());
 
     }
-
     @Override
     public void onStop() {                       //When the app is closed, this runs
         super.onStop();
 
-        //bluetoothAdapter.stopLeScan(this);
-        //bluetoothAdapter.stopScan(leScanCallback);
+        bluetoothAdapter.stopLeScan(this);
 
         //unregisterReceiver(bluetoothStateReceiver);
         getActivity().unregisterReceiver(rfduinoReceiver);
@@ -226,90 +182,71 @@ public class Fragment_sensor extends Fragment {
             bound = false;                              // Boolean to show if the service is connected
         }
 
-        //bluetoothAdapter.disable();
+    }
+    @Override
+    public void onResume() {      //When the app is brought back into focus
+        super.onResume();
+
+        //Check if the device has bluetooth LE capabilities and enable bluetooth if it has not been already.
+        enable_bluetooth();
+
+        onStop();
+        onStart();
     }
 
+    public void enable_bluetooth(){
 
+        // Use this check to determine whether Bluetooth LE is supported on the device. Even though
+        // the manifest will keep this application from installing on these devices
 
+        if (!getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            Toast.makeText(getActivity(), "No Bluetooth LE Support", Toast.LENGTH_SHORT).show();
+            getActivity().finish();
+        }
 
+        // Ensures Bluetooth is available on the device and it is enabled. If not,
+        // force enables Bluetooth.
 
-
+        if (bluetoothAdapter == null)
+        {
+            Toast.makeText( getActivity().getApplicationContext(), "Device does not have bluetooth", Toast.LENGTH_SHORT).show();
+            getActivity().finish();
+        }
+        else if (!bluetoothAdapter.isEnabled()) {
+            // Force Enable Bluetooth
+            bluetoothAdapter.enable();
+            Toast.makeText( getActivity().getApplicationContext(), "Bluetooth Enabled", Toast.LENGTH_SHORT).show();
+        }
+    }
     private void addData(byte[] data) {
 
         // Packet size: 18bytes
         //| timestamp 4bytes | packetNumber 1byte | accelData 6bytes | batteryVoltage 1byte | gyroData 6bytes |
 
-        long seconds_passed = MicroSectoSec(Bluetooth_Converter.BytesToUnsignedlong_LSB(data, 0, 4));
+        long seconds_passed = Bluetooth_Converter.timestamp_seconds(data);
         timestamp.setText("TimeStamp (4 bytes): " + seconds_passed/ 60 + " minutes " + seconds_passed % 60 + " seconds");
-        packetnumber.setText("Packet number (1 bytes): " + Bluetooth_Converter.BytesToUnsignedlong_LSB(data, 4, 1));
-        batteryVoltage.setText("Battery Voltage (1 bytes): " + battery_voltage(data [11]));
 
-        //Log.d(TAG,"Most significant bit / signed Integer : " + Converter.ByteToSignedInt_MSB(new byte[]{(byte) 125}, 0));
-        //Log.d(TAG,"Least significant bit / signed Integer : " + Converter.ByteToSignedInt_LSB(new byte[]{(byte) 125}, 0));
 
-        average(data);
+        packetnumber.setText("Packet number (1 bytes): " + Bluetooth_Converter.PactetNum(data));
+        batteryVoltage.setText("Battery Voltage (1 bytes): " + Bluetooth_Converter.battery_voltage(data));
+
+        accelData.setText("accelData (6 bytes): "   + "\nX: " + Bluetooth_Converter.AccelX(data)//AccelXDeg(data)//
+                + "\nY: " + Bluetooth_Converter.AccelY(data)
+                + "\nZ: " + Bluetooth_Converter.AccelZ(data));
+
+
+        // The Gyroscope gives angular velocity of the device
+        gyroData.setText("GyroData (6 bytes): " + "\nX: " + Bluetooth_Converter.GyroX(data)
+                + "\nY: " + Bluetooth_Converter.GyroY(data)
+                + "\nZ: " + Bluetooth_Converter.GyroZ(data));
+
+        arrow_direction_statements(data);
     }
+    public void arrow_direction_statements(byte[] data){
 
-    public void average(byte[] data){
-
-        float accelRes = (8.0f / 32768.0f) ;	// scale resolutions for the MPU6050 (scale set to ±8g, 16bit sample)
-
-        // accelerometer xyz 6-bytes
-        final short ax = (short)(Bluetooth_Converter.BytesToUnsignedLong_MSB(data, 5, 1)  + Bluetooth_Converter.BytesToUnsignedlong_LSB(data, 6, 1));
-        accelX = ax * accelRes;
-        final short ay = (short)(Bluetooth_Converter.BytesToUnsignedLong_MSB(data, 7, 1) + Bluetooth_Converter.BytesToUnsignedlong_LSB(data, 8, 1));
-        accelY = ay * accelRes;
-        final short az = (short)(Bluetooth_Converter.BytesToUnsignedLong_MSB(data, 9, 1) + Bluetooth_Converter.BytesToUnsignedlong_LSB(data, 10, 1));
-        accelZ = az * accelRes;
-
-        accelData.setText("accelData (6 bytes): "
-                + "\nX: " + accelX
-                + "\nY: " + accelY
-                + "\nZ: " + accelZ);
-
-
-        Get_Gyro_Data(data);
-
-
-
-        //Converts the already acquired accelerometer data into 3D euler angles
-        //double ACCEL_XANGLE = 57.295*Math.atan((float) ACCEL_YOUT / Math.sqrt(Math.pow((float) ACCEL_ZOUT, 2) + Math.pow((float) ACCEL_XOUT, 2)));
-        //double ACCEL_YANGLE = 57.295*Math.atan((float)-ACCEL_XOUT/ Math.sqrt(Math.pow((float)ACCEL_ZOUT,2)+Math.pow((float)ACCEL_YOUT,2)));
-
-
-        //TextView angle_x = (TextView) findViewById(R.id.angle_x);
-        //TextView angle_y = (TextView) findViewById(R.id.angle_y);
-        //angle_x.setText("angle_x :" + ACCEL_XANGLE);
-        //angle_y.setText("angle_y :" + ACCEL_YANGLE);
-
-        //Log.d(TAG, "ACCEL_XANGLE : " + ACCEL_XANGLE);
-        //Log.d(TAG, "ACCEL_YANGLE : " + ACCEL_YANGLE);
-
-        //arrow_direction_statements();
-    }
-
-    void Get_Gyro_Data(byte[] data)
-    {
-        // The Gyroscope gives angular speed or velocity of the device
-        float gyro_sensitivity =131;
-        // Gyroscope xyz 6-bytes
-        final short gx = (short)(Bluetooth_Converter.BytesToUnsignedLong_MSB(data, 12, 1)  + Bluetooth_Converter.BytesToUnsignedlong_LSB(data, 13, 1));
-        gyroX = gx/gyro_sensitivity;
-        final short gy = (short)(Bluetooth_Converter.BytesToUnsignedLong_MSB(data, 14, 1) + Bluetooth_Converter.BytesToUnsignedlong_LSB(data, 15, 1));
-        gyroY = gy/gyro_sensitivity;
-        final short gz = (short)(Bluetooth_Converter.BytesToUnsignedLong_MSB(data, 16, 1) + Bluetooth_Converter.BytesToUnsignedlong_LSB(data, 17, 1));
-        gyroZ = gz/gyro_sensitivity;
-
-        gyroData.setText("GyroData (6 bytes): "
-                + "\nX: " + (int)gyroX
-                + "\nY: " + (int)gyroY
-                + "\nZ: " + (int)gyroZ);
-    }
-
-
-
-    public void arrow_direction_statements(){
-
+        accelX = Bluetooth_Converter.AccelX(data);
+        accelY = Bluetooth_Converter.AccelY(data);
+        accelZ = Bluetooth_Converter.AccelZ(data);
         // West
         if (accelX > 0.1f && (accelY  > -0.1 && accelY < 0.1))
         {
@@ -401,72 +338,4 @@ public class Fragment_sensor extends Fragment {
         }
 
     }
-    public String battery_voltage(byte data){
-        /* Battery voltage is saved in one byte: 11 | 0011 | 00 -> 3.30V
-        * |11|   first 2 bits store mantisa [0-3]
-        * |0011| next 4 bits store first digit of exponent [0-9]
-        * |00|   last 2 bits store second digit of exponent (0 or 5)
-        *        0 if [0-4], 1 if [5-9]
-        * example: 11 | 0011 | 00 this is 3.30V
-        *          mantisa: 3
-        *          exponent first digit:  3
-        *          exponent second digit: 0
-        */
-
-        String finalvalue;
-        finalvalue = "" + Bluetooth_Converter.BitToInt(data, 6, 2) + "." + Bluetooth_Converter.BitToInt(data, 2, 4) + "" +  Bluetooth_Converter.BitToInt(data, 0, 2) +"V";
-        return finalvalue;
-    }
-
-    public long MicroSectoSec(long microsec){
-        return microsec /1000000;
-    }
-
-    public void bluetooth_start(){
-        // Bluetooth
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-        // Ensures Bluetooth is available on the device and it is enabled. If not,
-        // force enables Bluetooth.
-
-        if (bluetoothAdapter == null)
-        {
-            Toast.makeText( getActivity(), "Device does not have bluetooth", Toast.LENGTH_SHORT).show();
-            getActivity().finish();
-        }
-        else if (!bluetoothAdapter.isEnabled()) {
-            // Force Enable Bluetooth
-            bluetoothAdapter.enable();
-
-            // Enable Bluetooth using Request
-            //int REQUEST_ENABLE_BT = 1;
-            //Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            //startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-
-            Toast.makeText( getActivity(), "Bluetooth Enabled", Toast.LENGTH_SHORT).show();
-        }
-
-        mHandler = new Handler();
-
-        // Use this check to determine whether BLE is supported on the device.  Then you can
-        // selectively disable BLE-related features.
-        if (!getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            Toast.makeText(getActivity(), "ble_not_supported", Toast.LENGTH_SHORT).show();
-            getActivity().finish();
-        }
-
-        // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
-        // BluetoothAdapter through BluetoothManager.
-        final BluetoothManager bluetoothManager =
-                (BluetoothManager) getActivity().getSystemService(Context.BLUETOOTH_SERVICE);
-        mBluetoothAdapter = bluetoothManager.getAdapter();
-
-        // Checks if Bluetooth is supported on the device.
-        if (mBluetoothAdapter == null) {
-            Toast.makeText(getActivity(), "error_bluetooth_not_supported", Toast.LENGTH_SHORT).show();
-            getActivity().finish();
-            return;
-        }
-    }
 }
-
