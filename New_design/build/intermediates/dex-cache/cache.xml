@@ -16,25 +16,11 @@
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-d370eaae0433d4395b6fb371298c17255fe7f402.jar" />
     </item>
     <item
-        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\libs\notifications-1.0.1.jar"
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\pl.droidsonroids.gif\android-gif-drawable\1.1.2\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="d2498fce7adbdb5ebd37dafc56d8056db60f51fe">
-        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\notifications-1.0.1-344395a14385c3065a8627fc41aca5ecdc5227a5.jar" />
-    </item>
-    <item
-        jar="C:\Users\Darren\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\gson-2.3.1-04610622b5c89bfbf73dea7d9b097008fa813cb5.jar" />
-    </item>
-    <item
-        jar="C:\Users\Darren\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\18.0\cce0823396aa693798f8882e64213b1772032b09\guava-18.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="cce0823396aa693798f8882e64213b1772032b09">
-        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\guava-18.0-5c893d783d89c69033022ffd5eb996624cceeb83.jar" />
+        sha1="1a957d76cb66257f24184b660243e00fcc51605c">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-d253d3b0e778d483ae11e1962904c7b73a983c32.jar" />
     </item>
     <item
         jar="C:\Users\Darren\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
@@ -58,6 +44,13 @@
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-1e3102298e392488d38fb81572ca01eb31be3d27.jar" />
     </item>
     <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\libs\notifications-1.0.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d2498fce7adbdb5ebd37dafc56d8056db60f51fe">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\notifications-1.0.1-344395a14385c3065a8627fc41aca5ecdc5227a5.jar" />
+    </item>
+    <item
         jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\libs\notification-hubs-0.4.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -72,11 +65,25 @@
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-0d170d50fafd58b4aa1b5eed276abade22604e44.jar" />
     </item>
     <item
+        jar="C:\Users\Darren\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\gson-2.3.1-04610622b5c89bfbf73dea7d9b097008fa813cb5.jar" />
+    </item>
+    <item
         jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-ec0d5240752ec0446e9fb70f0e1341c3ccc6aef8.jar" />
+    </item>
+    <item
+        jar="C:\Users\Darren\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\18.0\cce0823396aa693798f8882e64213b1772032b09\guava-18.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="cce0823396aa693798f8882e64213b1772032b09">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\guava-18.0-5c893d783d89c69033022ffd5eb996624cceeb83.jar" />
     </item>
     <item
         jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v13\21.0.3\libs\internal_impl-21.0.3.jar"

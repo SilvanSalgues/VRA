@@ -132,47 +132,21 @@
       </layout>
     </layouts>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.example.darren.menu" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="45d83a3e-8628-4037-ab95-33b8652e434e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/btn_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/btn_x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/update_user.xml" />
-      <change type="DELETED" beforePath="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\classes.jar" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\libs\internal_impl-20.0.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\src\main\res\drawable-xxhdpi\background.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\src\main\res\drawable-xxhdpi\possiblebg.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Activity_container.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Activity_container.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Adapter_Contact.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Adapter_Contact.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Adapter_SMS.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Adapter_SMS.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Bluetooth_Converter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Bluetooth_Converter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type1.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type2.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_properties.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_properties.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_exercise.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_exercise.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_home.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_home.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_messenger.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_messenger.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_sensor.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_sensor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_signin.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_signin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_signup.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_signup.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/New_design.iml" afterPath="$PROJECT_DIR$/New_design.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/darren/new_design/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/darren/new_design/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/exercise.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/exercise.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/exercise_intro.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/exercise_intro.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/home.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/messenger.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/messenger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/revise.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/revise.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/sensor.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/sensor.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/signin.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/signin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/signup.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/signup.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/exercise_type_1.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/exercise_type_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/exercise_type_2.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/exercise_type_2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="New_design.iws" />
@@ -224,8 +198,8 @@
       <file leaf-file-name="Exercise_Type.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1088">
-              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="578" max-vertical-offset="1292">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -241,77 +215,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Fragment_signup.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_signup.java">
+      <file leaf-file-name="exercise_type_1.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise_type_1.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1020">
-              <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="544">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="16" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Fragment_signin.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_signin.java">
+      <file leaf-file-name="exercise_type_2.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise_type_2.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.4157894" vertical-offset="0" max-vertical-offset="1887">
-              <caret line="100" column="13" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.49908257" vertical-offset="0" max-vertical-offset="714">
+              <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="signup.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/signup.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="2040">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="update_user.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/update_user.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="458" max-vertical-offset="1020">
-              <caret line="151" column="21" selection-start-line="151" selection-start-column="21" selection-end-line="151" selection-end-column="21" />
-              <folding>
-                <element signature="tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#TextView#0;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#TextView#1;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#EditText#0;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#TextView#2;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#EditText#1;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#TextView#3;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#EditText#2;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#TextView#0;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#EditText#0;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#TextView#1;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#EditText#1;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#TextView#2;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-                <element signature="tag#EditText#2;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="exercise.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="1241">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -1107,6 +1033,11 @@
                 <option name="name" value="prepareDebugTestDependencies" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare pl.droidsonroids.gif:android-gif-drawable:1.1.2" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="preparePlDroidsonroidsGifAndroidGifDrawable112Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="prepareReleaseDependencies" />
               </ExternalTaskPojo>
@@ -1186,7 +1117,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4262725093237" />
+        <entry key="$PROJECT_DIR$" value="4263421576064" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1346,6 +1277,7 @@
                             <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/google/m2repository/com/google/android/gms/play-services/6.5.87/play-services-6.5.87.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar" />
                             <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/21.0.3/appcompat-v7-21.0.3.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/pl.droidsonroids.gif/android-gif-drawable/1.1.2/c1ba5ce880ece6118687a3bd1cbc799f2e97054e/android-gif-drawable-1.1.2.aar" />
                             <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/21.0.3/support-v4-21.0.3.aar" />
                             <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar" />
                             <option value="$MODULE_DIR$/libs/mobileservices-1.1.5.jar" />
@@ -1428,8 +1360,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/yourAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/row_list_to_do.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/ToDoItemAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/messenger.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Type_Contact.java" />
@@ -1442,8 +1372,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_revise.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Timer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Timer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/exercise_type_2.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/exercise_type_1.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_exercise_intro.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/rounded_corner.xml" />
@@ -1473,12 +1401,16 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Adapter_Contact.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type2.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type1.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_properties.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_exercise.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/exercise.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/signup.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/update_user.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/GIFDecode.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/GifRun.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/exercise_type_1.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/exercise_type_2.xml" />
       </list>
     </option>
   </component>
@@ -1699,7 +1631,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -1833,6 +1764,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable-xxhdpi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="New_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="New_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1861,6 +1822,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -1876,7 +1838,7 @@
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="05b18525" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="AVD_for_Nexus_7_by_Google" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.WIDTH" value="293" />
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.SHOW" value="false" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.SHOW" value="true" />
     <property name="FullScreen" value="false" />
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
@@ -1886,7 +1848,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.WIDTH" value="183" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.SHOW" value="false" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.SHOW" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.STATE" value="left" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.STATE" value="right" />
     <property name="OverrideImplement.combined" value="true" />
@@ -1898,9 +1860,9 @@
       <recent name="com.example.darren.menu" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\src\main\java\com\example\darren\new_design" />
       <recent name="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\src\main\res\drawable-hdpi" />
       <recent name="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\src\main\res\layout" />
-      <recent name="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\src\main\java\com\example\darren\new_design" />
       <recent name="C:\Users\Darren\Dropbox\Programming\Android\android-insight-app\New_design\app\src\main\res\animator" />
       <recent name="C:\Users\Darren\Dropbox\Programming\Android\android-insight-app\New_design\app\src\main\res\layout" />
     </key>
@@ -2109,7 +2071,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2120,13 +2082,14 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30201343" sideWeight="0.39728096" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.326284" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23640484" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30201343" sideWeight="0.60196376" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4295302" sideWeight="0.6699396" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43333334" sideWeight="0.3141994" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25302115" sideWeight="0.49916247" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25075528" sideWeight="0.49916247" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32663316" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2139,7 +2102,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33221477" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23640484" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3204698" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -2196,32 +2158,15 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1184669" vertical-offset="0" max-vertical-offset="574">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/profile.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/edit_profile.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/login.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="641" max-vertical-offset="1445">
           <caret line="60" column="47" selection-start-line="60" selection-start-column="47" selection-end-line="60" selection-end-column="47" />
           <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="android-dummy://New_design/app/Translations Editor">
@@ -2322,14 +2267,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise_day.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1309">
           <caret line="16" column="16" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="16" />
           <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
@@ -2341,80 +2286,80 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/bg_repeat.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="549">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/revise.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/revise.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise_intro.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise_intro.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1076" max-vertical-offset="1547">
           <caret line="76" column="51" selection-start-line="76" selection-start-column="51" selection-end-line="76" selection-end-column="51" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/container.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/container.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="19" selection-end-column="10" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sensor.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sensor.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1228" max-vertical-offset="3468">
           <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/menu.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/menu.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="760" max-vertical-offset="1326">
           <caret line="55" column="68" selection-start-line="55" selection-start-column="68" selection-end-line="55" selection-end-column="68" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row_contact.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row_contact.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Bluetooth_RFduinoService.java">
@@ -2425,24 +2370,24 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/signin.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1428">
           <caret line="58" column="32" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="32" />
           <folding />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/rounded_corner.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7883065" vertical-offset="0" max-vertical-offset="629">
           <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Type_SMS.java">
@@ -2453,25 +2398,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row_sms.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/messenger.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/messenger.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1552" max-vertical-offset="2618">
           <caret line="107" column="21" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="21" />
           <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Adapter_SMS.java">
@@ -2503,50 +2448,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/home.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3595" max-vertical-offset="4131">
           <caret line="235" column="4" selection-start-line="235" selection-start-column="4" selection-end-line="235" selection-end-column="4" />
           <folding />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-21/android/view/ViewGroup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334" vertical-offset="105601" max-vertical-offset="121618">
           <caret line="6347" column="19" selection-start-line="6347" selection-start-column="19" selection-end-line="6347" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise_type_2.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise_type_1.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="493">
-          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="104" max-vertical-offset="510">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2558,22 +2473,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="361" max-vertical-offset="918">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/signup.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="2040">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_signin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.3263159" vertical-offset="0" max-vertical-offset="1887">
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_signup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
+          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/update_user.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="433" max-vertical-offset="1071">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="458" max-vertical-offset="1003">
+          <caret line="151" column="21" selection-start-line="151" selection-start-column="21" selection-end-line="151" selection-end-column="21" />
           <folding />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="android-designer">
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="104" max-vertical-offset="510">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/illusion1.gif">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
@@ -2581,6 +2526,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="595">
           <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="433" max-vertical-offset="1071">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2593,55 +2549,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/signup.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="2040">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/update_user.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="458" max-vertical-offset="1003">
-          <caret line="151" column="21" selection-start-line="151" selection-start-column="21" selection-end-line="151" selection-end-column="21" />
-          <folding>
-            <element signature="tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#TextView#0;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#TextView#1;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#EditText#0;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#TextView#2;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#EditText#1;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#TextView#3;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#EditText#2;tag#RelativeLayout#0;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#TextView#0;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#EditText#0;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#TextView#1;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#EditText#1;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#TextView#2;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-            <element signature="tag#EditText#2;tag#RelativeLayout#1;tag#LinearLayout#0;tag#RelativeLayout#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_signup.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/GIFDecode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
-          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+        <state vertical-scroll-proportion="1.8740602" vertical-offset="3950" max-vertical-offset="9622">
+          <caret line="303" column="31" selection-start-line="303" selection-start-column="31" selection-end-line="303" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/GifRun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.040367" vertical-offset="300" max-vertical-offset="1411">
+          <caret line="56" column="22" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Exercise_Type.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="395" max-vertical-offset="1224">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/darren/new_design/Fragment_signin.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise_type_1.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4157894" vertical-offset="0" max-vertical-offset="1887">
-          <caret line="100" column="13" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="544">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="16" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/exercise_type_2.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49908257" vertical-offset="0" max-vertical-offset="714">
+          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
           <folding />
         </state>
       </provider>

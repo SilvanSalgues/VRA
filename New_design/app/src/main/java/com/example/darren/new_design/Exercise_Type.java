@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 public abstract class Exercise_Type  extends Fragment {
 
@@ -34,8 +33,21 @@ public abstract class Exercise_Type  extends Fragment {
         //Toast toast = Toast.makeText(getActivity(), "bgColour :" + myValue , Toast.LENGTH_SHORT);
         //toast.show();
 
-        RelativeLayout replaceLayout = (RelativeLayout) InputFragmentView.findViewById(R.id.replaceLayout);
-        replaceLayout.setBackgroundColor(Colour);
+        //GifRun w = new  GifRun();
+        //SurfaceView v = (SurfaceView) InputFragmentView.findViewById(R.id.surfaceView);
+        //w.LoadGiff(v, getActivity(), R.drawable.illusion1);
+
+        //ImageView GIFimage = (ImageView) InputFragmentView.findViewById(R.id.GIFimage);
+        //GIFimage.setAdjustViewBounds(true);
+        //GIFimage.setScaleType(ImageView.ScaleType.CENTER);
+        //GIFimage.setImageDrawable(getResources().getDrawable(R.anim.my_animation));
+        //AnimationDrawable frameAnimation = (AnimationDrawable) GIFimage.getDrawable();
+        // Start the animation (looped playback by default).
+        //frameAnimation.start();
+
+
+        //RelativeLayout replaceLayout = (RelativeLayout) InputFragmentView.findViewById(R.id.replaceLayout);
+        //replaceLayout.setBackgroundColor(Colour);
 
         Addwidgets();
         return InputFragmentView;
