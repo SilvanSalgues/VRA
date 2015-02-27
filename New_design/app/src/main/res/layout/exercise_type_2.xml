@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_point"
-            android:background="@drawable/e_point"/>
+            android:background="@drawable/z_point"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/left_point"
-            android:background="@drawable/e_point"/>
+            android:background="@drawable/x_point"/>
     </RelativeLayout>
 
 </RelativeLayout>

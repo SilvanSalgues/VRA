@@ -92,5 +92,12 @@
         sha1="0dcc55e70f7ebf7238fe2ec53f662eb378ab2668">
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-25ee73fa071cbaea413f9ebee73a336296ca9944.jar" />
     </item>
+    <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.github.bluejamesbond\textjustify-android\2.1.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9e3ac75a5e3f8ef059c7766dc9640e0487e32749">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-c37154cb53a5eb6393f153c1d32a8e4f23ce2d27.jar" />
+    </item>
 
 </items>

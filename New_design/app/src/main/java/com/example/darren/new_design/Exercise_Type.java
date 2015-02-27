@@ -32,7 +32,7 @@ public abstract class Exercise_Type  extends Fragment {
         GetLayout();
         InputFragmentView = inflater.inflate(layout_id, container, false);
 
-        starting_size = (int) (fontsize[0] * pixel_density());      // Starting size is the smallest the focus point can be and the first position in the array
+        starting_size = (int) (fontsize[1] * pixel_density());      // Starting size is the smallest the focus point can be and the first position in the array
 
         GIFimage = (GifImageView) InputFragmentView.findViewById(R.id.GIFview);
         //GIFimage.setBackgroundColor(Color.BLUE);

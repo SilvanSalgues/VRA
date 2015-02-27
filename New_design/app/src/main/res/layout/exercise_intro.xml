@@ -8,18 +8,19 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="100px"
-        android:id="@+id/headerSensor"
+        android:id="@+id/headerExerc"
         android:background="#ff1f5c68">
 
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:id="@+id/btn_info_sensor"
+            android:id="@+id/btn_info_intro"
             android:background="@drawable/icon_green_info"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="30dp"
-            android:focusableInTouchMode="false" />
+            android:focusableInTouchMode="false"
+            android:padding="2dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +28,7 @@
             android:text="About this screen"
             android:id="@+id/about"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/btn_info_sensor"
+            android:layout_toStartOf="@+id/btn_info_intro"
             android:layout_marginRight="20dp"
             android:textColor="@android:color/white"
             android:singleLine="false" />
@@ -43,7 +44,6 @@
             android:layout_marginLeft="20dp"
             android:textSize="20sp" />
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
@@ -52,14 +52,13 @@
         android:id="@+id/VideoLayout"
         android:gravity="center"
         android:layout_above="@+id/footer"
-        android:layout_below="@+id/headerSensor">
+        android:layout_below="@+id/headerExerc">
 
         <VideoView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/videoView"/>
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="280px"
@@ -68,19 +67,22 @@
         android:layout_alignParentStart="false"
         android:background="#fff7f7f7">
 
-        <TextView
+        <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscy ing elit. Nulla viverra elementum tellus, sollicitudin. "
             android:id="@+id/general_desc"
-            android:textSize="16sp"
-            android:autoText="true"
-            android:textColor="#ff9D9D9D"
-            android:layout_below="@+id/Duration"
             android:layout_alignStart="@+id/exercise_name"
-            android:layout_toStartOf="@+id/Instructions"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp" />
+            android:layout_toStartOf="@+id/start_exercise"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_below="@+id/Duration"
+            android:layout_marginTop="8dp"
+            ext:documentView_textSize="16sp"
+            ext:documentView_textAlignment="justified"
+            ext:documentView_textColor="#ff8c8c8c"
+            ext:documentView_text="Lorem ipsum dolor sit amet, consectetur adipiscy ing elit. Nulla viverra elementum tellus, sollicitudin."
+            ext:documentView_textTypefacePath="fonts/pali-helvetica-regular.ttf"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,23 +92,23 @@
             android:textAlignment="center"
             android:textSize="20sp"
             android:textColor="#ff1f5c68"
-            android:textIsSelectable="true"
-            android:layout_marginRight="10dp"
+            android:textIsSelectable="false"
             android:textStyle="bold"
-            android:layout_alignTop="@+id/Instructions"
-            android:layout_alignStart="@+id/start_exercise" />
+            android:layout_alignBottom="@+id/exercise_name"
+            android:layout_alignEnd="@+id/start_exercise"
+            android:typeface="sans" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Head Rotation "
             android:id="@+id/exercise_name"
-            android:textSize="26sp"
+            android:textSize="22sp"
             android:textColor="#ff1f5c68"
             android:textIsSelectable="false"
             android:textStyle="bold"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_marginLeft="20dp" />
 
         <Button
@@ -119,13 +121,13 @@
             android:gravity="center"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textIsSelectable="false" />
 
-        <TextView
+       <!-- <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Instructions"
@@ -148,7 +150,7 @@
             android:layout_alignTop="@+id/general_desc"
             android:layout_alignStart="@+id/Instructions"
             android:layout_toStartOf="@id/start_exercise"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp" />-->
 
         <!--        <TextView
                     android:layout_width="wrap_content"

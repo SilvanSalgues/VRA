@@ -3,6 +3,7 @@ package com.example.darren.new_design;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -29,14 +30,34 @@ public class Fragment_exercise extends Fragment {
     Button Pause_btn, Stop_btn;
     Fragment ExerciseFragment;
 
+    Database_Manager db;
+    Cursor cur;
+
     List<Exercise_properties> exerc = new ArrayList<>();    // Holds a list of exercises
     static CountDownTimer countDownTimer;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         InputFragmentView = inflater.inflate(R.layout.exercise, container, false);
+        db = new Database_Manager(getActivity());
+        db.open();
 
-        exerc.add(new Exercise_properties("Exercise Name 1",R.drawable.test, new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties("Exercise Name 2",R.drawable.test ,new Exercise_Type2(), 60, R.drawable.illusion3, 0.3f));
+        cur = db.getExerciseDescriptions();
+        cur.moveToPosition(4);//exercise);
+        Log.d("Cursor","" + cur.getString(1));
+
+        String ExName = cur.getString(1);
+        String Description = cur.getString(2);
+        db.close();
+
+
+        /*String ExName = "Side to side head rotation exercise, 6-8 feet away";
+        String Description = "Place tablet on a shelf or ledge at roughly eye level. Stand 6-8 feet away. " +
+                "The screen has an ‘E’ letter in the middle of the screen. Move your head from side to side " +
+                "while focusing on the letter. If the letter starts to go out of focus then slow down. Continue " +
+                "this exercise until timer has finished.";*/
+
+        exerc.add(new Exercise_properties(ExName,Description,R.drawable.test, new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
+        exerc.add(new Exercise_properties(ExName,Description,R.drawable.test, new Exercise_Type2(), 60, R.drawable.illusion3, 0.3f));
 
 
         timer = (TextView)  InputFragmentView.findViewById(R.id.timer_txt);
@@ -54,12 +75,12 @@ public class Fragment_exercise extends Fragment {
             @Override
             public void onClick(View v) {
                 if (TimerActive) {
-                    Pause_btn.setText("Continue Exercise");
+                    Pause_btn.setText("CONTINUE");
                     countDownTimer.cancel();
                     TimerActive = false;
                 }
                 else{
-                    Pause_btn.setText("Pause Exercise");
+                    Pause_btn.setText("PAUSE");
                     countDownTimer = new MyCountDownTimer();
                     countDownTimer.start();
                     TimerActive = true;
@@ -96,7 +117,7 @@ public class Fragment_exercise extends Fragment {
                 .addToBackStack(null);
         ft.commit();
 
-        exercise_name.setText(exerc.get(exercise).getName());                  // Sets the Exercise_No text box as the current exercise number
+        exercise_name.setText("Exercise | " + exerc.get(exercise).getName());  // Sets the Exercise_No text box as the current exercise number
         //Speed.setText("Speed : " + exerc.get(exercise).speed + "Hz");        // Sets the Speed text box as the speed of head movement of the exercise
 
         return InputFragmentView;

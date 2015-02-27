@@ -32,6 +32,7 @@ dependencies {
     //compile files('libs/mobileservices-2.0.1-beta.jar')
     //compile files('libs/notifications-1.0.1.jar')
     //compile files('libs/notification-hubs-0.4.jar')
-    compile(group: 'com.microsoft.azure', name: 'azure-notifications-handler', version: '1.0.1', ext: 'jar')
+    compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@jar'
     //compile (group: 'com.microsoft.azure', name: 'azure-notifications-handler', version: '1.0.1', ext: 'jar')
+    compile 'com.github.bluejamesbond:textjustify-android:2.1.0'
 }

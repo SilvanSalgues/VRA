@@ -19,13 +19,13 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="100px"
-        android:id="@+id/headerSensor"
+        android:id="@+id/headerExerc"
         android:background="#ff1f5c68">
 
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:id="@+id/btn_info_sensor"
+            android:id="@+id/btn_info_intro"
             android:background="@drawable/icon_green_info"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
@@ -38,7 +38,7 @@
             android:text="About this screen"
             android:id="@+id/about"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/btn_info_sensor"
+            android:layout_toStartOf="@+id/btn_info_intro"
             android:layout_marginRight="20dp"
             android:textColor="@android:color/white"
             android:singleLine="false" />
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_above="@+id/footer"
-        android:layout_below="@+id/headerSensor"
+        android:layout_below="@+id/headerExerc"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="18dp"
         android:layout_marginTop="18dp">
@@ -84,7 +84,7 @@
                 android:groupIndicator="@null"
                 android:divider="#fff7f7f7"
                 android:dividerHeight="1dp"
-        android:layout_below="@+id/headerSensor"
+        android:layout_below="@+id/headerExerc"
         android:layout_above="@+id/footer"
             android:drawSelectorOnTop="false" />
     </LinearLayout>
