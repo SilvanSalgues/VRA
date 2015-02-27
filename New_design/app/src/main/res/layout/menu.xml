@@ -62,7 +62,7 @@
             android:layout_width="fill_parent"
             android:layout_height="87dp"
             android:id="@+id/logout_btn"
-            android:background="@drawable/btns_logout_unselected"
+            android:background="@drawable/icon_logout"
             android:padding="1dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"

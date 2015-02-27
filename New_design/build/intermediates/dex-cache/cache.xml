@@ -16,6 +16,13 @@
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-d370eaae0433d4395b6fb371298c17255fe7f402.jar" />
     </item>
     <item
+        jar="C:\Users\Darren\.gradle\caches\modules-2\files-2.1\com.microsoft.azure\azure-notifications-handler\1.0.1\c322af100020e6db539f2aa367698d4b88fc453f\azure-notifications-handler-1.0.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c322af100020e6db539f2aa367698d4b88fc453f">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\azure-notifications-handler-1.0.1-4455dc8ad579e7aac81990bcc732ef94ff73b983.jar" />
+    </item>
+    <item
         jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\pl.droidsonroids.gif\android-gif-drawable\1.1.2\classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -44,20 +51,6 @@
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-1e3102298e392488d38fb81572ca01eb31be3d27.jar" />
     </item>
     <item
-        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\libs\notifications-1.0.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d2498fce7adbdb5ebd37dafc56d8056db60f51fe">
-        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\notifications-1.0.1-344395a14385c3065a8627fc41aca5ecdc5227a5.jar" />
-    </item>
-    <item
-        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\libs\notification-hubs-0.4.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="341cf8ef72f7244597c95190386787eef19120a4">
-        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\notification-hubs-0.4-1b463ab2c95a6a96316e806d0c52d1d7892377ec.jar" />
-    </item>
-    <item
         jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\exploded-aar\com.android.support\support-v13\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -79,6 +72,13 @@
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-ec0d5240752ec0446e9fb70f0e1341c3ccc6aef8.jar" />
     </item>
     <item
+        jar="C:\Users\Darren\.gradle\caches\modules-2\files-2.1\com.microsoft.azure\azure-mobile-services-android-sdk\2.0.2-beta\a46288e0089b8e0b784135ed7d3d2db0329fc3c5\azure-mobile-services-android-sdk-2.0.2-beta.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a46288e0089b8e0b784135ed7d3d2db0329fc3c5">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\azure-mobile-services-android-sdk-2.0.2-beta-0d0b6d405d4dfc4cdd03ac88d1ccc4c529f9205a.jar" />
+    </item>
+    <item
         jar="C:\Users\Darren\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\18.0\cce0823396aa693798f8882e64213b1772032b09\guava-18.0.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -91,13 +91,6 @@
         revision="21.1.2"
         sha1="0dcc55e70f7ebf7238fe2ec53f662eb378ab2668">
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-25ee73fa071cbaea413f9ebee73a336296ca9944.jar" />
-    </item>
-    <item
-        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\libs\mobileservices-1.1.5.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="12188408c45b88124cb38dd2bedc9b314b5f554b">
-        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\mobileservices-1.1.5-3e3aa4fe66a7d22e6bca3d6bd5c64d3222069412.jar" />
     </item>
 
 </items>

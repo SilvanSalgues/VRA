@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF50B7B0">
+    android:background="#ff1f5c68">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -11,8 +11,9 @@
         android:focusableInTouchMode="false"
         android:background="@drawable/logo"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/VRA"
-        android:layout_marginTop="30dp" />
+        android:layout_alignStart="@+id/content_login"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,10 +25,10 @@
         android:textIsSelectable="true"
         android:paddingTop="10dp"
         android:textColor="@android:color/white"
-        android:layout_marginLeft="8dp"
         android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_alignTop="@+id/logo" />
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/logo"
+        android:layout_toEndOf="@+id/logo" />
 
     <FrameLayout
         android:layout_width="320dp"
@@ -35,7 +36,7 @@
         android:id="@+id/content_login"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="25dp">
     </FrameLayout>
 

@@ -8,20 +8,26 @@
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/illusion1"
-    />
+        android:id="@+id/GIFview">
+    </pl.droidsonroids.gif.GifImageView>
 
-    <!--<SurfaceView
-    android:id="@+id/surfaceView"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" />-->
-
-    <ImageView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/center_point"
-        android:background="@drawable/e_point"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:focusableInTouchMode="true" />
+        android:padding="15dp"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/center_point"
+            android:background="@drawable/e_point"
+            android:focusableInTouchMode="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+
 </RelativeLayout>

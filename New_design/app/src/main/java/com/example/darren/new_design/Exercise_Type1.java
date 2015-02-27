@@ -19,6 +19,5 @@ public class Exercise_Type1 extends Exercise_Type{
 
         center_point.getLayoutParams().height=starting_size;           // Sets the height of the focus point image to the smallest size (square)
         center_point.getLayoutParams().width=starting_size;            // Sets the width of the focus point image to the smallest size
-
     }
 }

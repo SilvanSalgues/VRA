@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textSize="25sp"
-        android:textColor="#FF50B7B0"
+        android:textColor="#ff1f5c68"
         android:textStyle="bold" />
 
     <TextView
@@ -23,10 +23,11 @@
         android:text="Sign In"
         android:id="@+id/up_signin"
         android:textSize="18sp"
-        android:textColor="#ff44d0ba"
+        android:textColor="#ff589310"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/up_create"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:padding="4dp" />
 
 
     <EditText
@@ -38,7 +39,7 @@
         android:layout_below="@id/up_signup"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:background="#FF50B7B0"
+        android:background="#ff1f5c68"
         android:textSize="15sp"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
@@ -55,7 +56,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:inputType="textEmailAddress"
-        android:background="#FF50B7B0"
+        android:background="#ff1f5c68"
         android:textSize="15sp"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
@@ -72,7 +73,7 @@
         android:layout_marginTop="5dp"
         android:layout_below="@+id/up_email"
         android:layout_alignStart="@+id/up_name"
-        android:background="#FF50B7B0"
+        android:background="#ff1f5c68"
         android:textSize="15sp"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
@@ -89,7 +90,7 @@
         android:layout_marginTop="5dp"
         android:layout_below="@+id/up_pass"
         android:layout_alignStart="@+id/up_name"
-        android:background="#FF50B7B0"
+        android:background="#ff1f5c68"
         android:textSize="15sp"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
@@ -106,10 +107,11 @@
         android:layout_alignEnd="@+id/up_verify_pass"
         android:layout_marginTop="5dp"
         android:layout_alignStart="@+id/up_verify_pass"
-        android:background="#ff44d0ba"
+        android:background="#ff589310"
         android:textSize="15sp"
         android:textColor="#FFFFFF"
-        android:layout_alignParentEnd="false" />
+        android:layout_alignParentEnd="false"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

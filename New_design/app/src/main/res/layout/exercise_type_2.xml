@@ -8,30 +8,39 @@
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/illusion1"
+        android:id="@+id/GIFview"
         />
 
-    <!--<SurfaceView
-    android:id="@+id/surfaceView"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" />-->
-
-    <ImageView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/left_point"
-        android:background="@drawable/e_point"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="60dp"
+        android:padding="15dp"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/right_point"
+            android:background="@drawable/e_point"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="60dp"
-        android:focusableInTouchMode="false" />
+        android:padding="15dp"
+        android:background="@android:color/white">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/right_point"
-        android:background="@drawable/e_point"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="60dp" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/left_point"
+            android:background="@drawable/e_point"/>
+    </RelativeLayout>
+
 </RelativeLayout>

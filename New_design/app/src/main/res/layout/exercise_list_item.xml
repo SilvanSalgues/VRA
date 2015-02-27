@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#fff7f7f7">
+
+        <TextView
+            android:id="@+id/expandedListItem"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="#ff9D9D9D"
+            android:textSize="15dp"
+            android:autoText="false"
+            android:layout_toStartOf="@+id/tick"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/tick"
+            android:background="@drawable/icon_green_tick"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/groupHolder"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:id="@+id/groupHolder"
+            android:background="@drawable/icon_grey_arrow_right"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+</LinearLayout>

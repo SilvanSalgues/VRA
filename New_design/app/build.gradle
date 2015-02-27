@@ -26,8 +26,12 @@ dependencies {
     compile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile files('libs/mobileservices-1.1.5.jar')
-    compile files('libs/notifications-1.0.1.jar')
-    compile files('libs/notification-hubs-0.4.jar')
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.2'
+    compile 'com.microsoft.azure:azure-mobile-services-android-sdk:2.0.2-beta'
+    compile 'com.android.support:support-v4:21.0.3'
+    //compile files('libs/mobileservices-2.0.1-beta.jar')
+    //compile files('libs/notifications-1.0.1.jar')
+    //compile files('libs/notification-hubs-0.4.jar')
+    compile(group: 'com.microsoft.azure', name: 'azure-notifications-handler', version: '1.0.1', ext: 'jar')
+    //compile (group: 'com.microsoft.azure', name: 'azure-notifications-handler', version: '1.0.1', ext: 'jar')
 }

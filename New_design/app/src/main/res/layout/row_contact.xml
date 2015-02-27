@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/icon"
@@ -10,9 +11,9 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="4dp"
-        android:src="@drawable/default_profile"
         android:contentDescription="default_profile"
-        android:cropToPadding="true">
+        android:cropToPadding="false"
+        android:background="@drawable/default_profile">
     </ImageView>
 
     <LinearLayout
@@ -30,8 +31,8 @@
             android:typeface="sans"
             android:textStyle="bold"
             android:text="Contact Name"
-            android:textSize="20dp"
-            android:textIsSelectable="true" />
+            android:textSize="20sp"
+            android:textIsSelectable="false" />
 
         <TextView
             android:id="@+id/new_messages"
@@ -39,7 +40,7 @@
             android:layout_height="wrap_content"
             android:typeface="sans"
             android:text="0 New Message"
-            android:textSize="18dp" />
-
+            android:textSize="18sp"
+            android:textIsSelectable="false" />
     </LinearLayout>
 </RelativeLayout>

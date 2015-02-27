@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,12 +14,9 @@ class Adapter_Contact extends BaseAdapter{
 
     private LayoutInflater inflater;
     private ArrayList<Type_Contact> data;
-    Context c;
-    int p;
 
     public Adapter_Contact(Context context, ArrayList<Type_Contact> d){
         data = d;
-        c = context;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -38,29 +36,23 @@ class Adapter_Contact extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View row = convertView;
-        p = position;
 
         if (row == null) {
-            row = inflater.inflate(R.layout.row_contact, null);
+            row = inflater.inflate(R.layout.row_contact, parent, false);
         }
 
+        ImageView icon = (ImageView) row.findViewById(R.id.icon);
         TextView contact_name = (TextView)row.findViewById(R.id.contact_name);
         TextView phone_number = (TextView)row.findViewById(R.id.new_messages);
 
         final Type_Contact Contact = data.get(position);
+        icon.setBackgroundResource(R.drawable.profile);
         contact_name.setText(Contact.getName());
         phone_number.setText(Contact.getPhone());
 
-
-        row.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //Perform an action when this list item is clicked
-                //Toast.makeText(c, p, Toast.LENGTH_SHORT).show();
-            }
-        });
         return row;
     }
 }

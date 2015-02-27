@@ -3,40 +3,114 @@
 <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white">
+
+    <!--
+      <HorizontalScrollView
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:id="@+id/horizontalScrollView"
+          android:layout_below="@+id/WeekNo"
+          android:layout_marginTop="30dp">
+-->
+
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@android:color/white">
+        android:layout_height="100px"
+        android:id="@+id/headerSensor"
+        android:background="#ff1f5c68">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/btn_info_sensor"
+            android:background="@drawable/icon_green_info"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="30dp"
+            android:focusableInTouchMode="false" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Week 1"
-            android:id="@+id/WeekNo"
-            android:textSize="50sp"
-            android:textIsSelectable="true"
-            android:textColor="#ff306b65"
-            android:autoText="false"
-            android:layout_alignParentTop="true"
+            android:text="About this screen"
+            android:id="@+id/about"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btn_info_sensor"
+            android:layout_marginRight="20dp"
+            android:textColor="@android:color/white"
+            android:singleLine="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Revise Progress | Training Exercises Explained "
+            android:id="@+id/textView"
+            android:textColor="@android:color/white"
+            android:layout_alignTop="@+id/about"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="20dp" />
-
-        <HorizontalScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/horizontalScrollView"
-            android:layout_below="@+id/WeekNo"
-            android:layout_marginTop="30dp">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/linear_exercise">
-            </LinearLayout>
-
-        </HorizontalScrollView>
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/footer"
+        android:layout_below="@+id/headerSensor"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="18dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day 1"
+            android:id="@+id/day"
+            android:textSize="22sp"
+            android:textIsSelectable="true"
+            android:textColor="#ff1f5c68"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="3dp"
+            android:textStyle="bold" />
+
+        <ExpandableListView
+                android:id="@+id/expandableListView"
+                android:layout_height="match_parent"
+                android:layout_width="240dp"
+                android:groupIndicator="@null"
+                android:divider="#fff7f7f7"
+                android:dividerHeight="1dp"
+        android:layout_below="@+id/headerSensor"
+        android:layout_above="@+id/footer"
+            android:drawSelectorOnTop="false" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="280px"
+        android:id="@+id/footer"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="#fff7f7f7">
+
+        <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Week 1 Exercises"
+              android:id="@+id/WeekNo"
+              android:textSize="30sp"
+              android:textIsSelectable="true"
+              android:textColor="#ff1f5c68"
+              android:autoText="false"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentStart="true"
+              android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp" />
+
+    </RelativeLayout>
+
 </RelativeLayout>

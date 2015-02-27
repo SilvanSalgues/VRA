@@ -10,8 +10,6 @@ import android.os.Bundle;
 
 public class Activity_login extends Activity {
 
-    FragmentManager fm = getFragmentManager();
-    FragmentTransaction ft = fm.beginTransaction();
     Fragment myFragment;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +24,8 @@ public class Activity_login extends Activity {
         }
 
         if (savedInstanceState == null){
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
             myFragment = new Fragment_signin();
             ft.add(R.id.content_login, myFragment);
             ft.commit();

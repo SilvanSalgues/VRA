@@ -20,7 +20,7 @@ public class Database_Manager {
     private static final String DATABASE_NAME = "Database";
     private static final String DATABASE_TABLE1 = "Users";
 
-    private Context context;
+    Context context;
 
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
@@ -144,7 +144,7 @@ public class Database_Manager {
             mCursor.moveToFirst();
         }
 
-        if(mCursor.getCount() > 0)
+        if( mCursor.getCount() > 0)
         {
             return true;
         }

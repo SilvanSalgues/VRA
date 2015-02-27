@@ -1,40 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@android:color/white"
-        android:id="@+id/home_layout">
+        android:id="@+id/home_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WELCOME DARREN MC NEELY"
-            android:id="@+id/welcome"
-            android:textColor="#ff306b65"
-            android:textSize="24sp"
-            android:textIsSelectable="true"
-            android:typeface="normal"
-            android:textStyle="bold"
-            android:layout_alignTop="@+id/last_active"
-            android:layout_alignStart="@+id/graph_container" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="100px"
+            android:id="@+id/Exercise_home"
+            android:background="#ff1f5c68" >
 
-        <TextView
-            android:layout_width="550dp"
-            android:layout_height="wrap_content"
-            android:text="Donec id elit non mi porta gravida at eget metus. Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo."
-            android:id="@+id/under_welcome"
-            android:layout_below="@+id/welcome"
-            android:layout_alignStart="@+id/welcome"
-            android:textColor="#ff98a4a0"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
-            android:textSize="14sp" />
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:id="@+id/info_home"
+                android:background="@drawable/icon_green_info"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About this screen"
+                android:id="@+id/about_home"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/info_home"
+                android:layout_marginRight="20dp"
+                android:textColor="@android:color/white"
+                android:singleLine="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home | Training Exercises Explained "
+                android:id="@+id/textView3"
+                android:textColor="@android:color/white"
+                android:layout_alignTop="@+id/about_home"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -44,12 +53,14 @@
             android:elevation="4dp"
             android:background="#fffaf9ff"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/under_welcome"
             android:id="@+id/graph_container"
             android:paddingLeft="30dp"
             android:paddingRight="50dp"
-            android:layout_above="@+id/profile"
-            android:focusable="true">
+            android:focusable="true"
+            android:layout_below="@+id/Exercise_home"
+            android:layout_above="@+id/footer"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp">
 
             <com.jjoe64.graphview.GraphView
                 android:layout_width="fill_parent"
@@ -90,6 +101,13 @@
                 android:layout_marginBottom="4dp" />
         </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="280px"
+        android:id="@+id/footer"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="#fff7f7f7">
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,16 +117,17 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/graph_container"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="60dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="EXERCISE COMPLETE "
             android:id="@+id/exercise_complete"
-            android:textColor="#FF44D0BA"
-            android:textSize="16sp"
-            android:textIsSelectable="true"
+            android:textColor="#ff1f5c68"
+            android:textSize="20sp"
+            android:textIsSelectable="false"
             android:textStyle="bold"
             android:layout_marginRight="20dp"
             android:layout_below="@+id/last_active"
@@ -119,9 +138,9 @@
             android:layout_height="wrap_content"
             android:text="8"
             android:id="@+id/exercise_complete_number"
-            android:textColor="#ff44d0ba"
-            android:textSize="16sp"
-            android:textIsSelectable="true"
+            android:textColor="#ff1f5c68"
+            android:textSize="20sp"
+            android:textIsSelectable="false"
             android:textStyle="bold"
             android:layout_below="@+id/last_active_time"
             android:layout_alignEnd="@+id/last_active_time" />
@@ -131,108 +150,54 @@
             android:layout_height="wrap_content"
             android:text="LAST ACTIVE"
             android:id="@+id/last_active"
-            android:textColor="#FF44D0BA"
-            android:textSize="16sp"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/exercise_complete"
+            android:textColor="#ff1f5c68"
+            android:textSize="20sp"
             android:singleLine="true"
-            android:layout_marginTop="20dp"
-            android:textIsSelectable="true"
-            android:textStyle="normal|bold" />
+            android:textIsSelectable="false"
+            android:textStyle="normal|bold"
+            android:layout_alignTop="@+id/Name"
+            android:layout_alignStart="@+id/exercise_complete" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10:39"
             android:id="@+id/last_active_time"
-            android:textColor="#FF44D0BA"
-            android:textSize="16sp"
+            android:textColor="#ff1f5c68"
+            android:textSize="20sp"
             android:singleLine="true"
-            android:textIsSelectable="true"
+            android:textIsSelectable="false"
             android:textStyle="normal|bold"
             android:layout_above="@+id/exercise_complete"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="30dp" />
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#ff306b65"
-            android:id="@+id/relativeLayout2"
-            android:visibility="visible"
-            android:layout_alignEnd="@+id/graph_container"
-            android:layout_alignTop="@+id/profile"
-            android:layout_toEndOf="@+id/other_info"
-            android:layout_marginLeft="100dp"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Physiotherapist"
-                android:id="@+id/textView4"
-                android:textSize="25sp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:id="@+id/imageView"
-                android:background="@drawable/plus"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:visibility="invisible" />
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:background="#c0c0c0"
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/imageView"
-                android:layout_alignParentStart="true"
-                android:visibility="invisible" />
-
-        </RelativeLayout>
+            android:layout_marginRight="160dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DARREN MC NEELY"
+            android:text="Darren Mc Neely"
             android:id="@+id/Name"
-            android:textColor="#ff306b65"
-            android:textSize="18sp"
+            android:textColor="#ff1f5c68"
+            android:textSize="28sp"
             android:textIsSelectable="false"
             android:textStyle="bold"
+            android:layout_marginLeft="30dp"
             android:layout_alignTop="@+id/profile"
             android:layout_toEndOf="@+id/profile"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginTop="15dp" />
 
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Donec id elit non mi porta gravida at eget metus. Sed posuere consectetur est at lobortis."
-            android:id="@+id/other_info"
-            android:textColor="#ff98a4a0"
+        <Button
+            android:layout_width="115dp"
+            android:layout_height="40dp"
+            android:id="@+id/edit_profile"
+            android:background="#ff589310"
+            android:layout_marginTop="6dp"
             android:layout_below="@+id/Name"
             android:layout_alignStart="@+id/Name"
-            android:layout_marginTop="5dp"
-            android:textSize="12sp" />
-
-        <ImageButton
-            android:layout_width="110dp"
-            android:layout_height="30dp"
-            android:id="@+id/edit_profile"
-            android:background="@drawable/edit_profile"
-            android:layout_below="@+id/other_info"
-            android:layout_alignStart="@+id/other_info"
-            android:layout_marginTop="10dp" />
+            android:text="Edit Profile"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textStyle="bold" />
 
     </RelativeLayout>
-
 </RelativeLayout><!-- From: file:/C:/Users/Darren/Documents/Repos/FinalYear/New_design/app/src/main/res/layout/home.xml -->

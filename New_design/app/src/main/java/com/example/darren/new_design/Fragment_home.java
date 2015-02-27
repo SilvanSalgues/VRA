@@ -1,32 +1,23 @@
 package com.example.darren.new_design;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,20 +29,20 @@ public class Fragment_home extends Fragment{
 
     ImageButton profile;
     TextView Welcome;
-    ImageButton edit_profile;
+    Button edit_profile;
     //PopupWindow popWindow;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View InputFragmentView = inflater.inflate(R.layout.home, container, false);
 
-        Welcome = (TextView) InputFragmentView.findViewById(R.id.welcome);
+        //Welcome = (TextView) InputFragmentView.findViewById(R.id.welcome);
 
         // Font path
-        String fontPath = "fonts/pali-helvetica-bold.ttf";
+        //String fontPath = "fonts/pali-helvetica-bold.ttf";
         // Loading Font Face
-        Typeface tf = Typeface.createFromAsset(this.getResources().getAssets(), fontPath);
+        //Typeface tf = Typeface.createFromAsset(this.getResources().getAssets(), fontPath);
         // Applying font
-        Welcome.setTypeface(tf);
+        //Welcome.setTypeface(tf);
 
         DataPoint[] data = new DataPoint[] {
                 new DataPoint(1, 9.0d),
@@ -71,6 +62,7 @@ public class Fragment_home extends Fragment{
         series.setBackgroundColor(Color.argb(200, 236, 239, 244));
         series.setDrawDataPoints(true);
 
+        graph.getGridLabelRenderer().setVerticalLabelsAlign(Paint.Align.CENTER);
         graph.addSeries(series);
 
 
@@ -92,7 +84,7 @@ public class Fragment_home extends Fragment{
                 open();
             }
         });
-        edit_profile = (ImageButton) InputFragmentView.findViewById(R.id.edit_profile);
+        edit_profile = (Button) InputFragmentView.findViewById(R.id.edit_profile);
 
         edit_profile.setOnClickListener(new OnClickListener() {
             @Override

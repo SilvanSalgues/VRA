@@ -5,7 +5,10 @@ package com.example.darren.new_design;
  */
 public class Type_SMS {
 
-	/**
+    @com.google.gson.annotations.SerializedName("user")
+    private String mUser;
+
+    /**
 	 * Message text
 	 */
 	@com.google.gson.annotations.SerializedName("text")
@@ -22,6 +25,8 @@ public class Type_SMS {
 	 */
 	@com.google.gson.annotations.SerializedName("complete")
 	private boolean mComplete;
+
+
 
 	public Type_SMS() {
 	}
@@ -44,7 +49,19 @@ public class Type_SMS {
 		this.setId(id);
 	}
 
-	/**
+
+
+    public String getUser()
+    {
+        return mUser;
+    }
+
+
+    public final void setUser (String user) {
+        mUser = user;
+    }
+
+    /**
 	 * Returns the item text
 	 */
 	public String getText() {
