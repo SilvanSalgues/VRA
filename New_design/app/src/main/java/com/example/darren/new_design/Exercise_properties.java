@@ -4,16 +4,22 @@ public class Exercise_properties
 {
 
     int id;
+    int Week;
+    int Day;
+    String TimeOfDay;
     String Name;
     String Description;
-    int Intro_Video;
+    String Intro_Video;
     Exercise_Type Type;
     int Duration;
     int Gif;
     float Speed;
 
-    public Exercise_properties( String name, String Description, int Intro_Video, Exercise_Type type, int duration, int gif, float speed)
+    public Exercise_properties(int Week, int Day, String TimeOfDay, String name, String Description, String Intro_Video, Exercise_Type type, int duration, int gif, float speed)
     {
+        this.Week = Week;
+        this.Day = Day;
+        this.TimeOfDay = TimeOfDay;
         this.Name = name;
         this.Description = Description;
         this.Intro_Video = Intro_Video;
@@ -23,6 +29,15 @@ public class Exercise_properties
         this.Speed = speed;
     }
 
+    public int getWeek()
+    {
+        return Week;
+    }
+    public int getDay()
+    {
+        return Day;
+    }
+    public String getTimeOfDay(){ return TimeOfDay;}
     public String getName()
     {
         return Name;
@@ -31,7 +46,7 @@ public class Exercise_properties
     {
         return Description;
     }
-    public int getIntro_Video(){ return Intro_Video;}
+    public String getIntro_Video(){ return Intro_Video;}
     public Exercise_Type getType()
     {
         return Type;

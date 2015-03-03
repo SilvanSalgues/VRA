@@ -4,25 +4,24 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.database.Cursor;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
+import android.widget.Toast;
+
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fragment_exercise_intro extends Fragment {
+public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.OnInitializedListener{
 
     Fragment myFragment;
     TextView Duration, exercise_date;
@@ -30,15 +29,16 @@ public class Fragment_exercise_intro extends Fragment {
     ImageView btn_info_intro;
     int exercise = 0;
 
-    VideoView videoView;
-    int position = 0;
-    ProgressDialog progressDialog;
-    MediaController mediaControls;
+    //VideoView videoView;
+    //int position = 0;
+    //ProgressDialog progressDialog;
+    //MediaController mediaControls;
 
     TextView exercise_name;
     com.bluejamesbond.text.DocumentView general_desc;
 
     List<Exercise_properties> exerc = new ArrayList<>();    // Holds a list of exercises
+    List<Exercise_description> exdesc = new ArrayList<>();    // Holds a list of exercises descriptions
     Database_Manager db;
     Cursor cur;
 
@@ -55,15 +55,32 @@ public class Fragment_exercise_intro extends Fragment {
         db.open();
 
         cur = db.getExerciseDescriptions();
-        cur.moveToPosition(4);//exercise);
-        Log.d("Cursor","" + cur.getString(1));
+        cur.moveToPosition(0);
+        exdesc.add(new Exercise_description("","",""));
+        do{
+        exdesc.add(new Exercise_description(cur.getString(1), cur.getString(2), cur.getString(3)));
+        }while (cur.moveToNext());
 
-        String ExName = cur.getString(1);
-        String Description = cur.getString(2);
         db.close();
 
-        exerc.add(new Exercise_properties(ExName,Description,R.drawable.test, new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties(ExName,Description,R.drawable.test, new Exercise_Type2(), 60, R.drawable.illusion3, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Morning Exercise#1",   exdesc.get(1).getName(), exdesc.get(1).getDescription(), exdesc.get(1).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Morning Exercise#1",   exdesc.get(2).getName(), exdesc.get(2).getDescription(), exdesc.get(2).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Morning Exercise#2",   exdesc.get(1).getName(), exdesc.get(1).getDescription(), exdesc.get(1).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Morning Exercise#2",   exdesc.get(2).getName(), exdesc.get(2).getDescription(), exdesc.get(2).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#1", exdesc.get(1).getName(), exdesc.get(1).getDescription(), exdesc.get(1).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#1", exdesc.get(2).getName(), exdesc.get(2).getDescription(), exdesc.get(2).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(1).getName(), exdesc.get(1).getDescription(), exdesc.get(1).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(2).getName(), exdesc.get(2).getDescription(), exdesc.get(2).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(3).getName(), exdesc.get(3).getDescription(), exdesc.get(3).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(4).getName(), exdesc.get(4).getDescription(), exdesc.get(4).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(5).getName(), exdesc.get(5).getDescription(), exdesc.get(5).getIntro_Video(), new Exercise_Type2(), 60, R.drawable.illusion1, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(6).getName(), exdesc.get(6).getDescription(), exdesc.get(6).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(7).getName(), exdesc.get(7).getDescription(), exdesc.get(7).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(8).getName(), exdesc.get(8).getDescription(), exdesc.get(8).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Evening Exercise",     exdesc.get(1).getName(), exdesc.get(1).getDescription(), exdesc.get(1).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Evening Exercise",     exdesc.get(2).getName(), exdesc.get(2).getDescription(), exdesc.get(2).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Evening Exercise",     exdesc.get(9).getName(), exdesc.get(9).getDescription(), exdesc.get(9).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
+        exerc.add(new Exercise_properties(1, 1, "Evening Exercise",     exdesc.get(10).getName(), exdesc.get(10).getDescription(), exdesc.get(10).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
 
 
         btn_info_intro = (ImageView) InputFragmentView.findViewById(R.id.btn_info_intro);
@@ -90,7 +107,41 @@ public class Fragment_exercise_intro extends Fragment {
             }
         });
         //initialize the VideoView
-        videoView  = (VideoView) InputFragmentView.findViewById(R.id.videoView);
+        //videoView  = (VideoView) InputFragmentView.findViewById(R.id.videoView);
+
+/*        YouTubePlayerSupportFragment mYoutubePlayerFragment = new YouTubePlayerSupportFragment();
+        mYoutubePlayerFragment.initialize(DeveloperKey.DEVELOPER_KEY, this);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.youtube_Fragment, mYoutubePlayerFragment);
+        fragmentTransaction.commit();*/
+
+        //YouTubePlayerView youTubeView = (YouTubePlayerView) InputFragmentView.findViewById(R.id.youtube_Fragment);
+        //youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, this);
+
+        YouTubePlayerFragment youTubePlayerFragment = YouTubePlayerFragment.newInstance();
+        youTubePlayerFragment.initialize(DeveloperKey.DEVELOPER_KEY, this);/*new YouTubePlayer.OnInitializedListener() {
+
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
+
+                if (!wasRestored) {
+
+                    player.setFullscreen(true);
+                    player.loadVideo("pOcgcPUp1_g");
+                    player.play();
+                }
+
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
+                // TODO Auto-generated method stub
+
+            }
+        });*/
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.youtube_fragment, youTubePlayerFragment).commit();
 
         exercise_name = (TextView) InputFragmentView.findViewById(R.id.exercise_name);
         exercise_name.setText(exerc.get(exercise).getName());
@@ -98,8 +149,8 @@ public class Fragment_exercise_intro extends Fragment {
         general_desc = (com.bluejamesbond.text.DocumentView) InputFragmentView.findViewById(R.id.general_desc);
         general_desc.setText(exerc.get(exercise).getDescription());
 
-        mediaControls = new MediaController(getActivity());
-        mediaControls.setAnchorView(videoView);
+        //mediaControls = new MediaController(getActivity());
+        //mediaControls.setAnchorView(videoView);
 
         // create a progress bar while the video file is loading
         //progressDialog = new ProgressDialog(getActivity());
@@ -112,36 +163,35 @@ public class Fragment_exercise_intro extends Fragment {
         // show the progress bar
         //progressDialog.show();
 
-        try {
-            //set the media controller in the VideoView
-            videoView.setMediaController(mediaControls);
+        //try {
+        //    //set the media controller in the VideoView
+        //    videoView.setMediaController(mediaControls);
+        //
+        //    //set the uri of the video to be played
+        //    videoView.setVideoURI(Uri.parse("rtsp://r7---sn-5hn7su7l.c.youtube.com/CiILENy73wIaGQn41yn1cCDnpBMYESARFEgGUgZ2aWRlb3MM/0/0/0/video.3gp"));//"https://www.youtube.com/watch?v=" + exerc.get(exercise).getIntro_Video()));//"http://youtu.be/s8XK3uziOxQ")); //"android.resource://" + getActivity().getPackageName() + "/" + exerc.get(exercise).getIntro_Video()));
 
-            //set the uri of the video to be played
+        //} catch (Exception e) {
+        //
+        //    Log.e("Error", e.getMessage());
+        //    e.printStackTrace();
+        //}
 
-            videoView.setVideoURI(Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + exerc.get(exercise).getIntro_Video()));
-
-        } catch (Exception e) {
-
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
-        }
-
-        videoView.requestFocus();
+        //videoView.requestFocus();
         //we also set an setOnPreparedListener in order to know when the video file is ready for playback
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        //videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                // close the progress bar and play the video
-                //progressDialog.dismiss();
-                //if we have a position on savedInstanceState, the video playback should start from here
-                videoView.seekTo(position);
+        //    public void onPrepared(MediaPlayer mediaPlayer) {
+        //        // close the progress bar and play the video
+        //        progressDialog.dismiss();
+        //        //if we have a position on savedInstanceState, the video playback should start from here
+        //        videoView.seekTo(position);
 
-                if (position != 0) {
-                    //if we come from a resumed activity, video playback will be paused
-                    videoView.pause();
-                }
-            }
-        });
+        //        if (position != 0) {
+        //            //if we come from a resumed activity, video playback will be paused
+        //            videoView.pause();
+        //        }
+        //    }
+        //});
 
         //exercise_date = (TextView) InputFragmentView.findViewById(R.id.exercise_date);
         //String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", java.util.Locale.getDefault()).format(new Date());
@@ -154,8 +204,8 @@ public class Fragment_exercise_intro extends Fragment {
         start_exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                videoView.pause();
-                videoView.clearFocus();
+                //videoView.pause();
+                //videoView.clearFocus();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 myFragment = new Fragment_exercise();
@@ -167,7 +217,8 @@ public class Fragment_exercise_intro extends Fragment {
         return InputFragmentView;
     }
 
-    @Override
+/*
+        @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         //we use onSaveInstanceState in order to store the video playback position for orientation change
@@ -183,8 +234,25 @@ public class Fragment_exercise_intro extends Fragment {
             videoView.seekTo(position);
         }
     }
+*/
 
+  @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
+        if(!wasRestored){
+            player.cueVideo(exerc.get(exercise).getIntro_Video());//"nCgQDjiotG0");
+        }
+    }
 
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult result) {
+        if (result.isUserRecoverableError()) {
+            result.getErrorDialog(this.getActivity(), 1).show();
+        } else {
+            Toast.makeText(this.getActivity(),
+                    "YouTubePlayer.onInitializationFailure(): " + result.toString(),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
     private AlertDialog CreateDialog( String message ){
         return new AlertDialog.Builder(getActivity())
                 //set message, title, and icon

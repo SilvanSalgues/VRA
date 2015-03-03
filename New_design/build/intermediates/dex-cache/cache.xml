@@ -30,6 +30,13 @@
         <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\classes-d253d3b0e778d483ae11e1962904c7b73a983c32.jar" />
     </item>
     <item
+        jar="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\libs\YouTubeAndroidPlayerApi.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="78b8f6e37921559ed21c1fae1f30f9f713494db8">
+        <dex dex="C:\Users\Darren\Documents\Repos\FinalYear\New_design\app\build\intermediates\pre-dexed\debug\YouTubeAndroidPlayerApi-21325f6403ce7d9acf429d9fcdbf175959f684db.jar" />
+    </item>
+    <item
         jar="C:\Users\Darren\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"

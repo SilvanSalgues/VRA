@@ -23,6 +23,7 @@ public class Database_Manager {
 
     public static final String KEY_DID = "_id";
     public static final String KEY_DESC = "description";
+    public static final String KEY_URL = "url";
 
     Context context;
 
@@ -46,14 +47,15 @@ public class Database_Manager {
         public void onCreate(SQLiteDatabase db){
             // Creating tables
             String DATA1_CREATE = "create table " + DATABASE_TABLE1 + "(_id integer primary key autoincrement, "
-                    + "name text not null, "
-                    + "email text not null,"
-                    + "pass text not null);";
+                    + "name TEXT not null, "
+                    + "email TEXT not null, "
+                    + "pass TEXT not null);";
 
             // Creating tables
             String DATA2_CREATE = "create table " + DATABASE_TABLE2 + "(_id integer primary key autoincrement, "
-                    + "name text not null, "
-                    + "description text not null);";
+                    + "name TEXT not null, "
+                    + "description TEXT not null, "
+                    + "url TEXT not null);";
 
 
             // Create Tables
@@ -79,67 +81,77 @@ public class Database_Manager {
 
     private static void Exercise_descriptions(SQLiteDatabase db){
         //Description 1
-        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description) Values ('Side to side head rotation exercise, 6-8 feet away', " +
+        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description, url) Values ('Side to side head rotation exercise, 6-8 feet away', " +
                 "'Place tablet on a shelf or ledge at roughly eye level. Stand 6-8 feet away. The screen has an ‘E’ letter in the middle of the " +
                 "screen. Move your head from side to side while focusing on the letter. If the letter starts to go out of focus then slow down. " +
-                "Continue this exercise until timer has finished.')");
+                "Continue this exercise until timer has finished.', " +
+                "'pOcgcPUp1_g')");
 
         //Description 2
-        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description) Values ('Up and down head rotation exercise, 6-8 feet away', " +
+        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description, url) Values ('Up and down head rotation exercise, 6-8 feet away', " +
                 "'Place tablet on a shelf or ledge at roughly eye level. Stand 6-8 feet away. The screen has an ‘E’ letter in the middle of the" +
                 " screen. Move your head up and down while focusing on the letter. If the letter starts to go out of focus then slow down. Continue " +
-                "this exercise until timer has finished.')");
+                "this exercise until timer has finished.', " +
+                "'weQvgn0UTTo')");
 
         //Description 3
-        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description) Values ('Side to side head rotation exercise, arm’s length in front', " +
+        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description, url) Values ('Side to side head rotation exercise, arm’s length in front', " +
                 "'While standing, hold the tablet at arm’s length in front of you. The screen has an ‘E’ letter in the middle of the screen. Move your" +
                 " head from side to side while focusing on the letter. If the letter starts to go out of focus then slow down. Continue this exercise " +
-                "until timer has finished.')");
+                "until timer has finished.', " +
+                "'s8XK3uziOxQ')");
 
         //Description 4
-        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description) Values ('Up and down head rotation exercise, arm’s length in front', " +
+        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description, url) Values ('Up and down head rotation exercise, arm’s length in front', " +
                 "'While standing, hold the tablet at arm’s length in front of you. The screen has an ‘E’ letter in the middle of the screen. Move your" +
                 " head up and down while focusing on the letter. If the letter starts to go out of focus then slow down. Continue this exercise until " +
-                "timer has finished.')");
+                "timer has finished.', " +
+                "'s8XK3uziOxQ')"); // Update url when exercise4 is created
 
         //Description 5
-        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description) Values ('Two points of focus, arm’s length in front', " +
+        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description, url) Values ('Two points of focus, arm’s length in front', " +
                 "'For this exercise, hold the tablet at arm’s length in front of you. The screen has an ‘X’ on the left and ‘Z’ on the right. Start by " +
                 "looking at the ‘X’ with your eyes and head pointing at it. Then you are going look at the ‘Z’ without moving your head. Then move you head " +
-                "also to point at the ‘Z’. Move your eyes to the ‘X’, move your head to the ‘X’. And repeat the process until the timer has finished. ')");
+                "also to point at the ‘Z’. Move your eyes to the ‘X’, move your head to the ‘X’. And repeat the process until the timer has finished. ', " +
+                "'3Flza2CJ5OY')");
 
         //Description 6
-        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description) Values ('Closing eyes, arm’s length in front', " +
+        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description, url) Values ('Closing eyes, arm’s length in front', " +
                 "'For this exercise, hold the tablet at arm’s length in front of you. It is recommend to be seated for this exercise.  The screen has an " +
                 "‘X’ letter in the middle of the screen. Start by looking at the ‘X’. Close your eyes and move your head to one side while trying to keep " +
                 "your eye on the ‘X’. Open your eyes to see if they stayed on the ‘X’. Repeat the exercise, varying the speed and direction of head movement" +
-                " each time until the timer has finished.')");
+                " each time until the timer has finished.', " +
+                "'mqNX6vkjHaA')");
 
         //Description 7
-        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description) Values ('Move the tablet in the opposite direction, side to side', " +
+        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description, url) Values ('Move the tablet in the opposite direction, side to side', " +
                 "'For this exercise, hold the tablet at arm’s length in front of you. Holding the tablet directly in front of you look at the ‘E’. " +
                 "You are then going to move you head in one direction to the side while moving the tablet in the opposite direction. Keep your eyes on " +
                 "the ‘E’ and make sure it remains in focus. The amount you move your head and tablet should not be very big otherwise the letter will go " +
-                "out of focus. Increase the amount your head moves and the speed at which you do so as you progress. ')");
+                "out of focus. Increase the amount your head moves and the speed at which you do so as you progress.', " +
+                "'g-6_l4frnWc')");
 
         //Description 8
-        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description) Values ('Move the tablet in the opposite direction, up and down', " +
+        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description, url) Values ('Move the tablet in the opposite direction, up and down', " +
                 "'For this exercise, hold the tablet at arm’s length in front of you. Holding the tablet directly in front of you look at the ‘E’. " +
                 "You are then going to point you head up while moving the tablet down and vice versa. Keep your eyes on the ‘E’ and make sure it remains " +
                 "in focus. The amount you move your head and tablet should not be very big otherwise the letter will go out of focus. Increase the amount " +
-                "your head moves and the speed at which you do so as you progress. ')");
+                "your head moves and the speed at which you do so as you progress.', " +
+                "'53rzyxZBuhw')");
 
         //Description 9
-        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description) Values ('Side to side head rotation exercise, placing tablet against a window ', " +
+        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description, url) Values ('Side to side head rotation exercise, placing tablet against a window ', " +
                 "'For this exercise place tablet up against a window on a ledge, if you don’t have a ledge hold the tablet against the window at roughly eye level." +
                 " The screen has an ‘E’ letter in the middle of the screen. Move your head from side to side while focusing on the letter. If the letter starts to go " +
-                "out of focus then slow down. Continue this exercise until timer has finished.')");
+                "out of focus then slow down. Continue this exercise until timer has finished.', " +
+                "'C5cDhnIuCQo')");
 
         //Description 10
-        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description) Values ('Up and down head rotation exercise, placing tablet against a window', " +
+        db.execSQL("INSERT INTO " + DATABASE_TABLE2 + " (name, description, url) Values ('Up and down head rotation exercise, placing tablet against a window', " +
                 "'For this exercise place tablet up against a window on a ledge, if you don’t have a ledge hold the tablet against the window at roughly eye " +
                 "level. The screen has an ‘E’ letter in the middle of the screen. Move your head up and down while focusing on the letter. If the letter starts " +
-                "to go out of focus then slow down. Continue this exercise until timer has finished.')");
+                "to go out of focus then slow down. Continue this exercise until timer has finished.', " +
+                "'1kfldT6fvxI')");
     }
 
     public Database_Manager open() throws SQLException{
@@ -178,7 +190,8 @@ public class Database_Manager {
         return db.query(DATABASE_TABLE2, new String[] {
                         KEY_DID,
                         KEY_NAME,
-                        KEY_DESC},
+                        KEY_DESC,
+                        KEY_URL},
                 null,
                 null,
                 null,
