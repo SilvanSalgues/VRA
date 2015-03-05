@@ -36,10 +36,10 @@
             android:text="Sensor Data | Raw Sensor Infomation "
             android:id="@+id/textView"
             android:textColor="@android:color/white"
-            android:layout_alignTop="@+id/about"
-            android:layout_alignParentStart="true"
             android:layout_marginLeft="20dp"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"/>
 
     </RelativeLayout>
     <LinearLayout

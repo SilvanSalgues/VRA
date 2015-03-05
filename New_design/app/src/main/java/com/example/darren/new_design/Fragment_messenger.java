@@ -78,11 +78,6 @@ public class Fragment_messenger extends Fragment {//} implements ListView.OnItem
                 "Christy Walton",
                 "Jim Walton",
                 "Charles Koch",
-                "David Koch",
-                "Alice Walton",
-                "S. Robson Walton",
-                "Michael Bloomberg",
-                "Mark Zuckerberg",
         };
 
         Random r = new Random();
@@ -299,38 +294,42 @@ public class Fragment_messenger extends Fragment {//} implements ListView.OnItem
             return;
         }
 
-        // Create a new item
-        final Type_SMS item = new Type_SMS();
+        // If the Edit text for adding a message is not empty
+        if (!addSMStext.getText().toString().isEmpty()) {
 
-        Log.d("Device id", "" + Notification_Handler.getHandle());
-        item.setUser(Notification_Handler.getHandle());//regid);
-        item.setText(addSMStext.getText().toString());
-        item.setComplete(false);
+            // Create a new item
+            final Type_SMS item = new Type_SMS();
 
-        // Insert the new item
-        new AsyncTask<Void, Void, Void>(){
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    final Type_SMS entity = AzureTable.insert(item).get();
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(!entity.isComplete()){
-                                adapter_sms.add(entity);
+            Log.d("Device id", "" + Notification_Handler.getHandle());
+            item.setUser(Notification_Handler.getHandle());//regid);
+            item.setText(addSMStext.getText().toString());
+            item.setComplete(false);
+
+            // Insert the new item
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... params) {
+                    try {
+                        final Type_SMS entity = AzureTable.insert(item).get();
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (!entity.isComplete()) {
+                                    adapter_sms.add(entity);
+                                }
                             }
-                        }
-                    });
-                } catch (Exception exception){
-                    Log.d("" + exception, "Error");
+                        });
+                    } catch (Exception exception) {
+                        Log.d("" + exception, "Error");
 
+                    }
+
+                    return null;
                 }
+            }.execute();
 
-                return null;
-            }
-        }.execute();
-
-        addSMStext.setText("");
+            addSMStext.setText("");
+        }
     }
 
 

@@ -19,7 +19,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -94,8 +93,8 @@ public class Fragment_home extends Fragment{
                 //popWindow.setFocusable(true); // Shows keyboard on edittext box
                 //popupWindow.update();
 
-                Toast toast = Toast.makeText(getActivity(), "show dialog", Toast.LENGTH_SHORT);
-                toast.show();
+//                Toast toast = Toast.makeText(getActivity(), "show dialog", Toast.LENGTH_SHORT);
+//                toast.show();
             }
         });
 

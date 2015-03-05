@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="list_images">
+        <item>@drawable/illusion1</item>
+        <item>@drawable/illusion2</item>
+        <item>@drawable/illusion3</item>
+        <item>@drawable/illusion4</item>
+        <item>@drawable/illusion5</item>
+        <item>@drawable/illusion6</item>
+        <item>@drawable/illusion7</item>
+        <item>@drawable/illusion8</item>
+        <item>@drawable/illusion9</item>
+    </array>
+</resources>

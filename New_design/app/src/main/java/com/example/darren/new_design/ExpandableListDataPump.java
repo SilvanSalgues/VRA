@@ -1,45 +1,96 @@
 package com.example.darren.new_design;
 
+import android.content.Context;
+import android.database.Cursor;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ExpandableListDataPump {
-    public static ArrayList<ExerciseList>  getData() {
+
+    static List<Exercise_properties> exerc;
+    static List<Exercise_description> exdesc;
+    static Database_Manager db;
+    static Cursor cur_desc, cur_list;
+
+
+    public ExpandableListDataPump(Context context){
+        db = new Database_Manager(context);
+    }
+
+    public static ArrayList<ExerciseList>  getData(int day) {
+
+        exerc = new ArrayList<>();    // Holds a list of exercises
+        exdesc = new ArrayList<>();    // Holds a list of exercises descriptions
+        db.open();
+
+        cur_desc = db.getExerciseDescriptions();
+        cur_desc.moveToPosition(0);
+        do{
+            exdesc.add(new Exercise_description(cur_desc.getString(1), cur_desc.getString(2), cur_desc.getString(3)));
+        }while (cur_desc.moveToNext());
+
+        cur_list = db.getExerciseList(day);
+        cur_list.moveToPosition(0);
+        do{
+            Exercise_Type Type;
+            if (cur_list.getString(5).equals("Exercise_Type1")){
+                Type = new Exercise_Type2();
+            }
+            else{
+                Type = new Exercise_Type1();
+            }
+            exerc.add(new Exercise_properties(cur_list.getInt(1), cur_list.getInt(2), cur_list.getString(3), cur_list.getInt(4), Type, cur_list.getInt(6), cur_list.getInt(7), cur_list.getInt(8)));
+        }while (cur_list.moveToNext());
+
+        db.close();
+
         ArrayList<ExerciseList> fetch = new ArrayList<>();
 
         List<String> Morn1 = new ArrayList<>();
-        Morn1.add("1. Head Rotation");
-        Morn1.add("2. efficitur aliquam");
-
         List<String> Morn2 = new ArrayList<>();
-        Morn2.add("1. Head Rotation");
-        Morn2.add("2. efficitur aliquam");
-        Morn2.add("3. Lorem ipsum dol");
+        List<String> After1 = new ArrayList<>();
+        List<String> After2 = new ArrayList<>();
+        List<String> Evening = new ArrayList<>();
 
-        List<String> Even1 = new ArrayList<>();
-        Even1.add("2. efficitur aliquam");
-        Even1.add("3. Lorem ipsum dol");
+        for (Exercise_properties ex : exerc )
+        {
+            if (ex.getTimeOfDay().equals("Morning Exercise#1"))
+            {
+                Morn1.add((ex.getexerciseNum() + 1) +". " + exdesc.get(ex.getexerciseNum()).getName()) ;
+            }
 
-        List<String> Even2 = new ArrayList<>();
-        Even2.add("1. Head Rotation");
-        Even2.add("2. efficitur aliquam");
-        Even2.add("3. Lorem ipsum dol");
-        Even2.add("4. Etiam est dui");
-        Even2.add("5. amet magna");
-        Even2.add("6. Nunc viverra");
-        Even2.add("7. hendrerit sapien");
-        Even2.add("8. vitae placerat");
+            if (ex.getTimeOfDay().equals("Morning Exercise#2"))
+            {
+                Morn2.add((ex.getexerciseNum() + 1) +". " + exdesc.get(ex.getexerciseNum()).getName()) ;
+            }
 
-        List<String> Afternoon = new ArrayList<>();
-        Afternoon.add("1. Head Rotation");
-        Afternoon.add("2. efficitur aliquam");
+            if (ex.getTimeOfDay().equals("Afternoon Exercise#1"))
+            {
+                After1.add((ex.getexerciseNum() + 1) +". " + exdesc.get(ex.getexerciseNum()).getName()) ;
+            }
+
+            if (ex.getTimeOfDay().equals("Afternoon Exercise#2"))
+            {
+                After2.add((ex.getexerciseNum() + 1) +". " + exdesc.get(ex.getexerciseNum()).getName()) ;
+            }
+
+            if (ex.getTimeOfDay().equals("Evening Exercise"))
+            {
+                Evening.add((ex.getexerciseNum() + 1) +". " + exdesc.get(ex.getexerciseNum()).getName()) ;
+            }
+
+        }
 
         fetch.add(new ExerciseList("Morning Exercise #1", Morn1));
         fetch.add(new ExerciseList("Morning Exercise #2", Morn2));
-        fetch.add(new ExerciseList("Afternoon Exercise #1", Even1));
-        fetch.add(new ExerciseList("Afternoon Exercise #2", Even2));
-        fetch.add(new ExerciseList("Evening Exercises", Afternoon));
+        fetch.add(new ExerciseList("Afternoon Exercise #1", After1));
+        fetch.add(new ExerciseList("Afternoon Exercise #2", After2));
+        fetch.add(new ExerciseList("Evening Exercises", Evening));
 
+        cur_desc.close();
+        cur_list.close();
         return fetch;
     }
 }

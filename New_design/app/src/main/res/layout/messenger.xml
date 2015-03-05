@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#ff1f5c68"
+        android:background="#ff3c7c89"
         android:orientation="horizontal"
         android:focusable="true">
 
@@ -74,12 +74,14 @@
                 android:text="Person"
                 android:id="@+id/Person"
                 android:textSize="30sp"
-                android:layout_alignBottom="@+id/icon_person"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:layout_toStartOf="@+id/loadingProgressBar"
+                android:textColor="#ff1f5c68"
+                android:layout_alignBottom="@+id/icon_person"
                 android:layout_toEndOf="@+id/icon_person"
-                android:textColor="#ff1f5c68" />
+                android:layout_alignStart="@+id/icon_person"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
 
             <ImageView
                 android:id="@+id/icon_person"
@@ -88,11 +90,11 @@
                 android:contentDescription="default_profile"
                 android:focusable="false"
                 android:background="@drawable/default_profile"
-                android:layout_marginRight="3dp"
+                android:layout_marginRight="5dp"
                 android:padding="2dp"
-                android:layout_marginLeft="3dp"
+                android:layout_marginLeft="15dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/line2">
+                android:layout_marginTop="3dp">
             </ImageView>
 
             <ProgressBar
@@ -100,15 +102,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_alignTop="@+id/Person"
-                android:layout_alignEnd="@+id/line2" />
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:background="#c0c0c0"
-                android:layout_below="@+id/Person"
-                android:id="@+id/line2"
-                android:layout_marginLeft="10dp"
+                android:layout_alignParentEnd="true"
                 android:layout_marginRight="10dp" />
 
 
@@ -117,29 +111,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/row_sms"
-                android:padding="6dip"
+                android:padding="6dp"
                 android:layout_above="@+id/NewMSG"
                 android:headerDividersEnabled="false"
-                android:layout_below="@+id/icon_person">
+                android:layout_below="@+id/icon_person"
+                android:background="#ff3c7c89"
+                android:layout_marginTop="4dp"
+                android:dividerHeight="0dp"
+                android:divider="@null"
+                >
 
             </ListView>
 
-            <LinearLayout
+
+            <RelativeLayout
                 android:id="@+id/NewMSG"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:background="#ff1f5c68"
-                android:padding="3dp">
+                android:background="#ff3c7c89"
+                android:layout_alignParentEnd="true">
 
                 <EditText
                     android:id="@+id/addSMStext"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:textColor="@android:color/white">
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:textColor="@android:color/black"
+                    android:background="#fff7f7f7"
+                    android:textIsSelectable="false"
+                    android:inputType="none"
+                    android:layout_toStartOf="@+id/addSMSbtn"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:paddingLeft="8dp">
                     <requestFocus />
                 </EditText>
 
@@ -149,9 +156,15 @@
                     android:layout_height="wrap_content"
                     android:text="Send"
                     android:textColor="@android:color/white"
-                    android:background="#ff589310" />
+                    android:background="#ff589310"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp" />
 
-            </LinearLayout>
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

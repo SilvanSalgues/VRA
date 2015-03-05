@@ -30,55 +30,47 @@ public class Fragment_exercise extends Fragment {
     Button Pause_btn, Stop_btn;
     Fragment ExerciseFragment;
 
-
-    List<Exercise_properties> exerc = new ArrayList<>();    // Holds a list of exercises
-    List<Exercise_description> exdesc = new ArrayList<>();    // Holds a list of exercises descriptions
+    static List<Exercise_properties> exerc = new ArrayList<>();    // Holds a list of exercises
+    static List<Exercise_description> exdesc = new ArrayList<>();    // Holds a list of exercises descriptions
     Database_Manager db;
-    Cursor cur;
+    Cursor cur_desc, cur_list;
 
     static CountDownTimer countDownTimer;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         InputFragmentView = inflater.inflate(R.layout.exercise, container, false);
+
         db = new Database_Manager(getActivity());
         db.open();
 
-        exdesc.add(new Exercise_description("","",""));
-        cur = db.getExerciseDescriptions();
-        cur.moveToPosition(0);
+        cur_desc = db.getExerciseDescriptions();
+        cur_desc.moveToPosition(0);
         do{
-            exdesc.add(new Exercise_description(cur.getString(1), cur.getString(2), cur.getString(3)));//cur.getString(2)));
-        }while (cur.moveToNext());
+            exdesc.add(new Exercise_description(cur_desc.getString(1), cur_desc.getString(2), cur_desc.getString(3)));
+        }while (cur_desc.moveToNext());
+
+        cur_list = db.getExerciseList(1);
+        cur_list.moveToPosition(0);
+        do{
+            Exercise_Type Type;
+            if (cur_list.getString(5).equals("Exercise_Type2")){
+                Type = new Exercise_Type2();
+            }
+            else{
+                Type = new Exercise_Type1();
+            }
+
+            exerc.add(new Exercise_properties(cur_list.getInt(1), cur_list.getInt(2), cur_list.getString(3), cur_list.getInt(4), Type, cur_list.getInt(6), cur_list.getInt(7), cur_list.getInt(8)));
+        }while (cur_list.moveToNext());
 
         db.close();
-
-
-        // Day 1 - Week 1
-        exerc.add(new Exercise_properties(1, 1, "Morning Exercise#1",   exdesc.get(1).getName(), exdesc.get(1).getDescription(), exdesc.get(1).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Morning Exercise#1",   exdesc.get(2).getName(), exdesc.get(2).getDescription(), exdesc.get(2).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Morning Exercise#2",   exdesc.get(1).getName(), exdesc.get(1).getDescription(), exdesc.get(1).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Morning Exercise#2",   exdesc.get(2).getName(), exdesc.get(2).getDescription(), exdesc.get(2).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#1", exdesc.get(1).getName(), exdesc.get(1).getDescription(), exdesc.get(1).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#1", exdesc.get(2).getName(), exdesc.get(2).getDescription(), exdesc.get(2).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(1).getName(), exdesc.get(1).getDescription(), exdesc.get(1).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(2).getName(), exdesc.get(2).getDescription(), exdesc.get(2).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(3).getName(), exdesc.get(3).getDescription(), exdesc.get(3).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(4).getName(), exdesc.get(4).getDescription(), exdesc.get(4).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(5).getName(), exdesc.get(5).getDescription(), exdesc.get(5).getIntro_Video(), new Exercise_Type2(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(6).getName(), exdesc.get(6).getDescription(), exdesc.get(6).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(7).getName(), exdesc.get(7).getDescription(), exdesc.get(7).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Afternoon Exercise#2", exdesc.get(8).getName(), exdesc.get(8).getDescription(), exdesc.get(8).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Evening Exercise",     exdesc.get(1).getName(), exdesc.get(1).getDescription(), exdesc.get(1).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Evening Exercise",     exdesc.get(2).getName(), exdesc.get(2).getDescription(), exdesc.get(2).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Evening Exercise",     exdesc.get(9).getName(), exdesc.get(9).getDescription(), exdesc.get(9).getIntro_Video(), new Exercise_Type1(), 60, R.drawable.illusion1, 0.3f));
-        exerc.add(new Exercise_properties(1, 1, "Evening Exercise",     exdesc.get(10).getName(),exdesc.get(10).getDescription(),exdesc.get(10).getIntro_Video(),new Exercise_Type1(), 60, R.drawable.illusion3, 0.3f));
 
 
         timer = (TextView)  InputFragmentView.findViewById(R.id.timer_txt);
         timer .setText(String.valueOf(remainingTime / 1000));
 
 
-        remainingTime = exerc.get(exercise).getDuration() * 1000;                        // Gets the time of the exercise
+        remainingTime = exerc.get(exercise).getDuration() * 1000;   // Gets the time of the exercise
         countDownTimer = new MyCountDownTimer();
         countDownTimer.start();
 
@@ -131,7 +123,7 @@ public class Fragment_exercise extends Fragment {
                 .addToBackStack(null);
         ft.commit();
 
-        exercise_name.setText("Exercise | " + exerc.get(exercise).getName());  // Sets the Exercise_No text box as the current exercise number
+        exercise_name.setText("Exercise | " + exdesc.get(exerc.get(exercise).getexerciseNum()).getName());  // Sets the Exercise_No text box as the current exercise number
         //Speed.setText("Speed : " + exerc.get(exercise).speed + "Hz");        // Sets the Speed text box as the speed of head movement of the exercise
 
         return InputFragmentView;

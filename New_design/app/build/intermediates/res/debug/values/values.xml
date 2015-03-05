@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- From: file:/C:/Users/Darren/Documents/Repos/FinalYear/New_design/app/src/main/res/values/images.xml -->
+    <eat-comment/>
+    <array name="list_images">
+        <item>@drawable/illusion1</item>
+        <item>@drawable/illusion2</item>
+        <item>@drawable/illusion3</item>
+        <item>@drawable/illusion4</item>
+        <item>@drawable/illusion5</item>
+        <item>@drawable/illusion6</item>
+        <item>@drawable/illusion7</item>
+        <item>@drawable/illusion8</item>
+        <item>@drawable/illusion9</item>
+    </array>
     <!-- From: file:/C:/Users/Darren/Documents/Repos/FinalYear/New_design/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>

@@ -3,7 +3,6 @@
     tools:context=".MyActivity" >
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:orderInCategory="100" />
 </menu>
 <!-- From: file:/C:/Users/Darren/Documents/Repos/FinalYear/New_design/app/src/main/res/menu/my.xml -->

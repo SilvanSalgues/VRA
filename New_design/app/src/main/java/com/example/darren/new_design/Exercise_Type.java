@@ -1,6 +1,7 @@
 package com.example.darren.new_design;
 
 import android.app.Fragment;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +43,11 @@ public abstract class Exercise_Type  extends Fragment {
         if(gifFromResource == null) {
             //resource (drawable or raw)
             try {
-                gifFromResource = new GifDrawable(getResources(), GIF);
+                // Load gifs from an array of gifs from an array stored in images.xml
+                TypedArray imgs = getResources().obtainTypedArray(R.array.list_images);
+                gifFromResource = new GifDrawable(getResources(), imgs.getResourceId(GIF, -1));
+                imgs.recycle();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

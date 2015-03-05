@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,58 +20,80 @@ public class Fragment_revise extends Fragment {
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     ArrayList<ExerciseList> expandableListDetail;
+    ArrayList<ArrayList<ExerciseList>> ListofList;
+    View [] inflated = new View[7];
+    TextView day;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View InputFragmentView = inflater.inflate(R.layout.revise, container, false);
+        LinearLayout Layout =(LinearLayout) InputFragmentView.findViewById(R.id.linear_exercise);
 
-        expandableListTitle = new ArrayList<>();
 
-        expandableListView = (ExpandableListView) InputFragmentView.findViewById(R.id.expandableListView);
+        //expandableListView = (ExpandableListView) InputFragmentView.findViewById(R.id
+        // .expandableListView);
 
-        expandableListDetail = ExpandableListDataPump.getData();
+        ExpandableListDataPump expump = new ExpandableListDataPump(getActivity());
+        ListofList = new ArrayList<>();
 
-        if (expandableListDetail != null){
-            for (int pos = 0; pos < expandableListDetail.size(); pos++) {
-                Log.d("expandableListTitle", "" + expandableListDetail.get(pos).getExTitle());
-                expandableListTitle.add(""+ expandableListDetail.get(pos).getExTitle());
+        for(int i = 0; i<7; i++) {
+            expandableListTitle = new ArrayList<>();
+
+            ListofList.add(expump.getData(i+1)); // parameter is the day of the week
+
+            expandableListDetail = ListofList.get(i);
+
+            if (expandableListDetail != null){
+                for (int pos = 0; pos < expandableListDetail.size(); pos++) {
+                    Log.d("expandableListTitle", "" + expandableListDetail.get(pos).getExTitle());
+                    expandableListTitle.add(""+ expandableListDetail.get(pos).getExTitle());
+                }
             }
+
+
+            inflated[i] = getActivity().getLayoutInflater().inflate(R.layout.exercise_day, null);
+
+            day = (TextView)inflated[i].findViewById(R.id.day);
+            day.setText("Day " + (i+1));
+            expandableListView = (ExpandableListView) inflated[i].findViewById(R.id.expandableListView);
+            Layout.addView(inflated[i]);
+
+            expandableListAdapter = new ExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
+            expandableListView.setAdapter(expandableListAdapter);
+            expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                @Override
+                public void onGroupExpand(int groupPosition) {
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            expandableListDetail.get(groupPosition).getExTitle() + " List Expanded.", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+                @Override
+                public void onGroupCollapse(int groupPosition) {
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            expandableListTitle.get(groupPosition) + " List Collapsed.",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v,
+                                            int groupPosition, int childPosition, long id) {
+                    Toast.makeText(
+                            getActivity().getApplicationContext(),
+                            expandableListTitle.get(groupPosition)
+                                    + " -> "
+                                    + expandableListDetail.get(groupPosition).getExList().get(childPosition),Toast.LENGTH_SHORT)
+                            .show();
+                    return false;
+                }
+            });
+
+            //expandableListDetail.clear();
         }
-
-        expandableListAdapter = new ExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
-        expandableListView.setAdapter(expandableListAdapter);
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getActivity().getApplicationContext(),
-                        expandableListDetail.get(groupPosition).getExTitle() + " List Expanded.", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getActivity().getApplicationContext(),
-                        expandableListTitle.get(groupPosition) + " List Collapsed.",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                Toast.makeText(
-                        getActivity().getApplicationContext(),
-                        expandableListTitle.get(groupPosition)
-                                + " -> "
-                                + expandableListDetail.get(groupPosition).getExList().get(childPosition),Toast.LENGTH_SHORT)
-                        .show();
-                return false;
-            }
-        });
-//        LinearLayout Layout=(LinearLayout) InputFragmentView.findViewById(R.id.linear_exercise);
 //
-//        View [] inflated = new View[7];
+
 //        TableLayout[] bg = new TableLayout[7];
 //        TextView[] day = new TextView [7];
 //        ImageView[][] tick = new ImageView[7][5];
@@ -83,8 +107,7 @@ public class Fragment_revise extends Fragment {
 //        params.setMargins(30, 0, 0, 0);
 //
 //
-//        for(int i = 0; i<7; i++) {
-//            inflated[i] = getActivity().getLayoutInflater().inflate(R.layout.exercise_day, null);
+
 //
 //            //Cursor cursor =  db.getAllExercises(i,0);
 //
