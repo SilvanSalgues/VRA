@@ -2,12 +2,13 @@ package com.example.darren.new_design;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,23 +18,60 @@ import java.util.List;
 public class Fragment_revise extends Fragment {
 
     ExpandableListView expandableListView;
-    ExpandableListAdapter expandableListAdapter;
+    ArrayList<ExpandableListAdapter> expandableListAdapter;
     List<String> expandableListTitle;
     ArrayList<ExerciseList> expandableListDetail;
     ArrayList<ArrayList<ExerciseList>> ListofList;
+
+    LinearLayout Layout;
     View [] inflated = new View[7];
-    TextView day;
+    TextView day, WeekNo;
+
+    RadioGroup radioGroup;
+    RadioButton radioButton;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View InputFragmentView = inflater.inflate(R.layout.revise, container, false);
-        LinearLayout Layout =(LinearLayout) InputFragmentView.findViewById(R.id.linear_exercise);
+        WeekNo = (TextView) InputFragmentView.findViewById(R.id.WeekNo);
+
+        radioGroup = (RadioGroup) InputFragmentView.findViewById(R.id.radioWeeks);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find which radio button is selected
+                if(checkedId == R.id.radioWeek2) {
+                    WeekNo.setText("Week 2 Exercises");
+                }
+                else if(checkedId == R.id.radioWeek3) {
+                    WeekNo.setText("Week 3 Exercises");
+                }
+                else if(checkedId == R.id.radioWeek4) {
+                    WeekNo.setText("Week 4 Exercises");
+                }
+                else if(checkedId == R.id.radioWeek5) {
+                    WeekNo.setText("Week 5 Exercises");
+                }
+                else if(checkedId == R.id.radioWeek6) {
+                    WeekNo.setText("Week 6 Exercises");
+                }
+                else if(checkedId == R.id.radioWeek7) {
+                    WeekNo.setText("Week 7 Exercises");
+                }
+                else {
+                    WeekNo.setText("Week 1 Exercises");
+                }
+            }
+        });
+
+        radioButton = (RadioButton) InputFragmentView.findViewById(R.id.radioWeek1);
+        radioButton.toggle();
 
 
-        //expandableListView = (ExpandableListView) InputFragmentView.findViewById(R.id
-        // .expandableListView);
-
+        Layout =(LinearLayout) InputFragmentView.findViewById(R.id.linear_exercise);
         ExpandableListDataPump expump = new ExpandableListDataPump(getActivity());
         ListofList = new ArrayList<>();
+        expandableListAdapter = new ArrayList<>();
 
         for(int i = 0; i<7; i++) {
             expandableListTitle = new ArrayList<>();
@@ -44,7 +82,7 @@ public class Fragment_revise extends Fragment {
 
             if (expandableListDetail != null){
                 for (int pos = 0; pos < expandableListDetail.size(); pos++) {
-                    Log.d("expandableListTitle", "" + expandableListDetail.get(pos).getExTitle());
+                    //Log.d("expandableListTitle", "" + expandableListDetail.get(pos).getExTitle());
                     expandableListTitle.add(""+ expandableListDetail.get(pos).getExTitle());
                 }
             }
@@ -57,13 +95,15 @@ public class Fragment_revise extends Fragment {
             expandableListView = (ExpandableListView) inflated[i].findViewById(R.id.expandableListView);
             Layout.addView(inflated[i]);
 
-            expandableListAdapter = new ExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
-            expandableListView.setAdapter(expandableListAdapter);
+            expandableListAdapter.add(new ExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail));
+
+            expandableListView.setAdapter(expandableListAdapter.get(i));
+            final int pos = i;
             expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
                 @Override
                 public void onGroupExpand(int groupPosition) {
                     Toast.makeText(getActivity().getApplicationContext(),
-                            expandableListDetail.get(groupPosition).getExTitle() + " List Expanded.", Toast.LENGTH_SHORT).show();
+                            "Day "+ (pos +1) +":"+ expandableListDetail.get(groupPosition).getExTitle() + " List Expanded.", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -71,7 +111,7 @@ public class Fragment_revise extends Fragment {
                 @Override
                 public void onGroupCollapse(int groupPosition) {
                     Toast.makeText(getActivity().getApplicationContext(),
-                            expandableListTitle.get(groupPosition) + " List Collapsed.",Toast.LENGTH_SHORT).show();
+                            "Day "+ (pos +1) +":"+ expandableListTitle.get(groupPosition) + " List Collapsed.",Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -84,7 +124,7 @@ public class Fragment_revise extends Fragment {
                             getActivity().getApplicationContext(),
                             expandableListTitle.get(groupPosition)
                                     + " -> "
-                                    + expandableListDetail.get(groupPosition).getExList().get(childPosition),Toast.LENGTH_SHORT)
+                                    + "Day "+ (pos +1) +":"+ expandableListDetail.get(groupPosition).getExList().get(childPosition),Toast.LENGTH_SHORT)
                             .show();
                     return false;
                 }

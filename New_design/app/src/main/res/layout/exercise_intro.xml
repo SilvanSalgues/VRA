@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="100px"
+        android:layout_height="50dp"
         android:id="@+id/headerExerc"
         android:background="#ff1f5c68">
 
@@ -68,7 +68,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="280px"
+        android:layout_height="140dp"
         android:id="@+id/footer"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="false"

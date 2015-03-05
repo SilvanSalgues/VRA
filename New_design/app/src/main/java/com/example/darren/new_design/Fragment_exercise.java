@@ -6,7 +6,6 @@ import android.app.FragmentTransaction;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,16 +111,11 @@ public class Fragment_exercise extends Fragment {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        Bundle parameters = new Bundle();
-        int bgGIF = exerc.get(exercise).getBackground();
-        parameters.putInt("bgGIF", bgGIF);
-
-        Log.i("Fragment_exercise", "exercise type " + exerc.get(exercise).getType());
-        ExerciseFragment = exerc.get(exercise).getType();
-        ExerciseFragment.setArguments(parameters);
+        ExerciseFragment = exerc.get(exercise).getType().newInstance(exerc.get(exercise).getBackground());
         ft.replace(R.id.exercise_container, ExerciseFragment)
                 .addToBackStack(null);
         ft.commit();
+
 
         exercise_name.setText("Exercise | " + exdesc.get(exerc.get(exercise).getexerciseNum()).getName());  // Sets the Exercise_No text box as the current exercise number
         //Speed.setText("Speed : " + exerc.get(exercise).speed + "Hz");        // Sets the Speed text box as the speed of head movement of the exercise
@@ -152,16 +146,16 @@ public class Fragment_exercise extends Fragment {
         }
     }
 
-    @Override
+/*    @Override
     public void onDestroyView() {
         super.onDestroyView();
         InputFragmentView = null; // now cleaning up!
         countDownTimer.cancel();
         countDownTimer = null;
- //       ExerciseFragment.onDestroyView();
+        ExerciseFragment.onDestroyView();
 
         Log.d("Fragment Exercise", "DestroyView Called");
-    }
+    }*/
 }
 
 

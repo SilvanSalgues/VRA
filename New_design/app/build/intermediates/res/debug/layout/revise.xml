@@ -7,7 +7,7 @@
     android:background="@android:color/white">
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="100px"
+        android:layout_height="50dp"
         android:id="@+id/headerExerc"
         android:background="#ff1f5c68">
 
@@ -63,7 +63,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="280px"
+        android:layout_height="140dp"
         android:id="@+id/footer"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
@@ -82,6 +82,64 @@
             android:layout_alignParentStart="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp" />
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="30dp"
+                    android:layout_alignBottom="@+id/WeekNo"
+                    android:layout_toEndOf="@+id/WeekNo"
+                    android:id="@+id/radioWeeks">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioWeek1"
+            android:button="@drawable/custom_radio_button_selector"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioWeek2"
+            android:button="@drawable/custom_radio_button_selector"
+            android:layout_marginLeft="5dp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioWeek3"
+            android:button="@drawable/custom_radio_button_selector"
+            android:layout_marginLeft="5dp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioWeek4"
+            android:button="@drawable/custom_radio_button_selector"
+            android:layout_marginLeft="5dp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioWeek5"
+            android:button="@drawable/custom_radio_button_selector"
+            android:layout_marginLeft="5dp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioWeek6"
+            android:button="@drawable/custom_radio_button_selector"
+            android:layout_marginLeft="5dp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioWeek7"
+            android:button="@drawable/custom_radio_button_selector"
+            android:layout_marginLeft="5dp"/>
+        </RadioGroup>
 
     </RelativeLayout>
 

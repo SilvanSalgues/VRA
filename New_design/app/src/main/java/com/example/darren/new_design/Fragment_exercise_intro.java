@@ -97,7 +97,7 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
         YouTubePlayerFragment youTubePlayerFragment = YouTubePlayerFragment.newInstance();
         youTubePlayerFragment.initialize(DeveloperKey.DEVELOPER_KEY, this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(R.id.youtube_fragment, youTubePlayerFragment).commit();
+        transaction.replace(R.id.youtube_fragment, youTubePlayerFragment).commit();
 
         exercise_name = (TextView) InputFragmentView.findViewById(R.id.exercise_name);
         exercise_name.setText(exdesc.get(exerc.get(exercise).getexerciseNum()).getName());

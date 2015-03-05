@@ -28,6 +28,8 @@ public abstract class Exercise_Type  extends Fragment {
     GifImageView GIFimage;
     GifDrawable gifFromResource;
 
+    public Exercise_Type newInstance(int GIF){ return null; }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         GetLayout();
@@ -38,7 +40,7 @@ public abstract class Exercise_Type  extends Fragment {
         GIFimage = (GifImageView) InputFragmentView.findViewById(R.id.GIFview);
         //GIFimage.setBackgroundColor(Color.BLUE);
 
-        GIF = this.getArguments().getInt("bgGIF");
+        GIF = getArguments().getInt("bgGIF");
 
         if(gifFromResource == null) {
             //resource (drawable or raw)
@@ -53,7 +55,7 @@ public abstract class Exercise_Type  extends Fragment {
             }
         }
 
-        GIFimage.setBackground(gifFromResource);//setBackgroundResource(GIF); // R.drawable.illusion1
+        GIFimage.setBackground(gifFromResource);// R.drawable.illusion1
 
         Addwidgets();
         return InputFragmentView;
