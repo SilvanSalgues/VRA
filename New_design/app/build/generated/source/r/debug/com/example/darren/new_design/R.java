@@ -2305,12 +2305,13 @@ containing a value of this type.
         public static final int messenger=0x7f030022;
         public static final int revise=0x7f030023;
         public static final int row_contact=0x7f030024;
-        public static final int row_sms=0x7f030025;
-        public static final int sensor=0x7f030026;
-        public static final int signin=0x7f030027;
-        public static final int signup=0x7f030028;
-        public static final int support_simple_spinner_dropdown_item=0x7f030029;
-        public static final int update_user=0x7f03002a;
+        public static final int row_sms_received=0x7f030025;
+        public static final int row_sms_sent=0x7f030026;
+        public static final int sensor=0x7f030027;
+        public static final int signin=0x7f030028;
+        public static final int signup=0x7f030029;
+        public static final int support_simple_spinner_dropdown_item=0x7f03002a;
+        public static final int update_user=0x7f03002b;
     }
     public static final class menu {
         public static final int my=0x7f0f0000;

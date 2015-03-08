@@ -36,61 +36,24 @@ public class Type_SMS {
 		return getText();
 	}
 
-	/**
-	 * Initializes a new ToDoItem
-	 * 
-	 * @param text
-	 *            The item text
-	 * @param id
-	 *            The item id
-	 */
-	public Type_SMS(String text, String id) {
-		this.setText(text);
-		this.setId(id);
-	}
-
-
-
     public String getUser()
     {
         return mUser;
     }
-
-
     public final void setUser (String user) {
         mUser = user;
     }
 
-    /**
-	 * Returns the item text
-	 */
 	public String getText() {
 		return mText;
 	}
-
-	/**
-	 * Sets the item text
-	 * 
-	 * @param text
-	 *            text to set
-	 */
 	public final void setText(String text) {
 		mText = text;
 	}
 
-	/**
-	 * Returns the item id
-	 */
 	public String getId() {
 		return mId;
 	}
-
-	/**
-	 * Sets the item id
-	 * 
-	 * @param id
-	 *            id to set
-	 */
 	public final void setId(String id) {
 		mId = id;
 	}
@@ -101,10 +64,6 @@ public class Type_SMS {
 	public boolean isComplete() {
 		return mComplete;
 	}
-
-	/**
-	 * Marks the item as completed or incompleted
-	 */
 	public void setComplete(boolean complete) {
 		mComplete = complete;
 	}

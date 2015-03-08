@@ -2,6 +2,7 @@ package com.example.darren.new_design;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,35 +35,29 @@ public class Adapter_SMS extends ArrayAdapter<Type_SMS> {
     {
         final Type_SMS currentItem = getItem(position);
 
-        if (row == null) {
-            row = inflater.inflate(R.layout.row_sms, parent, false);
+        String user = "" + currentItem.getUser();
+
+        if(user.equals(Notification_Handler.getHandle())){
+            row = inflater.inflate(R.layout.row_sms_sent, parent, false);
+        }
+        else
+        {
+            row = inflater.inflate(R.layout.row_sms_received, parent, false);
         }
 
         row.setTag(currentItem);
-        //final CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkToDoItem);
         TextView smsText = (TextView) row.findViewById(R.id.smsText);
         smsText.setText(currentItem.getText());
-        //checkBox.setChecked(false);
-        //checkBox.setEnabled(true);
 
-
-//        checkBox.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View arg0) {
-//                if (checkBox.isChecked()) {
-//                    checkBox.setEnabled(false);
-//                    if (mContext instanceof Activity_container) {
-//                        Activity_container activity = (Activity_container) mContext;
-//                        FragmentManager fm = activity.getFragmentManager();
-//
-//                        Fragment_messenger fragment = (Fragment_messenger)fm.findFragmentById(R.id.content_layout);
-//                        fragment.checkItem(currentItem);
-//
-//                    }
-//                }
-//            }
-//        });
+        if(user.equals(Notification_Handler.getHandle()))
+        {
+            smsText.setText("S: " + currentItem.getText());
+        }
+        else
+        {
+            smsText.setText("R: " + currentItem.getText());
+            smsText.setTextColor(Color.parseColor("#ff8ae3f6"));
+        }
         return row;
     }
 }
