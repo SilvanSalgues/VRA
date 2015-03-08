@@ -3,6 +3,7 @@ package com.example.darren.new_design;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -17,7 +18,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
@@ -27,9 +30,17 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 public class Fragment_home extends Fragment{
 
     ImageButton profile;
-    TextView Welcome;
+    TextView exercise_complete_number, last_active_time, Name;
     Button edit_profile;
     //PopupWindow popWindow;
+
+    String email = "email@admin.com";
+
+    Database_Manager db;
+    Cursor curUser;
+
+    NumberPicker numberPicker;
+    EditText update_name,update_country, update_password, update_verify_pass;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View InputFragmentView = inflater.inflate(R.layout.home, container, false);
@@ -42,6 +53,28 @@ public class Fragment_home extends Fragment{
         //Typeface tf = Typeface.createFromAsset(this.getResources().getAssets(), fontPath);
         // Applying font
         //Welcome.setTypeface(tf);
+
+        db = new Database_Manager(getActivity());
+
+        exercise_complete_number = (TextView) InputFragmentView.findViewById(R.id.exercise_complete_number);
+        last_active_time = (TextView) InputFragmentView.findViewById(R.id.last_active_time);
+        Name = (TextView) InputFragmentView.findViewById(R.id.Name);
+
+        db.open();
+
+        curUser = db.getUser(email);
+        curUser.moveToFirst();
+        Name.setText(curUser.getString(0));
+        exercise_complete_number.setText("" + db.getExerciseCount(email));
+
+        if (curUser.getString(3) != null)
+        {
+            last_active_time.setText(curUser.getString(3));
+        }
+        else last_active_time.setText("No Exercise Recorded");
+
+        db.close();
+
 
         DataPoint[] data = new DataPoint[] {
                 new DataPoint(1, 9.0d),
@@ -174,6 +207,19 @@ public class Fragment_home extends Fragment{
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.update_user);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        update_name = (EditText) dialog.findViewById(R.id.update_name);
+        update_country = (EditText) dialog.findViewById(R.id.update_country);
+        update_password = (EditText) dialog.findViewById(R.id.update_password);
+        update_verify_pass = (EditText) dialog.findViewById(R.id.update_verify_pass);
+        numberPicker = (NumberPicker) dialog.findViewById(R.id.numberPicker);
+
+        numberPicker.setMaxValue(9);
+        numberPicker.setMinValue(1);
+
+        update_name.setText(curUser.getString(0));
+        update_country.setText(curUser.getString(5));
+        update_password.setText(curUser.getString(2));
 
         //dialog.setTitle("Title...");
 

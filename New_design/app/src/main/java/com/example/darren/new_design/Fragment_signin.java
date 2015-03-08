@@ -62,7 +62,7 @@ public class Fragment_signin extends Fragment {
 
                 else{
                     // Checking if the username and password is correct - if so toast message and go to next activity
-                    if (db.getUser(in_name.getText().toString(),in_pass.getText().toString())) {
+                    if (db.getUserLogin(in_name.getText().toString(), in_pass.getText().toString())) {
 
                         Toast.makeText(getActivity().getApplicationContext(),
                                 "Successful Login", Toast.LENGTH_SHORT).show();

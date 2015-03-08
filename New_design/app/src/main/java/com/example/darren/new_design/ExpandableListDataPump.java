@@ -31,7 +31,7 @@ public class ExpandableListDataPump {
             exdesc.add(new Exercise_description(cur_desc.getString(1), cur_desc.getString(2), cur_desc.getString(3)));
         }while (cur_desc.moveToNext());
 
-        cur_list = db.getExerciseList(day);
+        cur_list = db.getExerciseListforDay(day);
         cur_list.moveToPosition(0);
         do{
             Exercise_Type Type;

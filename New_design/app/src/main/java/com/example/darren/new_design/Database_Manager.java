@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class Database_Manager {
 
@@ -16,9 +17,11 @@ public class Database_Manager {
     private static final String DATABASE_TABLE1 = "Users";
     public static final String KEY_USERID = "_id";
     public static final String KEY_NAME = "name";
-    public static final String KEY_Email = "email";
+    public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "pass";
-
+    public static final String KEY_LASTACTIVE = "last_active";
+    public static final String KEY_EXCOUNT = "exercise_count";
+    public static final String KEY_COUNRTY = "country";
 
     private static final String DATABASE_TABLE2 = "Ex_description";
     public static final String KEY_DID = "_id";
@@ -62,7 +65,10 @@ public class Database_Manager {
             String DATA1_CREATE = "create table " + DATABASE_TABLE1 + "(_id INTEGER primary key autoincrement, " +
                     "name TEXT not null, "+
                     "email TEXT not null, "+
-                    "pass TEXT not null);";
+                    "pass TEXT not null, " +
+                    "last_active TEXT, " +
+                    "exercise_count INTEGER, " +
+                    "country TEXT);";
 
             // Creating Ex_description table
             String DATA2_CREATE = "create table " + DATABASE_TABLE2 + "(_id INTEGER primary key autoincrement, "+
@@ -87,7 +93,7 @@ public class Database_Manager {
             db.execSQL(DATA3_CREATE);
 
             //default inserts
-            db.execSQL("INSERT INTO " + DATABASE_TABLE1 + " (name, email, pass) Values ('admin', 'email@admin.com', 'admin')");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE1 + " (name, email, pass, exercise_count) Values ('admin', 'email@admin.com', 'admin', 16)");
 
             Exercise_descriptions(db);
             Exercise_List(db);
@@ -96,8 +102,9 @@ public class Database_Manager {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
             // drops table if it- exists
-            //db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE1);
-            //db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE2);
+            db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE1);
+            db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE2);
+            db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE3);
 
             // create table
             this.onCreate(db);
@@ -178,7 +185,6 @@ public class Database_Manager {
                 "to go out of focus then slow down. Continue this exercise until timer has finished.', " +
                 "'1kfldT6fvxI')");
     }
-
     private static void Exercise_List(SQLiteDatabase db){
         // Day 1
         db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
@@ -277,26 +283,27 @@ public class Database_Manager {
         db = DBHelper.getWritableDatabase();
         return this;
     }
-
     public void close()
     {
         DBHelper.close();
     }
 
+
     public long insertUser(String name, String email, String pass){
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_NAME, name);
-        initialValues.put(KEY_Email, email);
+        initialValues.put(KEY_EMAIL, email);
         initialValues.put(KEY_PASSWORD, pass);
         return db.insert(DATABASE_TABLE1, null, initialValues);
     }
 
-    public boolean getUser(String name, String pass) throws SQLException{
+    public boolean getUserLogin(String name, String pass) throws SQLException{
+        boolean check = false;
         Cursor mCursor =
                 db.query(true, DATABASE_TABLE1, new String[] {
                                 KEY_USERID,
                                 KEY_NAME,
-                                KEY_Email,
+                                KEY_EMAIL,
                                 KEY_PASSWORD
                         },
                         KEY_NAME + "='" + name + "'" + " and " + KEY_PASSWORD + "='" + pass + "'" ,
@@ -308,18 +315,58 @@ public class Database_Manager {
 
         if (mCursor != null) {
             mCursor.moveToFirst();
-        }
-
-        if( mCursor.getCount() > 0)
-        {
-            return true;
+            if( mCursor.getCount() > 0)
+            {
+                check = true;
+            }
         }
         else
         {
-            return false;
+            check = false;
         }
+        return check;
+    }
+    public int getExerciseCount(String email) throws SQLException{
+        int count  = 0;
+        Cursor cur =
+                db.query(true, DATABASE_TABLE1, new String[] {
+                        KEY_EXCOUNT
+                },
+                KEY_EMAIL + "='" + email + "'",
+                null,
+                null,
+                null,
+                null,
+                null);
+
+
+        if (cur != null) {
+            cur.moveToFirst();
+
+            count = cur.getInt(0);
+            //Log.d("Count ", "" + cur.getInt(0));
+            cur.close();
+        }
+
+        return count;
     }
 
+    public Cursor getUser(String email) throws SQLException{
+        return db.query(true, DATABASE_TABLE1, new String[] {
+                                KEY_NAME,
+                                KEY_EMAIL,
+                                KEY_PASSWORD,
+                                KEY_LASTACTIVE,
+                                KEY_EXCOUNT,
+                                KEY_COUNRTY
+                        },
+                        KEY_EMAIL + "='" + email + "'",
+                        null,
+                        null,
+                        null,
+                        null,
+                        null);
+    }
     public Cursor getExerciseDescriptions(){
         return db.query(DATABASE_TABLE2, new String[] {
                         KEY_DID,
@@ -332,7 +379,7 @@ public class Database_Manager {
                 null,
                 null);
     }
-    public Cursor getExerciseList(int day){
+    public Cursor getExerciseListforDay(int day){
         return db.query(DATABASE_TABLE3, new String[] {
                         KEY_LID,
                         KEY_WEEK,
@@ -351,36 +398,35 @@ public class Database_Manager {
                 null);
     }
 
-    public Cursor getAllUsers(){
-        return db.query(DATABASE_TABLE1, new String[] {
-                        KEY_USERID,
-                        KEY_NAME,
-                        KEY_Email,
-                        KEY_PASSWORD},
+    public Cursor getCompleteExerciseList(){
+        return db.query(DATABASE_TABLE3, new String[] {
+                        KEY_LID,
+                        KEY_WEEK,
+                        KEY_DAY,
+                        KEY_TIMEOFDAY,
+                        KEY_EXERCISENUM,
+                        KEY_EXTYPE,
+                        KEY_DURATION,
+                        KEY_GIF,
+                        KEY_SPEED},
                 null,
                 null,
                 null,
                 null,
                 null);
     }
-    public Cursor getUser(String rowId) throws SQLException{
-        Cursor mCursor =
-                db.query(true, DATABASE_TABLE1, new String[] {
-                                KEY_USERID,
-                                KEY_NAME,
-                                KEY_Email,
-                                KEY_PASSWORD
-                        },
-                        KEY_USERID + "='" + rowId + "'",
-                        null,
-                        null,
-                        null,
-                        null,
-                        null);
 
-        if (mCursor != null) {
-            mCursor.moveToFirst();
-        }
-        return mCursor;
+    public void updateExerciseCount(String email, int ExerciseCount){
+        Log.d("Update Count", "" + ExerciseCount);
+        ContentValues args = new ContentValues();
+        args.put(KEY_EXCOUNT, ExerciseCount);
+        db.update(DATABASE_TABLE1, args, KEY_EMAIL + "='" + email + "'", null) ;
+    }
+
+    public void updateLastActive(String email, String LastActive){
+        Log.d("Update Count", "" + LastActive);
+        ContentValues args = new ContentValues();
+        args.put(KEY_LASTACTIVE, LastActive);
+        db.update(DATABASE_TABLE1, args, KEY_EMAIL + "='" + email + "'", null) ;
     }
 }

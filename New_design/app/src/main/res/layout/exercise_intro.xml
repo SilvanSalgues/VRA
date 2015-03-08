@@ -82,9 +82,9 @@
             android:layout_toStartOf="@+id/start_exercise"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="8dp"
-            android:layout_below="@+id/Duration"
+            android:layout_below="@+id/exercise_name"
             android:layout_marginTop="8dp"
-            ext:documentView_textSize="16sp"
+            ext:documentView_textSize="17sp"
             ext:documentView_textAlignment="justified"
             ext:documentView_textColor="#ff8c8c8c"
             ext:documentView_text="Lorem ipsum dolor sit amet, consectetur adipiscy ing elit. Nulla viverra elementum tellus, sollicitudin."
@@ -97,22 +97,23 @@
             android:text="Duration : 1:00"
             android:id="@+id/Duration"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="19sp"
             android:textColor="#ff1f5c68"
             android:textIsSelectable="false"
             android:textStyle="bold"
-            android:layout_alignBottom="@+id/exercise_name"
-            android:layout_alignEnd="@+id/start_exercise"
-            android:typeface="sans" />
+            android:typeface="normal"
+            android:layout_below="@+id/exercise_name"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Head Rotation "
             android:id="@+id/exercise_name"
-            android:textSize="22sp"
+            android:textSize="19sp"
             android:textColor="#ff1f5c68"
-            android:textIsSelectable="false"
+            android:textIsSelectable="true"
             android:textStyle="bold"
             android:layout_alignParentTop="true"
             android:layout_marginTop="6dp"
@@ -134,41 +135,19 @@
             android:textStyle="bold"
             android:textIsSelectable="false" />
 
-       <!-- <TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Instructions"
-            android:id="@+id/Instructions"
-            android:textSize="26sp"
+            android:text="Day + Time of Day"
+            android:id="@+id/day"
+            android:textAlignment="center"
+            android:textSize="18sp"
             android:textColor="#ff1f5c68"
             android:textIsSelectable="false"
             android:textStyle="bold"
+            android:typeface="sans"
             android:layout_alignTop="@+id/exercise_name"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="1. Lorem ipsum dolor sit amet, \n2. Consectetur adipiscing elit. \n3. Nulla viverra elementum tellus \n4. Sollicitudin. "
-            android:id="@+id/Instruct_text"
-            android:textSize="16sp"
-            android:autoText="true"
-            android:textColor="#ff9D9D9D"
-            android:layout_alignTop="@+id/general_desc"
-            android:layout_alignStart="@+id/Instructions"
-            android:layout_toStartOf="@id/start_exercise"
-            android:layout_marginRight="10dp" />-->
-
-        <!--        <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Date &amp; Time"
-                    android:id="@+id/exercise_date"
-                    android:textSize="18sp"
-                    android:textColor="#ff1f5c68"
-                    android:textIsSelectable="true"
-                    android:layout_alignTop="@+id/general_desc"
-                    android:layout_alignStart="@+id/Duration" />-->
-
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"/>
     </RelativeLayout>
 </RelativeLayout>

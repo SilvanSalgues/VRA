@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +19,21 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.OnInitializedListener{
 
     Fragment myFragment;
-    TextView Duration, exercise_date;
+    TextView day, Duration;
     Button start_exercise;
     ImageView btn_info_intro;
     int exercise = 0;
+
+    String email = "email@admin.com";
+
 
     TextView exercise_name;
     com.bluejamesbond.text.DocumentView general_desc;
@@ -40,6 +46,8 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View InputFragmentView = inflater.inflate(R.layout.exercise_intro, container, false);
 
+
+
         /*String ExName = "Side to side head rotation exercise, 6-8 feet away";
         String Description = "Place tablet on a shelf or ledge at roughly eye level. Stand 6-8 feet away. " +
                 "The screen has an ‘E’ letter in the middle of the screen. Move your head from side to side " +
@@ -49,14 +57,21 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
         db = new Database_Manager(getActivity());
         db.open();
 
+        exercise = db.getExerciseCount(email);
+
+        // Get all Exercise Descriptions from database
+        //-----------------------------------------------------------------------------------------
         cur_desc = db.getExerciseDescriptions();
-        cur_desc.moveToPosition(0);
+        cur_desc.moveToFirst();
         do{
             exdesc.add(new Exercise_description(cur_desc.getString(1), cur_desc.getString(2), cur_desc.getString(3)));
         }while (cur_desc.moveToNext());
+        //-----------------------------------------------------------------------------------------
 
-        cur_list = db.getExerciseList(1);
-        cur_list.moveToPosition(0);
+        // Get the list of all exercises from database
+        //-----------------------------------------------------------------------------------------
+        cur_list = db.getCompleteExerciseList();
+        cur_list.moveToFirst();
         do{
             Exercise_Type Type;
             if (cur_list.getString(5).equals("Exercise_Type1")){
@@ -67,9 +82,13 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
             }
             exerc.add(new Exercise_properties(cur_list.getInt(1), cur_list.getInt(2), cur_list.getString(3), cur_list.getInt(4), Type, cur_list.getInt(6), cur_list.getInt(7), cur_list.getInt(8)));
         }while (cur_list.moveToNext());
+        //-----------------------------------------------------------------------------------------
 
         db.close();
 
+        Log.d("exerc size", "" + exerc.size());
+        day = (TextView) InputFragmentView.findViewById(R.id.day);
+        day.setText("Day " + exerc.get(exercise).Day + ": " + exerc.get(exercise).TimeOfDay);
         btn_info_intro = (ImageView) InputFragmentView.findViewById(R.id.btn_info_intro);
         btn_info_intro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,10 +125,6 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
         general_desc = (com.bluejamesbond.text.DocumentView) InputFragmentView.findViewById(R.id.general_desc);
         general_desc.setText(exdesc.get(exerc.get(exercise).getexerciseNum()).getDescription());
 
-        //exercise_date = (TextView) InputFragmentView.findViewById(R.id.exercise_date);
-        //String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", java.util.Locale.getDefault()).format(new Date());
-        //exercise_date.setText(currentDateandTime);
-
         Duration = (TextView) InputFragmentView.findViewById(R.id.Duration);
         Duration.setText("Duration : " +exerc.get(exercise).getDuration());
 
@@ -117,6 +132,12 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
         start_exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                db.open();
+                String currentDateandTime = new SimpleDateFormat("HH:mm dd/MM/yyyy", java.util.Locale.getDefault()).format(new Date());
+                db.updateLastActive(email, currentDateandTime);
+                db.close();
+
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 myFragment = new Fragment_exercise();

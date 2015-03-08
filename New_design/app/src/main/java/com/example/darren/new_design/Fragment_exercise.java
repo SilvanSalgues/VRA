@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.List;
 public class Fragment_exercise extends Fragment {
 
     int exercise = 0;
+    String email = "email@admin.com";
 
     public View InputFragmentView;
     public long remainingTime;
@@ -42,14 +44,21 @@ public class Fragment_exercise extends Fragment {
         db = new Database_Manager(getActivity());
         db.open();
 
+        exercise = db.getExerciseCount(email);
+
+        //Get all Exercise Descriptions from database
+        //-----------------------------------------------------------------------------------------
         cur_desc = db.getExerciseDescriptions();
-        cur_desc.moveToPosition(0);
+        cur_desc.moveToFirst();
         do{
             exdesc.add(new Exercise_description(cur_desc.getString(1), cur_desc.getString(2), cur_desc.getString(3)));
         }while (cur_desc.moveToNext());
+        //-----------------------------------------------------------------------------------------
 
-        cur_list = db.getExerciseList(1);
-        cur_list.moveToPosition(0);
+        // Get the list of all exercises from database
+        //-----------------------------------------------------------------------------------------
+        cur_list = db.getCompleteExerciseList();
+        cur_list.moveToFirst();
         do{
             Exercise_Type Type;
             if (cur_list.getString(5).equals("Exercise_Type2")){
@@ -61,7 +70,9 @@ public class Fragment_exercise extends Fragment {
 
             exerc.add(new Exercise_properties(cur_list.getInt(1), cur_list.getInt(2), cur_list.getString(3), cur_list.getInt(4), Type, cur_list.getInt(6), cur_list.getInt(7), cur_list.getInt(8)));
         }while (cur_list.moveToNext());
+        //-----------------------------------------------------------------------------------------
 
+        Log.d("Number of Exercises", "" + exerc.size());
         db.close();
 
 
@@ -97,6 +108,17 @@ public class Fragment_exercise extends Fragment {
         Stop_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
+
+                db.open();
+                if (exercise < exerc.size()) {
+                    db.updateExerciseCount(email, ++exercise);
+                }
+                else{
+                    db.updateExerciseCount(email, 0);
+                }
+
+                db.close();
 
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();

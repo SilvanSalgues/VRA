@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="520dp"
-    android:layout_height="350dp"
+    android:layout_height="400dp"
     android:background="@android:color/white"
     android:id="@+id/custom_dialog_first_rl"
     android:focusableInTouchMode="false">
@@ -62,41 +62,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"
-                android:id="@+id/email_text"
-                android:textColor="#ff585858"
-                android:textSize="18sp"
-                android:textIsSelectable="false"
-                android:layout_below="@+id/update_name"
-                android:layout_alignStart="@+id/update_name"
-                android:layout_marginTop="10dp" />
-            <EditText
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:ems="10"
-                android:id="@+id/update_email"
-                android:inputType="textEmailAddress"
-                android:background="#ff1f5c68"
-                android:textSize="15sp"
-                android:textColorHint="#FFFFFF"
-                android:textStyle="bold"
-                android:paddingLeft="10dp"
-                android:hint="EMAIL"
-                android:textColor="#FFFFFF"
-                android:layout_below="@+id/email_text"
-                android:layout_alignStart="@+id/email_text" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Country"
                 android:id="@+id/country_text"
                 android:textColor="#ff585858"
                 android:textSize="18sp"
                 android:textIsSelectable="false"
-                android:layout_below="@+id/update_email"
-                android:layout_alignStart="@+id/update_email"
-                android:layout_marginTop="10dp" />
+                android:layout_below="@+id/update_name"
+                android:layout_alignStart="@+id/update_name"
+                android:layout_marginTop="10dp"/>
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="50dp"
@@ -123,8 +96,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Old Password"
-                android:id="@+id/oldpass_text"
+                android:text="Password"
+                android:id="@+id/pass_text"
                 android:textColor="#ff585858"
                 android:textSize="18sp"
                 android:textIsSelectable="false"
@@ -137,56 +110,29 @@
                 android:layout_height="50dp"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/oldpass"
+                android:id="@+id/update_password"
                 android:background="#ff1f5c68"
                 android:textSize="15sp"
                 android:textColorHint="#FFFFFF"
                 android:textStyle="bold"
                 android:paddingLeft="10dp"
-                android:hint="OLD PASSWORD"
+                android:hint="PASSWORD"
                 android:textColor="#FFFFFF"
-                android:layout_below="@+id/oldpass_text"
-                android:layout_alignStart="@+id/oldpass_text"
+                android:layout_below="@+id/pass_text"
+                android:layout_alignStart="@+id/pass_text"
                 android:layout_marginRight="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Password"
-                android:id="@+id/newpass_text"
-                android:textColor="#ff585858"
-                android:textSize="18sp"
-                android:textIsSelectable="false"
-                android:layout_marginLeft="20dp"
-                android:layout_below="@+id/oldpass"
-                android:layout_marginTop="10dp" />
-            <EditText
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:id="@+id/update_pass"
-                android:background="#ff1f5c68"
-                android:textSize="15sp"
-                android:textColorHint="#FFFFFF"
-                android:textStyle="bold"
-                android:paddingLeft="10dp"
-                android:hint="NEW PASSWORD"
-                android:textColor="#FFFFFF"
-                android:layout_below="@+id/newpass_text"
-                android:layout_alignStart="@+id/newpass_text" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Verify New Password"
+                android:text="Verify Password"
                 android:id="@+id/verify_pass_text"
                 android:textColor="#ff585858"
                 android:textSize="18sp"
                 android:textIsSelectable="false"
-                android:layout_alignStart="@+id/update_pass"
-                android:layout_below="@+id/update_pass"
-                android:layout_marginTop="10dp" />
+                android:layout_below="@+id/update_password"
+                android:layout_alignStart="@+id/update_password"
+                android:layout_marginTop="10dp"/>
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="50dp"
@@ -212,8 +158,32 @@
                 android:background="@drawable/btn_save"
                 android:focusableInTouchMode="false"
                 android:layout_alignParentTop="true"
-                android:layout_alignEnd="@+id/oldpass"
+                android:layout_alignEnd="@+id/update_password"
                 android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Focus Point Size "
+                android:id="@+id/textView4"
+                android:textColor="#ff585858"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/update_verify_pass"
+                android:layout_alignStart="@+id/update_verify_pass"
+                android:layout_toStartOf="@+id/numberPicker"
+                android:layout_marginTop="25dp"/>
+
+            <NumberPicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/numberPicker"
+                android:layout_below="@+id/update_verify_pass"
+                android:layout_alignEnd="@+id/update_verify_pass"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="20dp"/>
+
         </RelativeLayout>
     </LinearLayout>
+
 </RelativeLayout>
