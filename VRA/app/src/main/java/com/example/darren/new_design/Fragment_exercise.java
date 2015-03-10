@@ -1,3 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
+
 package com.example.darren.new_design;
 
 import android.app.Fragment;
@@ -15,7 +17,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Fragment_exercise extends Fragment {
 

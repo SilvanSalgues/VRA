@@ -115,7 +115,6 @@
             android:background="@drawable/profile"
             android:visibility="visible"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/graph_container"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="60dp" />
@@ -184,7 +183,7 @@
             android:layout_marginLeft="30dp"
             android:layout_alignTop="@+id/profile"
             android:layout_toEndOf="@+id/profile"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="5dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -199,12 +198,22 @@
             android:layout_height="40dp"
             android:id="@+id/edit_profile"
             android:background="#ff589310"
-            android:layout_marginTop="6dp"
-            android:layout_below="@+id/Name"
-            android:layout_alignStart="@+id/Name"
             android:text="Edit Profile"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_below="@+id/useremail"
+            android:layout_alignStart="@+id/useremail"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="email"
+            android:id="@+id/useremail"
+            android:textSize="18sp"
+            android:textColor="#ff585858"
+            android:layout_alignBottom="@+id/exercise_complete"
+            android:layout_alignStart="@+id/Name"/>
     </RelativeLayout>
 </RelativeLayout>

@@ -1,3 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
+
 package com.example.darren.new_design;
 
 public class Exercise_properties
@@ -25,14 +27,14 @@ public class Exercise_properties
         this.Speed = speed;
     }
 
-    public int getWeek()
+    /*public int getWeek()
     {
         return Week;
-    }
-    public int getDay()
+    }*/
+    /*public int getDay()
     {
         return Day;
-    }
+    }*/
     public String getTimeOfDay(){ return TimeOfDay;}
     public int getexerciseNum()
     {
@@ -50,8 +52,8 @@ public class Exercise_properties
     {
         return Gifposition;
     }
-    public float getSpeed()
+/*    public float getSpeed()
     {
         return Speed;
-    }
+    }*/
 }

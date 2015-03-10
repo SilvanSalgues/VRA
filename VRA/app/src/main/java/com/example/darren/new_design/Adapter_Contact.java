@@ -1,3 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
+
 package com.example.darren.new_design;
 
 import android.content.Context;
@@ -51,7 +53,7 @@ class Adapter_Contact extends BaseAdapter{
         final Type_Contact Contact = data.get(position);
         icon.setBackgroundResource(R.drawable.profile);
         contact_name.setText(Contact.getName());
-        phone_number.setText(Contact.getPhone());
+        phone_number.setText(Contact.getNumberOfSMS());
 
         return row;
     }

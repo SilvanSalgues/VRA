@@ -1,15 +1,14 @@
-// Copyright 2014 Google Inc. All Rights Reserved.
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
 
 package com.example.darren.new_design;
 
 /**
- * Static container class for holding a reference to your YouTube Developer Key.
+ * Static container class for holding a reference to the google API Key for Android applications.
  */
 public class DeveloperKey {
 
   /**
-   * Please replace this with a valid API key which is enabled for the
-   * YouTube Data API v3 service. Go to the
+   * Go to the
    * <a href="https://console.developers.google.com/">Google Developers Console</a>
    * to register a new developer key.
    */

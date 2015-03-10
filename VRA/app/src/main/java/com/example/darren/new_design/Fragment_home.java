@@ -1,3 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
+
 package com.example.darren.new_design;
 
 import android.app.Dialog;
@@ -30,9 +32,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 public class Fragment_home extends Fragment{
 
     ImageButton profile;
-    TextView exercise_complete_number, last_active_time, Name, Pixels;
+    TextView exercise_complete_number, last_active_time, Name, useremail, Pixels;
     Button edit_profile;
-    //PopupWindow popWindow;
 
     String email = "email@admin.com";
 
@@ -41,6 +42,8 @@ public class Fragment_home extends Fragment{
 
     NumberPicker numberPicker;
     EditText update_name,update_country, update_password, update_verify_pass;
+
+    float[] logMAR = {-0.3f, -0.2f, -0.1f, 0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f};
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View InputFragmentView = inflater.inflate(R.layout.home, container, false);
@@ -59,12 +62,14 @@ public class Fragment_home extends Fragment{
         exercise_complete_number = (TextView) InputFragmentView.findViewById(R.id.exercise_complete_number);
         last_active_time = (TextView) InputFragmentView.findViewById(R.id.last_active_time);
         Name = (TextView) InputFragmentView.findViewById(R.id.Name);
+        useremail = (TextView) InputFragmentView.findViewById(R.id.useremail);
 
         db.open();
 
         curUser = db.getUser(email);
         curUser.moveToFirst();
         Name.setText(curUser.getString(0));
+        useremail.setText(email);
         exercise_complete_number.setText("" + db.getExerciseCount(email));
 
         if (curUser.getString(3) != null)
@@ -92,7 +97,7 @@ public class Fragment_home extends Fragment{
         series.setThickness(8);
         series.setDrawBackground(true);
         series.setBackgroundColor(Color.argb(200, 236, 239, 244));
-        series.setDrawDataPoints(true);
+        //series.setDrawDataPoints(true);
 
         graph.getGridLabelRenderer().setVerticalLabelsAlign(Paint.Align.CENTER);
         graph.addSeries(series);
@@ -122,12 +127,6 @@ public class Fragment_home extends Fragment{
             @Override
             public void onClick(View view) {
                 open_Dialog();
-                //open_Popup();
-                //popWindow.setFocusable(true); // Shows keyboard on edittext box
-                //popupWindow.update();
-
-//                Toast toast = Toast.makeText(getActivity(), "show dialog", Toast.LENGTH_SHORT);
-//                toast.show();
             }
         });
 
@@ -170,37 +169,6 @@ public class Fragment_home extends Fragment{
         profile.setImageBitmap(getRoundedShape(bp));
     }
 
-    /*void open_Popup(){
-
-        LayoutInflater popSwitchView = (LayoutInflater) getActivity().getBaseContext().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-        View popupview = popSwitchView.inflate(R.layout.update_user, null);
-        popWindow= new PopupWindow(popupview);
-        popWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        popWindow.setHeight(WindowManager.LayoutParams.MATCH_PARENT);
-
-
-        //InstructBtn = (Button) popupview.findViewById(R.id.instructions_close);
-        //InstructBtn.setOnClickListener(new View.OnClickListener() {     // If the button at the bottom of the popup is pressed
-        //    @Override
-        //    public void onClick(View v) {
-        //        popupWindow.dismiss();                  // Closes popup window
-        //        mycounter.Start();
-        //    }
-        //});
-
-
-
-        //Drawable d = getResources().getDrawable(R.drawable.popbg);
-        //popWindow.setBackgroundDrawable(d);
-
-        popupview.post(new Runnable() {                 // Waits until the activity window has been displayed before loading the popup windows
-            public void run() {
-                popWindow.showAtLocation(getActivity().findViewById(R.id.home_layout), Gravity.CENTER, 0, 0);
-                popWindow.setOutsideTouchable(false);
-            }
-        });
-    }*/
-
     public void open_Dialog() {
         // custom dialog
         final Dialog dialog = new Dialog(getActivity());
@@ -208,7 +176,11 @@ public class Fragment_home extends Fragment{
         dialog.setContentView(R.layout.update_user);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
-        float[] logMAR = {-0.3f, -0.2f, -0.1f, 0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f};
+        db.open();
+
+        curUser = db.getUser(email);
+        curUser.moveToFirst();
+
         update_name = (EditText) dialog.findViewById(R.id.update_name);
         update_country = (EditText) dialog.findViewById(R.id.update_country);
         update_password = (EditText) dialog.findViewById(R.id.update_password);
@@ -219,29 +191,45 @@ public class Fragment_home extends Fragment{
         numberPicker.setMaxValue(9);
         numberPicker.setMinValue(1);
 
-        numberPicker.setValue(curUser.getInt(7));
-        Pixels.setText(logMAR[curUser.getInt(7)] + " LogMAR");
+        numberPicker.setValue(db.getpointsize(email));
+        Pixels.setText(logMAR[db.getpointsize(email)] + " LogMAR");
+
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                Pixels.setText(logMAR[newVal - 1] + " LogMAR");
+            }
+        });
 
         update_name.setText(curUser.getString(0));
         update_country.setText(curUser.getString(5));
         update_password.setText(curUser.getString(2));
+        update_verify_pass.setText(curUser.getString(2));
 
-        //dialog.setTitle("Title...");
-
-        // set the custom dialog components - text, image and button
-        //TextView text = (TextView) dialog.findViewById(R.id.text);
-        //text.setText("Android custom dialog example!");
-        //ImageView image = (ImageView) dialog.findViewById(R.id.image);
-        //image.setImageResource(R.drawable.ic_launcher);
-
-        //Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        Button SaveBtn = (Button) dialog.findViewById(R.id.SaveBtn);
         // if button is clicked, close the custom dialog
-        //dialogButton.setOnClickListener(new OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        dialog.dismiss();
-        //    }
-        //});
+        SaveBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if( update_name.getText().toString().length() == 0 ) {
+                    update_name.setError("Username is required!");
+                }
+                else if ( update_password.getText().toString().length() == 0 ){
+                    update_password.setError( "password is required!" );
+                }
+                else if (!update_verify_pass.getText().toString().equals( update_password.getText().toString()) ){
+                    update_verify_pass.setError( "verify password does not match!" );
+                }
+                else {
+
+                    db.updateUSER(email, update_name.getText().toString(), update_password.getText().toString(), update_country.getText().toString(), numberPicker.getValue());
+                    db.close();
+                    Name.setText(update_name.getText().toString());
+                    dialog.dismiss();
+                }
+            }
+        });
         dialog.show();
     }
 }

@@ -1,3 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
+
 package com.example.darren.new_design;
 
 /**
@@ -71,6 +73,6 @@ public class Type_SMS {
 	@Override
 	public boolean equals(Object o)
     {
-        return o instanceof Type_SMS && ((Type_SMS) o).mId == mId;
+        return o instanceof Type_SMS && ((Type_SMS) o).mId.equals(mId);
 	}
 }

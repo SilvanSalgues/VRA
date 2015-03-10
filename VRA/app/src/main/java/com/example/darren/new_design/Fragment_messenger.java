@@ -1,5 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
 package com.example.darren.new_design;
-
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Fragment_messenger extends Fragment {//} implements ListView.OnItemClickListener{
+public class Fragment_messenger extends Fragment {
 
     ArrayList<Type_Contact> fetch = new ArrayList<>();
 
@@ -152,11 +152,11 @@ public class Fragment_messenger extends Fragment {//} implements ListView.OnItem
                 }
             });
 
-
+            NotificationsManager.handleNotifications(getActivity(), SENDER_ID, Notification_Handler.class);
             // Load the items from the Mobile Service
             refreshItemsFromTable();
 
-            NotificationsManager.handleNotifications(getActivity(), SENDER_ID, Notification_Handler.class);
+
 
         }
         catch (MalformedURLException e) {

@@ -1,3 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
+
 package com.example.darren.new_design;
 
 public class Bluetooth_Converter {
@@ -98,7 +100,7 @@ public class Bluetooth_Converter {
         return ((data[9] << 8) + (data[10] & 0xFF)) * accelRes;
     }
 
-    public static double AccelXDeg(byte data[]){
+    /*public static double AccelXDeg(byte data[]){
         double angleDegX = Math.toDegrees(Math.atan2(AccelY(data), AccelZ(data)));
         // if (angleDegX > 180)    // Change the rotation value of the Accelerometer to +/- 180
         //     angleDegX -= 360;
@@ -118,7 +120,7 @@ public class Bluetooth_Converter {
         //    angleDegZ -= 360;
 
         return angleDegZ;
-    }
+    }*/
 
 
     public static float GyroX(byte data[]){

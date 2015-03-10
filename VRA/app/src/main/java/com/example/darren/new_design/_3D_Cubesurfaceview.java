@@ -1,3 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
+
 package com.example.darren.new_design;
 
 import android.content.Context;
@@ -26,11 +28,11 @@ public class _3D_Cubesurfaceview extends GLSurfaceView {
 		{
 			renderer.xAngle += (touchedX - event.getX())/2f;
 			renderer.yAngle += (touchedY - event.getY())/2f;
-			
+
 			touchedX = event.getX();
 			touchedY = event.getY();
 		}
 		return true;
-		
+
 	}
 }

@@ -1,3 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
+
 package com.example.darren.new_design;
 
 import android.content.ContentValues;
@@ -97,7 +99,7 @@ public class Database_Manager {
             db.execSQL(DATA3_CREATE);
 
             //default inserts
-            db.execSQL("INSERT INTO " + DATABASE_TABLE1 + " (name, email, pass, exercise_count, pointsize, loggedIn) Values ('admin', 'email@admin.com', 'admin', 0, 0, 1)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE1 + " (name, email, pass, exercise_count, pointsize, loggedIn) Values ('admin', 'email@admin.com', 'admin', 0, 1, 1)");
 
             Exercise_descriptions(db);
             Exercise_List(db);
@@ -324,11 +326,13 @@ public class Database_Manager {
             {
                 check = true;
             }
+            mCursor.close();
         }
         else
         {
             check = false;
         }
+
         return check;
     }
     public int getExerciseCount(String email) throws SQLException{
@@ -350,6 +354,29 @@ public class Database_Manager {
 
             count = cur.getInt(0);
             //Log.d("Count ", "" + cur.getInt(0));
+            cur.close();
+        }
+
+        return count;
+    }
+    public int getpointsize(String email) throws SQLException{
+        int count  = 0;
+        Cursor cur =
+                db.query(true, DATABASE_TABLE1, new String[] {
+                                KEY_POINTSIZE
+                        },
+                        KEY_EMAIL + "='" + email + "'",
+                        null,
+                        null,
+                        null,
+                        null,
+                        null);
+
+
+        if (cur != null) {
+            cur.moveToFirst();
+
+            count = cur.getInt(0);
             cur.close();
         }
 
@@ -404,7 +431,6 @@ public class Database_Manager {
                 null,
                 null);
     }
-
     public Cursor getCompleteExerciseList(){
         return db.query(DATABASE_TABLE3, new String[] {
                         KEY_LID,
@@ -429,11 +455,20 @@ public class Database_Manager {
         args.put(KEY_EXCOUNT, ExerciseCount);
         db.update(DATABASE_TABLE1, args, KEY_EMAIL + "='" + email + "'", null) ;
     }
-
     public void updateLastActive(String email, String LastActive){
         Log.d("Update Count", "" + LastActive);
         ContentValues args = new ContentValues();
         args.put(KEY_LASTACTIVE, LastActive);
         db.update(DATABASE_TABLE1, args, KEY_EMAIL + "='" + email + "'", null) ;
+    }
+    public void updateUSER(String email, String name, String password, String country, int pointsize){
+        ContentValues args = new ContentValues();
+        Log.d("Database", "User Updated" );
+        args.put(KEY_NAME, name);
+        args.put(KEY_PASSWORD, password);
+        args.put(KEY_COUNRTY, country);
+        args.put(KEY_POINTSIZE, pointsize);
+                db.update(DATABASE_TABLE1, args, KEY_EMAIL + "='" + email + "'", null);
+        Log.d("Pointsize","" + pointsize);
     }
 }

@@ -1,3 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
+
 package com.example.darren.new_design;
 
 import android.content.Context;
@@ -19,7 +21,7 @@ public class ExpandableListDataPump {
         db = new Database_Manager(context);
     }
 
-    public static ArrayList<ExerciseList>  getData(int day) {
+    public ArrayList<ExerciseList>  getData(int day) {
 
         exerc = new ArrayList<>();    // Holds a list of exercises
         exdesc = new ArrayList<>();    // Holds a list of exercises descriptions

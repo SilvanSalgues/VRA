@@ -1,3 +1,5 @@
+// Copyright © 2015 Darren McNeely. All Rights Reserved.
+
 package com.example.darren.new_design;
 
 import android.app.Fragment;
@@ -27,15 +29,19 @@ public abstract class Exercise_Type  extends Fragment {
     public Exercise_Type(){}
     GifImageView GIFimage;
     GifDrawable gifFromResource;
+    Database_Manager db;
 
+    String email = "email@admin.com";
     public Exercise_Type newInstance(int GIF){ return null; }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         GetLayout();
         InputFragmentView = inflater.inflate(layout_id, container, false);
-
-        starting_size = (int) (pointsize[1] * pixel_density());      // Starting size is the smallest the focus point can be and the first position in the array
+        db = new Database_Manager(getActivity());
+        db.open();
+        starting_size = (int) (pointsize[db.getpointsize(email) -1] * pixel_density());      // Starting size is the smallest the focus point can be and the first position in the array
+        db.close();
 
         GIFimage = (GifImageView) InputFragmentView.findViewById(R.id.GIFview);
         //GIFimage.setBackgroundColor(Color.BLUE);
