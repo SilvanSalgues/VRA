@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:id="@+id/headerExerc"
-        android:background="#ff1f5c68">
+        android:background="@color/Dark_Green">
 
         <ImageView
             android:layout_width="35dp"
@@ -29,7 +29,7 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/btn_info_intro"
             android:layout_marginRight="20dp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:singleLine="false" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="Revise Progress | Training Exercises Explained "
             android:id="@+id/textView"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:layout_marginLeft="20dp"
             android:textSize="20sp"
             android:layout_centerVertical="true"
@@ -50,7 +50,10 @@
         android:id="@+id/horizontalScrollView"
         android:layout_below="@+id/headerExerc"
         android:layout_above="@+id/footer"
-        android:layout_marginRight="27dp">
+        android:fadingEdgeLength="40dp"
+        android:requiresFadingEdge="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -67,7 +70,7 @@
         android:id="@+id/footer"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="#fff7f7f7">
+        android:background="@color/Light_Grey">
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,7 +79,7 @@
             android:id="@+id/WeekNo"
             android:textSize="30sp"
             android:textIsSelectable="true"
-            android:textColor="#ff1f5c68"
+            android:textColor="@color/Dark_Green"
             android:autoText="false"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"

@@ -4,13 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#fff7f7f7">
+    android:background="@color/Light_Grey">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:id="@+id/headerExerc"
-        android:background="#ff1f5c68">
+        android:background="@color/Dark_Green">
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@android:color/white"
+        android:background="@color/white"
         android:layout_below="@+id/headerExerc"
         android:id="@+id/body"
         android:layout_above="@+id/footer">
@@ -58,7 +58,7 @@
             android:id="@+id/Pause_btn"
             android:textColor="@android:color/white"
             android:singleLine="true"
-            android:background="#ff589310"
+            android:background="@color/Lime_Green"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_alignParentTop="true"
@@ -70,7 +70,7 @@
             android:text="STOP"
             android:id="@+id/Stop_btn"
             android:textColor="@android:color/white"
-            android:background="#ff589310"
+            android:background="@color/Lime_Green"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_alignParentTop="true"
@@ -84,11 +84,12 @@
         android:text="Remaining 0:00"
         android:id="@+id/timer_txt"
         android:textSize="24sp"
-        android:textColor="#ff1f5c68"
+        android:textColor="@color/Dark_Green"
         android:layout_marginRight="30dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="20dp"
+        android:textIsSelectable="true"/>
 
 
 </RelativeLayout>

@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#fff7f7f7">
+        android:background="@color/Light_Grey">
 
         <TextView
             android:id="@+id/expandedListItem"

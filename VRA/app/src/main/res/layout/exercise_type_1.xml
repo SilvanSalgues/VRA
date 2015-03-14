@@ -17,7 +17,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:padding="15dp"
-        android:background="@android:color/white">
+        android:background="@color/white">
 
         <ImageView
             android:layout_width="wrap_content"

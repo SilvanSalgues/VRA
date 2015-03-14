@@ -11,7 +11,7 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:id="@+id/Exercise_home"
-            android:background="#ff1f5c68" >
+            android:background="@color/Dark_Green" >
 
             <ImageView
                 android:layout_width="35dp"
@@ -30,7 +30,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toStartOf="@+id/info_home"
                 android:layout_marginRight="20dp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/white"
                 android:singleLine="false" />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="Home | Training Exercises Explained "
                 android:id="@+id/textView3"
-                android:textColor="@android:color/white"
+                android:textColor="@color/white"
                 android:layout_marginLeft="20dp"
                 android:textSize="20sp"
                 android:layout_centerVertical="true"
@@ -107,7 +107,8 @@
         android:id="@+id/footer"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="#fff7f7f7">
+        android:background="@color/Light_Grey">
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -124,7 +125,7 @@
             android:layout_height="wrap_content"
             android:text="EXERCISES COMPLETE "
             android:id="@+id/exercise_complete"
-            android:textColor="#ff1f5c68"
+            android:textColor="@color/Dark_Green"
             android:textSize="20sp"
             android:textIsSelectable="false"
             android:textStyle="bold"
@@ -137,7 +138,7 @@
             android:layout_height="wrap_content"
             android:text="8"
             android:id="@+id/exercise_complete_number"
-            android:textColor="#ff1f5c68"
+            android:textColor="@color/Dark_Green"
             android:textSize="20sp"
             android:textIsSelectable="false"
             android:textStyle="bold"
@@ -149,7 +150,7 @@
             android:layout_height="wrap_content"
             android:text="LAST ACTIVE"
             android:id="@+id/last_active"
-            android:textColor="#ff1f5c68"
+            android:textColor="@color/Dark_Green"
             android:textSize="20sp"
             android:singleLine="true"
             android:textIsSelectable="false"
@@ -162,7 +163,7 @@
             android:layout_height="wrap_content"
             android:text="10:39"
             android:id="@+id/last_active_time"
-            android:textColor="#ff1f5c68"
+            android:textColor="@color/Dark_Green"
             android:textSize="20sp"
             android:singleLine="true"
             android:textIsSelectable="false"
@@ -176,7 +177,7 @@
             android:layout_height="wrap_content"
             android:text="Darren Mc Neely"
             android:id="@+id/Name"
-            android:textColor="#ff1f5c68"
+            android:textColor="@color/Dark_Green"
             android:textSize="28sp"
             android:textIsSelectable="false"
             android:textStyle="bold"
@@ -185,21 +186,21 @@
             android:layout_toEndOf="@+id/profile"
             android:layout_marginTop="5dp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/camera_icon"
-            android:background="@android:drawable/ic_menu_camera"
+            android:background="@drawable/camera_btn"
             android:layout_alignBottom="@+id/profile"
-            android:layout_toStartOf="@+id/Name" />
+            android:layout_alignEnd="@+id/profile"/>
 
         <Button
             android:layout_width="115dp"
             android:layout_height="40dp"
             android:id="@+id/edit_profile"
-            android:background="#ff589310"
+            android:background="@color/Lime_Green"
             android:text="Edit Profile"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:gravity="center"
             android:textStyle="bold"
             android:layout_below="@+id/useremail"
@@ -212,7 +213,7 @@
             android:text="email"
             android:id="@+id/useremail"
             android:textSize="18sp"
-            android:textColor="#ff585858"
+            android:textColor="@color/Dark_Grey"
             android:layout_alignBottom="@+id/exercise_complete"
             android:layout_alignStart="@+id/Name"/>
     </RelativeLayout>

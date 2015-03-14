@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.darren.new_design" >
+    package="com.example.darren.VRA" >
 
     <!-- Bluetooth Low Energy -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -15,7 +15,7 @@
 
     <!-- Azure GCM Notifications -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <permission android:name="com.example.darren.new_design.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <permission android:name="com.example.darren.VRA.permission.C2D_MESSAGE" android:protectionLevel="signature" />
     <uses-permission android:name="com.example.darren.new_design.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -37,7 +37,12 @@
         </receiver>
 
         <activity
-            android:name=".Activity_container"
+            android:name=".Main.Activity_container"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".Login.Activity_login"
             android:hardwareAccelerated="true"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -45,16 +50,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity_login"
-            android:hardwareAccelerated="true"
-            android:screenOrientation="landscape">
-        </activity>
 
         <!-- Required for applications which use Google Play Services. -->
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 
-        <service android:name=".Bluetooth_RFduinoService" />
+        <service android:name=".Sensor.Bluetooth_RFduinoService" />
     </application>
 
 </manifest>

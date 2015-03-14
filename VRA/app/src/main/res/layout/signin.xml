@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textSize="25sp"
-        android:textColor="#ff1f5c68"
+        android:textColor="@color/Dark_Green"
         android:textStyle="bold" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:text="Sign Up"
         android:id="@+id/in_signup"
         android:textSize="18sp"
-        android:textColor="#ff589310"
+        android:textColor="@color/Lime_Green"
         android:textIsSelectable="true"
         android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/in_Login"
@@ -37,14 +37,14 @@
         android:layout_below="@id/in_signin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="#ff1f5c68"
+        android:background="@color/Dark_Green"
         android:hint="USERNAME"
         android:textColorHint="#FFFFFF"
         android:paddingLeft="10dp"
         android:textStyle="bold"
         android:textSize="15sp"
         android:textIsSelectable="false"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/white" />
 
     <EditText
         android:layout_width="200dp"
@@ -54,14 +54,14 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/in_name"
         android:layout_alignStart="@+id/in_name"
-        android:background="#ff1f5c68"
+        android:background="@color/Dark_Green"
         android:hint="PASSWORD"
         android:textColorHint="#FFFFFF"
         android:paddingLeft="10dp"
         android:textStyle="bold"
         android:textSize="15sp"
         android:textIsSelectable="false"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/white" />
 
     <Button
         android:layout_width="wrap_content"
@@ -72,8 +72,8 @@
         android:layout_alignEnd="@+id/in_pass"
         android:layout_marginTop="25dp"
         android:layout_alignStart="@+id/in_pass"
-        android:background="#ff589310"
-        android:textColor="@android:color/white"
+        android:background="@color/Lime_Green"
+        android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold" />
 

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff1f5c68">
+    android:background="@color/Dark_Green">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:textSize="30sp"
         android:textIsSelectable="true"
         android:paddingTop="10dp"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_marginLeft="10dp"
         android:layout_alignTop="@+id/logo"
@@ -46,7 +46,7 @@
         android:id="@+id/logo_text"
         android:layout_below="@+id/VRA"
         android:layout_alignStart="@+id/VRA"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:layout_alignEnd="@+id/content_login"
         android:textSize="15sp"
         android:textIsSelectable="true"
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:text="TERMS OF SERVICE"
         android:id="@+id/terms"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:text="PRIVACY POLICY"
         android:id="@+id/policy"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:layout_alignBottom="@+id/terms"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="20dp"

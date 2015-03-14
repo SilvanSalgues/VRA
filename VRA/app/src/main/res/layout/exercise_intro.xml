@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:id="@+id/headerExerc"
-        android:background="#ff1f5c68">
+        android:background="@color/Dark_Green">
 
         <ImageView
             android:layout_width="35dp"
@@ -30,7 +30,7 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/btn_info_intro"
             android:layout_marginRight="20dp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:singleLine="false" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="Exercise | Training Exercises Explained "
             android:id="@+id/textView"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:layout_marginLeft="20dp"
             android:textSize="20sp"
             android:layout_centerVertical="true"
@@ -54,11 +54,6 @@
         android:layout_above="@+id/footer"
         android:layout_below="@+id/headerExerc">
 
-        <VideoView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/videoView"/>
-
         <FrameLayout
         android:id="@+id/youtube_fragment"
         android:layout_width="match_parent"
@@ -72,7 +67,7 @@
         android:id="@+id/footer"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="false"
-        android:background="#fff7f7f7">
+        android:background="@color/Light_Grey">
 
         <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
             android:layout_width="fill_parent"
@@ -98,7 +93,7 @@
             android:id="@+id/Duration"
             android:textAlignment="center"
             android:textSize="19sp"
-            android:textColor="#ff1f5c68"
+            android:textColor="@color/Dark_Green"
             android:textIsSelectable="false"
             android:textStyle="bold"
             android:typeface="normal"
@@ -112,7 +107,7 @@
             android:text="Head Rotation "
             android:id="@+id/exercise_name"
             android:textSize="19sp"
-            android:textColor="#ff1f5c68"
+            android:textColor="@color/Dark_Green"
             android:textIsSelectable="true"
             android:textStyle="bold"
             android:layout_alignParentTop="true"
@@ -124,8 +119,8 @@
             android:layout_height="46dp"
             android:text="START"
             android:id="@+id/start_exercise"
-            android:textColor="@android:color/white"
-            android:background="#ff589310"
+            android:textColor="@color/white"
+            android:background="@color/Lime_Green"
             android:gravity="center"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
@@ -142,7 +137,7 @@
             android:id="@+id/day"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:textColor="#ff1f5c68"
+            android:textColor="@color/Dark_Green"
             android:textIsSelectable="false"
             android:textStyle="bold"
             android:typeface="sans"
