@@ -50,12 +50,12 @@ class Adapter_Contact extends BaseAdapter{
 
         ImageView icon = (ImageView) row.findViewById(R.id.icon);
         TextView contact_name = (TextView)row.findViewById(R.id.contact_name);
-        TextView phone_number = (TextView)row.findViewById(R.id.new_messages);
+        TextView NumberOfSMS = (TextView)row.findViewById(R.id.NumberOfSMS);
 
         final Type_Contact Contact = data.get(position);
-        icon.setBackgroundResource(R.drawable.profile);
+        icon.setBackgroundResource(Contact.getIcon());
         contact_name.setText(Contact.getName());
-        phone_number.setText(Contact.getNumberOfSMS());
+        NumberOfSMS.setText(Contact.getNumberOfSMS());
 
         return row;
     }

@@ -32,6 +32,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ public class Fragment_home extends Fragment{
     TextView exercise_complete_number, last_active_time, Name, useremail, Pixels;
     Button camera_icon, edit_profile;
     ImageButton profile;
+    ImageView info_home;
 
     String email = "email@admin.com";
 
@@ -67,6 +69,8 @@ public class Fragment_home extends Fragment{
     EditText update_name,update_country, update_password, update_verify_pass;
 
     float[] logMAR = {-0.3f, -0.2f, -0.1f, 0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f};
+
+    AlertDialog diaBox;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View InputFragmentView = inflater.inflate(R.layout.home, container, false);
@@ -100,7 +104,7 @@ public class Fragment_home extends Fragment{
         {
             last_active_time.setText(curUser.getString(3));
         }
-        else last_active_time.setText("No Exercise Recorded");
+        else last_active_time.setText("No Exercise Record");
 
         db.close();
 
@@ -158,6 +162,15 @@ public class Fragment_home extends Fragment{
             @Override
             public void onClick(View view) {
                 open_Dialog();
+            }
+        });
+
+        info_home = (ImageView) InputFragmentView.findViewById(R.id.info_home);
+        info_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                diaBox = CreateDialog("Extra Information");
+                diaBox.show();
             }
         });
 
@@ -420,5 +433,13 @@ public class Fragment_home extends Fragment{
             }
         });
         dialog.show();
+    }
+
+    private AlertDialog CreateDialog( String message ){
+        return new AlertDialog.Builder(getActivity())
+                //set message, title
+                .setTitle("Exercise Details")
+                .setMessage(message)
+                .create();
     }
 }

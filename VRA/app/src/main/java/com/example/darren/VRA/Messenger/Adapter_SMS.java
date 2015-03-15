@@ -4,7 +4,6 @@ package com.example.darren.VRA.Messenger;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,12 +54,12 @@ public class Adapter_SMS extends ArrayAdapter<Type_SMS> {
 
         if(user.equals(Notification_Handler.getHandle()))
         {
-            smsText.setText("S: " + currentItem.getText());
+            //smsText.setText("S: " + currentItem.getText());
         }
         else
         {
-            smsText.setText("R: " + currentItem.getText());
-            smsText.setTextColor(Color.parseColor("#ff8ae3f6"));
+            //smsText.setText("R: " + currentItem.getText());
+            smsText.setTextColor(mContext.getResources().getColor(R.color.Light_Blue));
         }
         return row;
     }

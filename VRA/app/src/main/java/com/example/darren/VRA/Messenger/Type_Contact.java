@@ -3,27 +3,22 @@
 package com.example.darren.VRA.Messenger;
 
 public class Type_Contact {
-    private String contactName;
-    private String NumberOfSMS;
+    String contact_name;
+    String NumberOfSMS;
+    int icon;
 
-    public Type_Contact(String st1, String st2){
-        contactName = st1;
-        NumberOfSMS = st2;
+    public Type_Contact(String contact_name, String NumberOfSMS, int icon){
+        this.contact_name = contact_name;
+        this.NumberOfSMS = NumberOfSMS;
+        this.icon = icon;
     }
 
-    public String getName(){
-        return contactName;
-    }
-
+    public String getName(){return contact_name;}
     public String getNumberOfSMS(){
         return NumberOfSMS;
     }
-
-    public void setName(String st1){
-        contactName = st1;
-    }
-
-    public void setNumberOfSMS(String st2){
-        NumberOfSMS = st2;
+    public int getIcon(){return icon;}
+    public void setName(String contact_name){
+        this.contact_name = contact_name;
     }
 }

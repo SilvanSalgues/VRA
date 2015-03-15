@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.darren.VRA.R;
 import com.google.common.util.concurrent.FutureCallback;
@@ -35,7 +34,6 @@ import com.microsoft.windowsazure.notifications.NotificationsManager;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Fragment_messenger extends Fragment {
 
@@ -61,7 +59,7 @@ public class Fragment_messenger extends Fragment {
     ListView SMS_listview;
 
     String[] contact_name;
-
+    int[] contact_icon;
     ImageView icon_person;
 
 
@@ -73,29 +71,33 @@ public class Fragment_messenger extends Fragment {
                 "Larry Ellison",
                 "Christy Walton",
                 "Jim Walton",
-                "Charles Koch",
+                "Charles Koch"
         };
 
-        Random r = new Random();
-        for (String aContact_name : contact_name) {
+        contact_icon = new int[]{
+                R.drawable.bill_gates,
+                R.drawable.warren_buffet,
+                R.drawable.default_profile,
+                R.drawable.default_profile,
+                R.drawable.default_profile,
+                R.drawable.default_profile
+        };
 
-            int rand = r.nextInt(10);
-
-            if (rand == 0) {
-                fetch.add(new Type_Contact(aContact_name, "No new messages"));
-            } else if (rand == 1) {
-                fetch.add(new Type_Contact(aContact_name, rand + " New message"));
-            } else {
-                fetch.add(new Type_Contact(aContact_name, rand + " New messages"));
-            }
+        // Setting up a number of contacts
+        for (int contact = 0; contact < contact_name.length; contact++){
+            fetch.add(new Type_Contact(contact_name[contact], "No messages", contact_icon[contact]));
         }
 
+        // The contacts name above the SMS messages container
         Person = (TextView) InputFragmentView.findViewById(R.id.Person);
+
+        // The icon of the contact above the SMS messages container
         icon_person = (ImageView) InputFragmentView.findViewById(R.id.icon_person);
 
         if (contact_name.length > 0)
         {
             Person.setText(contact_name[0]);
+            icon_person.setBackgroundResource(contact_icon[0]);
         }
 
         adapter_contact = new Adapter_Contact(getActivity(), fetch);
@@ -107,7 +109,7 @@ public class Fragment_messenger extends Fragment {
 
                 //here you can use the position to determine what persons messages to display
                 Person.setText(fetch.get(position).getName());
-                icon_person.setBackgroundResource(R.drawable.profile);
+                icon_person.setBackgroundResource(fetch.get(position).getIcon());
             }
         });
 
@@ -143,21 +145,19 @@ public class Fragment_messenger extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     //here you can use the position to determine what message has been pressed
-                    //Toast.makeText(getActivity(),"Position " +  position,Toast.LENGTH_SHORT).show();
-
-                    Type_SMS currentItem = (Type_SMS) SMS_listview.getItemAtPosition(position);
-                    Toast.makeText(getActivity(), "Item " + currentItem, Toast.LENGTH_SHORT).show();
+                   Type_SMS currentItem = (Type_SMS) SMS_listview.getItemAtPosition(position);
+                   // Toast.makeText(getActivity(), "Item " + currentItem, Toast.LENGTH_SHORT).show();
 
                     AlertDialog diaBox = AskOption(currentItem);
                     diaBox.show();
                 }
             });
 
+
+
             NotificationsManager.handleNotifications(getActivity(), SENDER_ID, Notification_Handler.class);
             // Load the items from the Mobile Service
             refreshItemsFromTable();
-
-
 
         }
         catch (MalformedURLException e) {
@@ -170,7 +170,7 @@ public class Fragment_messenger extends Fragment {
         return InputFragmentView;
     }
 
-    public void checkItem(final Type_SMS item) {
+    public void removeItem(final Type_SMS item) {
         if (AzureClient == null) {
             return;
         }
@@ -187,9 +187,10 @@ public class Fragment_messenger extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //if (entity.isComplete()) {
-                            adapter_sms.remove(entity);
-                            //}
+                            if (entity.isComplete()) {
+                                adapter_sms.remove(entity);
+                                updateSMScount(0);
+                            }
                         }
                     });
                 } catch (Exception exception){
@@ -229,6 +230,7 @@ public class Fragment_messenger extends Fragment {
                             public void run() {
                                 if (!entity.isComplete()) {
                                     adapter_sms.add(entity);
+                                    updateSMScount(0);
                                 }
                             }
                         });
@@ -266,6 +268,8 @@ public class Fragment_messenger extends Fragment {
                             for (Type_SMS item : results) {
                                 adapter_sms.add(item);
                             }
+
+                            updateSMScount(0);
                         }
                     });
                 } catch (Exception exception){
@@ -320,6 +324,30 @@ public class Fragment_messenger extends Fragment {
         }
     }
 
+    // Update SMS count on contact list
+    private void updateSMScount(int index){
+        View v = Contact_listview.getChildAt(index -
+                Contact_listview.getFirstVisiblePosition());
+
+        if (v == null) {
+            return;
+        }
+        TextView NumberOfSMS = (TextView) v.findViewById(R.id.NumberOfSMS);
+        int countSMS = adapter_sms.getCount();
+        String countToString;
+        if (countSMS == 0) {
+            countToString = "No Messages";
+        }
+        else if (countSMS == 1) {
+            countToString ="1 Message";
+        }
+        else{
+            countToString = countSMS + " Messages";
+        }
+        NumberOfSMS.setText(countToString);
+        fetch.set(0, new Type_Contact(contact_name[index], countToString, contact_icon[index]));
+    }
+
     // Method for displaying a Dialog when deleting message
     private AlertDialog AskOption( final Type_SMS currentItem ){
         return new AlertDialog.Builder(getActivity())
@@ -331,7 +359,7 @@ public class Fragment_messenger extends Fragment {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //your deleting code
-                        checkItem(currentItem);
+                        removeItem(currentItem);
                         dialog.dismiss();
                     }
 
