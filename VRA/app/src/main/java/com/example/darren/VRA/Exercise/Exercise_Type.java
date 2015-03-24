@@ -20,21 +20,25 @@ import pl.droidsonroids.gif.GifImageView;
 
 public abstract class Exercise_Type  extends Fragment {
 
-    int GIF;
+
 
     // These two arrays hold information about the different pixel sizes the focus point can be and the log value of these sizes
     float[] pointsize = {9.9969913803f, 12.5854665423f, 15.8441637534f, 19.9466205854f, 25.1113079486f, 31.6132645265f, 39.7987437114f, 50.1036531064f, 63.0767686849f};
     //float[] logMAR = {-0.3f, -0.2f, -0.1f, 0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f};
+
     public int starting_size;
     public int layout_id;
 
+    int GIF;
     View InputFragmentView;
-    public Exercise_Type(){}
     GifImageView GIFimage;
     GifDrawable gifFromResource;
     Database_Manager db;
 
     String email = "email@admin.com";
+
+    //public Exercise_Type(){}
+
     public Exercise_Type newInstance(int GIF){ return null; }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

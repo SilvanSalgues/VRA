@@ -11,7 +11,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.darren.VRA.Exercise.ExerciseList;
 import com.example.darren.VRA.R;
 
 import java.util.ArrayList;
@@ -40,17 +39,26 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int listPosition, final int expandedListPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int listPosition, final int expandedListPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final String expandedListText = (String) getChild(listPosition, expandedListPosition);
+
+        final int expandListComplete = expandableListDetail.get(listPosition).getExComplete().get(expandedListPosition);
+
         if (convertView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) this.context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.exercise_list_item, null);
         }
-        TextView expandedListTextView = (TextView) convertView
-                .findViewById(R.id.expandedListItem);
+
+        TextView expandedListTextView = (TextView) convertView.findViewById(R.id.expandedListItem);
         expandedListTextView.setText(expandedListText);
+
+        ImageView tick = (ImageView) convertView.findViewById(R.id.tick);
+
+        if(expandListComplete == 1){
+            tick.setBackgroundResource(R.drawable.icon_green_tick);
+        }
+            else
+        tick.setBackgroundResource(R.drawable.icon_yellow_blank);
         return convertView;
     }
 

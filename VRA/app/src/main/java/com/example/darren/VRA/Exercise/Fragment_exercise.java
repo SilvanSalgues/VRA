@@ -96,6 +96,11 @@ public class Fragment_exercise extends Fragment {
             public void onClick(View v) {
                 if (TimerActive) {
                     Pause_btn.setText("CONTINUE");
+
+                    db.open();
+                    db.updatePausedCount(exerc.get(exercise).Day, exerc.get(exercise).Week, exerc.get(exercise).TimeOfDay, exerc.get(exercise).exerciseNum);
+                    db.close();
+
                     countDownTimer.cancel();
                     TimerActive = false;
                 }
@@ -116,11 +121,14 @@ public class Fragment_exercise extends Fragment {
 
                 db.open();
                 if (exercise < exerc.size()) {
+                    db.CompleteEx(exerc.get(exercise).Day, exerc.get(exercise).Week, exerc.get(exercise).TimeOfDay, exerc.get(exercise).exerciseNum);
                     db.updateExerciseCount(email, ++exercise);
                 }
                 else{
                     db.updateExerciseCount(email, 0);
                 }
+
+
 
                 db.close();
 

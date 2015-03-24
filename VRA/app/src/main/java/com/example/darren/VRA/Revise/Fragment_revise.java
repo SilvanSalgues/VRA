@@ -17,7 +17,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.darren.VRA.Database.Database_Manager;
-import com.example.darren.VRA.Exercise.ExerciseList;
 import com.example.darren.VRA.R;
 
 import java.util.ArrayList;
@@ -41,7 +40,6 @@ public class Fragment_revise extends Fragment {
     Database_Manager db;
     AlertDialog diaBox;
     int ExerciseNum;
-
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View InputFragmentView = inflater.inflate(R.layout.revise, container, false);
@@ -114,7 +112,7 @@ public class Fragment_revise extends Fragment {
             expandableListTitle = new ArrayList<>();
 
             // Adding a day of exercises from the expandableListDataPump class. Takes a parameter of the day of the week
-            listAllExercises.add(expump.getData(i+1));
+            listAllExercises.add(expump.getData(i + 1));
 
 
             if (listAllExercises.get(i) != null){
@@ -127,7 +125,7 @@ public class Fragment_revise extends Fragment {
             inflated[i] = getActivity().getLayoutInflater().inflate(R.layout.exercise_day, null);
 
             day = (TextView)inflated[i].findViewById(R.id.day);
-            day.setText("Day " + (i+1));
+            day.setText("Day " + (i + 1));
             expandableListView = (ExpandableListView) inflated[i].findViewById(R.id.expandableListView);
             Layout.addView(inflated[i]);
 
@@ -161,13 +159,15 @@ public class Fragment_revise extends Fragment {
                     db.open();
 
                     ExerciseNum = db.getExerciseNum(day + 1, week, expandableListTitle.get(groupPosition), childPosition);
+                    int PauseCount = db.getPausedCount(day + 1, week, expandableListTitle.get(groupPosition), childPosition);
+
                     diaBox = CreateDialog(
                             "Day " + (day + 1) +
                                     "\n" + expandableListTitle.get(groupPosition) +
                                     "\n" + listAllExercises.get(day).get(groupPosition).getExList().get(childPosition) + "\n" +
                                     "\nExercise Description\n" + db.getExerciseDescription(ExerciseNum) + "\n" +
-                                    "\nPaused: No Record" +
-                                    "\nComplete: No Record");
+                                    "\nPaused: " + PauseCount + "\n" +
+                                    "\nComplete: " + listAllExercises.get(day).get(groupPosition).getExComplete().get(childPosition) + "\n");
                     db.close();
                     diaBox.show();
                     return false;
