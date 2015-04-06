@@ -3,6 +3,8 @@
 package com.example.darren.VRA.Sensor;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.darren.VRA.R;
+import com.example.darren.VRA._3D_Rendering._3D_object;
 
 import java.util.UUID;
 
@@ -57,6 +60,11 @@ public class Fragment_sensor extends Fragment implements BluetoothAdapter.LeScan
     ImageView arrow_s;
     ImageView arrow_se;
 
+    Fragment newFragment;
+
+    LowPassFilter filterYaw = new LowPassFilter(0.03f);
+    LowPassFilter filterPitch = new LowPassFilter(0.03f);
+    LowPassFilter filterRoll = new LowPassFilter(0.03f);
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -66,6 +74,15 @@ public class Fragment_sensor extends Fragment implements BluetoothAdapter.LeScan
         //the old static bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         BluetoothManager manager = (BluetoothManager) getActivity().getSystemService(Context.BLUETOOTH_SERVICE);
         bluetoothAdapter = manager.getAdapter();
+
+        // 3d Cube
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        if (savedInstanceState == null) {
+            newFragment = new _3D_object();
+                       ft.replace(R.id.container_3D, newFragment);
+                       ft.commit();
+                   }
 
         //Check if the device has bluetooth LE capabilities and enable bluetooth if it has not been already.
         enable_bluetooth();
@@ -234,9 +251,13 @@ public class Fragment_sensor extends Fragment implements BluetoothAdapter.LeScan
         packetnumber.setText("Packet number (1 bytes): " + Bluetooth_Converter.PactetNum(data));
         batteryVoltage.setText("Battery Voltage (1 bytes): " + Bluetooth_Converter.battery_voltage(data));
 
-        accelData.setText("accelData (6 bytes): "   + "\nX: " + Bluetooth_Converter.AccelX(data)//AccelXDeg(data)//
-                + "\nY: " + Bluetooth_Converter.AccelY(data)
-                + "\nZ: " + Bluetooth_Converter.AccelZ(data));
+        float Heading = filterYaw.lowPass(Bluetooth_Converter.AccelX(data));
+        float Pitch = filterPitch.lowPass(Bluetooth_Converter.AccelY(data));
+        float Roll = filterRoll.lowPass(Bluetooth_Converter.AccelZ(data));
+
+        accelData.setText("accelData (6 bytes): "   + "\nX: " + Heading// Bluetooth_Converter.AccelX(data)//AccelXDeg(data)//
+                + "\nY: " + Pitch //Bluetooth_Converter.AccelY(data)
+                + "\nZ: " + Roll); //Bluetooth_Converter.AccelZ(data));
 
 
         // The Gyroscope gives angular velocity of the device

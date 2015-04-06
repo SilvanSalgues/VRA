@@ -4,16 +4,14 @@ package com.example.darren.VRA.Exercise;
 
 public class Exercise_properties
 {
-
-    int id;
-    int Week;
-    int Day;
-    String TimeOfDay;
-    int exerciseNum;
-    Exercise_Type Type;
-    int Duration;
-    int Gifposition;
-    float Speed;
+    private int Week;
+    private int Day;
+    private String TimeOfDay;
+    private int exerciseNum;
+    private Exercise_Type Type;
+    private int Duration;
+    private int Gifposition;
+    private float Speed;
 
     public Exercise_properties(int Week, int Day, String TimeOfDay, int exerciseNum, Exercise_Type type, int duration, int Gifposition, float speed)
     {
@@ -27,14 +25,14 @@ public class Exercise_properties
         this.Speed = speed;
     }
 
-    /*public int getWeek()
+    public int getWeek()
     {
         return Week;
-    }*/
-    /*public int getDay()
+    }
+    public int getDay()
     {
         return Day;
-    }*/
+    }
     public String getTimeOfDay(){ return TimeOfDay;}
     public int getexerciseNum()
     {
@@ -48,12 +46,12 @@ public class Exercise_properties
     {
         return Duration;
     }
-    public int getBackground()
+    public int getGifposition()
     {
         return Gifposition;
     }
-/*    public float getSpeed()
+    public float getSpeed()
     {
         return Speed;
-    }*/
+    }
 }

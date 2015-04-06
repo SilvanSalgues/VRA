@@ -35,10 +35,6 @@ public abstract class Exercise_Type  extends Fragment {
     GifDrawable gifFromResource;
     Database_Manager db;
 
-    String email = "email@admin.com";
-
-    //public Exercise_Type(){}
-
     public Exercise_Type newInstance(int GIF){ return null; }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +43,7 @@ public abstract class Exercise_Type  extends Fragment {
         InputFragmentView = inflater.inflate(layout_id, container, false);
         db = new Database_Manager(getActivity());
         db.open();
-        starting_size = (int) (pointsize[db.getpointsize(email) -1] * pixel_density());      // Starting size is the smallest the focus point can be and the first position in the array
+        starting_size = (int) (pointsize[db.getpointsize(db.isUserLoggedIn()) -1] * pixel_density());      // Starting size is the smallest the focus point can be and the first position in the array
         db.close();
 
         GIFimage = (GifImageView) InputFragmentView.findViewById(R.id.GIFview);

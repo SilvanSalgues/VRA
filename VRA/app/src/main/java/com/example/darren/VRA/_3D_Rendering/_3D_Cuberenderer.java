@@ -422,12 +422,12 @@ public class _3D_Cuberenderer implements GLSurfaceView.Renderer
 
 			// Link the two shaders together into a program.
 			GLES20.glLinkProgram(mProgramHandle);
-			 mTextureDataHandle0 = loadTexture(mActivityContext, R.drawable.nature1);
-			 mTextureDataHandle1 = loadTexture(mActivityContext, R.drawable.nature2);
-			 mTextureDataHandle2 = loadTexture(mActivityContext, R.drawable.nature3);
-			 mTextureDataHandle3 = loadTexture(mActivityContext, R.drawable.nature4);
-			 mTextureDataHandle4 = loadTexture(mActivityContext, R.drawable.nature5);
-			 mTextureDataHandle5 = loadTexture(mActivityContext, R.drawable.nature6);
+			 mTextureDataHandle0 = loadTexture(mActivityContext, R.drawable.cubesurface);
+			 mTextureDataHandle1 = loadTexture(mActivityContext, R.drawable.cubesurface);
+			 mTextureDataHandle2 = loadTexture(mActivityContext, R.drawable.cubesurface);
+			 mTextureDataHandle3 = loadTexture(mActivityContext, R.drawable.cubesurface);
+			 mTextureDataHandle4 = loadTexture(mActivityContext, R.drawable.cubesurface);
+			 mTextureDataHandle5 = loadTexture(mActivityContext, R.drawable.cubesurface);
 
 			// Get the link status.
 			final int[] linkStatus = new int[1];

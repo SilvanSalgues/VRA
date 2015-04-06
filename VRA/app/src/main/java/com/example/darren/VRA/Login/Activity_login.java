@@ -27,7 +27,7 @@ public class Activity_login extends Activity {
 
         db = new Database_Manager(this);
         db.open();
-        if(!db.isUserLoggedIn().equals("")){
+        if(db.isUserLoggedIn() != -1){
             Intent intent = new Intent(this, Activity_container.class);
             startActivity(intent);
             finish();

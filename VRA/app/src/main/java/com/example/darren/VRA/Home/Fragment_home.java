@@ -60,8 +60,6 @@ public class Fragment_home extends Fragment{
     ImageButton profile;
     ImageView info_home;
 
-    String email = "email@admin.com";
-
     Database_Manager db;
     Cursor curUser;
 
@@ -76,7 +74,6 @@ public class Fragment_home extends Fragment{
         View InputFragmentView = inflater.inflate(R.layout.home, container, false);
 
         outPutFile = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-        //Welcome = (TextView) InputFragmentView.findViewById(R.id.welcome);
 
         // Font path
         //String fontPath = "fonts/pali-helvetica-bold.ttf";
@@ -94,11 +91,12 @@ public class Fragment_home extends Fragment{
 
         db.open();
 
-        curUser = db.getUser(email);
+
+        curUser = db.getUser(db.isUserLoggedIn());
         curUser.moveToFirst();
         Name.setText(curUser.getString(0));
-        useremail.setText(email);
-        exercise_complete_number.setText("" + db.getExerciseCount(email));
+        useremail.setText(curUser.getString(1));
+        exercise_complete_number.setText(curUser.getString(4));
 
         if (curUser.getString(3) != null)
         {
@@ -380,7 +378,7 @@ public class Fragment_home extends Fragment{
 
         db.open();
 
-        curUser = db.getUser(email);
+        curUser = db.getUser(db.isUserLoggedIn());
         curUser.moveToFirst();
 
         update_name = (EditText) dialog.findViewById(R.id.update_name);
@@ -393,8 +391,8 @@ public class Fragment_home extends Fragment{
         numberPicker.setMaxValue(9);
         numberPicker.setMinValue(1);
 
-        numberPicker.setValue(db.getpointsize(email));
-        Pixels.setText(logMAR[db.getpointsize(email)] + " LogMAR");
+        numberPicker.setValue(db.getpointsize(db.isUserLoggedIn()));
+        Pixels.setText(logMAR[db.getpointsize(db.isUserLoggedIn())] + " LogMAR");
 
         numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
@@ -425,7 +423,7 @@ public class Fragment_home extends Fragment{
                 }
                 else {
 
-                    db.updateUSER(email, update_name.getText().toString(), update_password.getText().toString(), update_country.getText().toString(), numberPicker.getValue());
+                    db.updateUSER(curUser.getString(1), update_name.getText().toString(), update_password.getText().toString(), update_country.getText().toString(), numberPicker.getValue());
                     db.close();
                     Name.setText(update_name.getText().toString());
                     dialog.dismiss();

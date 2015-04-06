@@ -159,7 +159,7 @@ public class Fragment_revise extends Fragment {
                     db.open();
 
                     ExerciseNum = db.getExerciseNum(day + 1, week, expandableListTitle.get(groupPosition), childPosition);
-                    int PauseCount = db.getPausedCount(day + 1, week, expandableListTitle.get(groupPosition), childPosition);
+                    int PauseCount = db.getPausedCount(db.isUserLoggedIn(), day + 1, week, expandableListTitle.get(groupPosition), childPosition);
 
                     diaBox = CreateDialog(
                             "Day " + (day + 1) +

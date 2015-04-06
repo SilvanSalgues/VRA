@@ -61,6 +61,10 @@ public class Fragment_signup extends Fragment {
                 if (pass.equals(verify)) {
                     db.open();                // Open Database
                     db.insertUser("" + up_name.getText(), "" + up_email.getText(), "" + up_pass.getText());
+
+
+                    db.Exercise_Result_Setup(db.SQLiteDatabase, db.isUserLoggedIn());
+
                     db.close();                // Close Database
 
                     Toast.makeText(getActivity().getApplicationContext(), "Successfully added user", Toast.LENGTH_SHORT).show();

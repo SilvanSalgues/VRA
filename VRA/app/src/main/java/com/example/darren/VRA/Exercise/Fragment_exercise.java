@@ -24,7 +24,6 @@ import java.util.List;
 public class Fragment_exercise extends Fragment {
 
     int exercise = 0;
-    String email = "email@admin.com";
 
     public View InputFragmentView;
     public long remainingTime;
@@ -48,14 +47,14 @@ public class Fragment_exercise extends Fragment {
         db = new Database_Manager(getActivity());
         db.open();
 
-        exercise = db.getExerciseCount(email);
+        exercise = db.getExerciseCount(db.isUserLoggedIn());
 
         //Get all Exercise Descriptions from database
         //-----------------------------------------------------------------------------------------
         cur_desc = db.getExerciseDescriptions();
         cur_desc.moveToFirst();
         do{
-            exdesc.add(new Exercise_description(cur_desc.getString(1), cur_desc.getString(2), cur_desc.getString(3)));
+            exdesc.add(new Exercise_description(cur_desc.getString(0), cur_desc.getString(1), cur_desc.getString(2)));
         }while (cur_desc.moveToNext());
         //-----------------------------------------------------------------------------------------
 
@@ -65,14 +64,14 @@ public class Fragment_exercise extends Fragment {
         cur_list.moveToFirst();
         do{
             Exercise_Type Type;
-            if (cur_list.getString(5).equals("Exercise_Type2")){
+            if (cur_list.getString(4).equals("Exercise_Type2")){
                 Type = new Exercise_Type2();
             }
             else{
                 Type = new Exercise_Type1();
             }
 
-            exerc.add(new Exercise_properties(cur_list.getInt(1), cur_list.getInt(2), cur_list.getString(3), cur_list.getInt(4), Type, cur_list.getInt(6), cur_list.getInt(7), cur_list.getInt(8)));
+            exerc.add(new Exercise_properties(cur_list.getInt(0), cur_list.getInt(1), cur_list.getString(2), cur_list.getInt(3), Type, cur_list.getInt(5), cur_list.getInt(6), cur_list.getInt(7)));
         }while (cur_list.moveToNext());
         //-----------------------------------------------------------------------------------------
 
@@ -98,7 +97,7 @@ public class Fragment_exercise extends Fragment {
                     Pause_btn.setText("CONTINUE");
 
                     db.open();
-                    db.updatePausedCount(exerc.get(exercise).Day, exerc.get(exercise).Week, exerc.get(exercise).TimeOfDay, exerc.get(exercise).exerciseNum);
+                    db.updatePausedCount(exerc.get(exercise).getDay(), exerc.get(exercise).getWeek(), exerc.get(exercise).getTimeOfDay(), exerc.get(exercise).getexerciseNum());
                     db.close();
 
                     countDownTimer.cancel();
@@ -121,11 +120,11 @@ public class Fragment_exercise extends Fragment {
 
                 db.open();
                 if (exercise < exerc.size()) {
-                    db.CompleteEx(exerc.get(exercise).Day, exerc.get(exercise).Week, exerc.get(exercise).TimeOfDay, exerc.get(exercise).exerciseNum);
-                    db.updateExerciseCount(email, ++exercise);
+                    db.CompleteEx(exerc.get(exercise).getDay(), exerc.get(exercise).getWeek(), exerc.get(exercise).getTimeOfDay(), exerc.get(exercise).getexerciseNum());
+                    db.updateExerciseCount(db.isUserLoggedIn(), ++exercise);
                 }
                 else{
-                    db.updateExerciseCount(email, 0);
+                    db.updateExerciseCount(db.isUserLoggedIn(), 0);
                 }
 
 
@@ -145,7 +144,7 @@ public class Fragment_exercise extends Fragment {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        ExerciseFragment = exerc.get(exercise).getType().newInstance(exerc.get(exercise).getBackground());
+        ExerciseFragment = exerc.get(exercise).getType().newInstance(exerc.get(exercise).getGifposition());
         ft.replace(R.id.exercise_container, ExerciseFragment)
                 .addToBackStack(null);
         ft.commit();

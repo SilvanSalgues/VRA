@@ -37,9 +37,6 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
     ImageView btn_info_intro;
     int exercise = 0;
 
-    String email = "email@admin.com";
-
-
     TextView exercise_name;
     com.bluejamesbond.text.DocumentView general_desc;
 
@@ -62,14 +59,14 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
         db = new Database_Manager(getActivity());
         db.open();
 
-        exercise = db.getExerciseCount(email);
+        exercise = db.getExerciseCount(db.isUserLoggedIn());
 
         // Get all Exercise Descriptions from database
         //-----------------------------------------------------------------------------------------
         cur_desc = db.getExerciseDescriptions();
         cur_desc.moveToFirst();
         do{
-            exdesc.add(new Exercise_description(cur_desc.getString(1), cur_desc.getString(2), cur_desc.getString(3)));
+            exdesc.add(new Exercise_description(cur_desc.getString(0), cur_desc.getString(1), cur_desc.getString(2)));
         }while (cur_desc.moveToNext());
         //-----------------------------------------------------------------------------------------
 
@@ -79,13 +76,13 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
         cur_list.moveToFirst();
         do{
             Exercise_Type Type;
-            if (cur_list.getString(5).equals("Exercise_Type1")){
+            if (cur_list.getString(4).equals("Exercise_Type1")){
                 Type = new Exercise_Type2();
             }
             else{
                 Type = new Exercise_Type1();
             }
-            exerc.add(new Exercise_properties(cur_list.getInt(1), cur_list.getInt(2), cur_list.getString(3), cur_list.getInt(4), Type, cur_list.getInt(6), cur_list.getInt(7), cur_list.getInt(8)));
+            exerc.add(new Exercise_properties(cur_list.getInt(0), cur_list.getInt(1), cur_list.getString(2), cur_list.getInt(3), Type, cur_list.getInt(5), cur_list.getInt(6), cur_list.getInt(7)));
         }while (cur_list.moveToNext());
         //-----------------------------------------------------------------------------------------
 
@@ -93,7 +90,7 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
 
         Log.d("exerc size", "" + exerc.size());
         day = (TextView) InputFragmentView.findViewById(R.id.day);
-        day.setText("Day " + exerc.get(exercise).Day + ": " + exerc.get(exercise).TimeOfDay);
+        day.setText("Day " + exerc.get(exercise).getDay() + ": " + exerc.get(exercise).getTimeOfDay());
         btn_info_intro = (ImageView) InputFragmentView.findViewById(R.id.btn_info_intro);
         btn_info_intro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +137,7 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
 
                 db.open();
                 String currentDateandTime = new SimpleDateFormat("HH:mm dd/MM/yyyy", java.util.Locale.getDefault()).format(new Date());
-                db.updateLastActive(email, currentDateandTime);
+                db.updateLastActive(db.isUserLoggedIn(), currentDateandTime);
                 db.close();
 
                 FragmentManager fm = getFragmentManager();

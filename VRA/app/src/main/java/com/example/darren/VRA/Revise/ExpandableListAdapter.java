@@ -3,7 +3,6 @@
 package com.example.darren.VRA.Revise;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,27 +38,33 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int listPosition, final int expandedListPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String expandedListText = (String) getChild(listPosition, expandedListPosition);
+    public View getChildView(int listPosition, final int expandedListPosition, boolean isLastChild, View ChildView, ViewGroup parent) {
 
-        final int expandListComplete = expandableListDetail.get(listPosition).getExComplete().get(expandedListPosition);
-
-        if (convertView == null) {
+        if (ChildView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.exercise_list_item, null);
+            ChildView = layoutInflater.inflate(R.layout.exercise_list_item, null);
         }
 
-        TextView expandedListTextView = (TextView) convertView.findViewById(R.id.expandedListItem);
-        expandedListTextView.setText(expandedListText);
+        // Set the text for the child title
+        TextView expandedListTextView = (TextView) ChildView.findViewById(R.id.expandedListItem);
+        expandedListTextView.setText("" + getChild(listPosition, expandedListPosition));
 
-        ImageView tick = (ImageView) convertView.findViewById(R.id.tick);
+        // Checks if the child exercise has been complete and sets the appropriate indicator
+        final int expandListComplete = expandableListDetail.get(listPosition).getExComplete().get(expandedListPosition);
+        ImageView tick = (ImageView) ChildView.findViewById(R.id.tick);
 
         if(expandListComplete == 1){
             tick.setBackgroundResource(R.drawable.icon_green_tick);
         }
-            else
-        tick.setBackgroundResource(R.drawable.icon_yellow_blank);
-        return convertView;
+        else if (expandListComplete == 2 ){
+            tick.setBackgroundResource(R.drawable.icon_red_x);
+        }
+        else {
+            tick.setBackgroundResource(R.drawable.icon_yellow_blank);
+        }
+
+
+        return ChildView;
     }
 
     @Override
@@ -83,25 +88,31 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int listPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+    public View getGroupView(int listPosition, boolean isExpanded, View GroupView, ViewGroup parent) {
 
-        if (convertView == null) {
+        if (GroupView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.exercise_list_group, null);
+            GroupView = layoutInflater.inflate(R.layout.exercise_list_group, null);
         }
 
-        TextView listTitleTextView = (TextView) convertView.findViewById(R.id.listTitle);
-        listTitleTextView.setTypeface(null, Typeface.BOLD);
-        String listTitle = (String) getGroup(listPosition);
-        listTitleTextView.setText(listTitle);
-        ImageView groupHolder = (ImageView) convertView.findViewById(R.id.groupHolder);
+        // Sets the group title
+        String Title = getGroup(listPosition).toString();
+        TextView listTitle = (TextView) GroupView.findViewById(R.id.listTitle);
+        listTitle.setText(Title);
 
+        //Set time for group
+        TextView time = (TextView) GroupView.findViewById(R.id.time);
+        time.setText(this.expandableListDetail.get(listPosition).getExTime());
+
+        // Sets the arrow on the group depending on whether it is expanded or not
+        ImageView groupHolder = (ImageView) GroupView.findViewById(R.id.groupHolder);
         if (isExpanded) {
             groupHolder.setImageResource(R.drawable.icon_white_arrow_up);
         } else {
             groupHolder.setImageResource(R.drawable.icon_white_arrow_down);
         }
-        return convertView;
+
+        return GroupView;
     }
 
     @Override

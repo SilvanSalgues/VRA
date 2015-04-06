@@ -88,7 +88,7 @@ public class Activity_container extends Activity {
             }
             else if(v == logout_btn){
                 db.open();
-                if(!db.isUserLoggedIn().equals("")){
+                if(db.isUserLoggedIn() != -1){
                     db.LogoutUSER(db.isUserLoggedIn());
                 }
                 db.close();

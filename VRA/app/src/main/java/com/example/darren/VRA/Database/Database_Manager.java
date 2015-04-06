@@ -16,7 +16,7 @@ public class Database_Manager {
     private static final String DATABASE_NAME = "Database";
 
     private static final String DATABASE_TABLE1 = "Users";
-    public static final String KEY_USERID = "_id";
+    public static final String KEY_ID = "_id";
     public static final String KEY_NAME = "name";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "pass";
@@ -27,13 +27,11 @@ public class Database_Manager {
     public static final String KEY_LOGGEDIN = "loggedIn";
 
     private static final String DATABASE_TABLE2 = "Ex_description";
-    public static final String KEY_DID = "_id";
     public static final String KEY_DESC = "description";
     public static final String KEY_URL = "url";
 
 
     private static final String DATABASE_TABLE3 = "Ex_List";
-    public static final String KEY_LID = "_id";
     public static final String KEY_WEEK = "week";
     public static final String KEY_DAY = "day";
     public static final String KEY_TIMEOFDAY = "timeofday";
@@ -48,10 +46,15 @@ public class Database_Manager {
     public static final String KEY_COMPLETED = "completed";
     public static final String KEY_DIZZINESS = "dizziness";
 
+    private static final String DATABASE_TABLE5 = "Ex_Times";
+    public static final String KEY_USERID = "user_id";
+    public static final String KEY_TIMEHOURS = "timeHours";
+    public static final String KEY_TIMEMINUTES = "timeMinutes";
+
     Context context;
 
     private DatabaseHelper DBHelper;
-    private SQLiteDatabase db;
+    public SQLiteDatabase SQLiteDatabase;
 
 	/* Database class handles all the queries */
 
@@ -99,26 +102,35 @@ public class Database_Manager {
 
             // Creating Ex_Results table
             String DATA4_CREATE = "create table " + DATABASE_TABLE4 + "(_id INTEGER primary key autoincrement, "+
-                    "week INTEGER not null, "+
-                    "day INTEGER not null, "+
+                    "user_id INTEGER not null, " +
+                    "week INTEGER not null, " +
+                    "day INTEGER not null, " +
                     "timeofday TEXT not null, " +
                     "exerciseNum INTEGER not null, " +
                     "paused INTEGER null, " +
                     "completed INTEGER not null, " +
                     "dizziness INTEGER null);";
 
+            // Creating Ex_times table
+            String DATA5_CREATE = "create table " + DATABASE_TABLE5 + "(_id INTEGER primary key autoincrement, "+
+                    "timeofday TEXT not null, " +
+                    "timeHours INTEGER not null," +
+                    "timeMinutes INTEGER not null);";
+
             // Create Tables
             db.execSQL(DATA1_CREATE);
             db.execSQL(DATA2_CREATE);
             db.execSQL(DATA3_CREATE);
             db.execSQL(DATA4_CREATE);
+            db.execSQL(DATA5_CREATE);
 
             //default inserts
-            db.execSQL("INSERT INTO " + DATABASE_TABLE1 + " (name, email, pass, exercise_count, pointsize, loggedIn) Values ('admin', 'email@admin.com', 'admin', 0, 1, 1)");
+            //SQLiteDatabase.execSQL("INSERT INTO " + DATABASE_TABLE1 + " (name, email, pass, exercise_count, pointsize, loggedIn) Values ('admin', 'email@admin.com', 'admin', 0, 1, 1)");
 
             Exercise_descriptions(db);
             Exercise_List(db);
-            Exercise_Result_Setup(db);
+            //Exercise_Result_Setup(SQLiteDatabase);
+            Exercise_times(db);
         }
 
         @Override
@@ -127,6 +139,8 @@ public class Database_Manager {
             db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE1);
             db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE2);
             db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE3);
+            db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE4);
+            db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE5);
 
             // create table
             this.onCreate(db);
@@ -300,10 +314,8 @@ public class Database_Manager {
         db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
         db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
     }
+    public void Exercise_Result_Setup(SQLiteDatabase db, int user_id){
 
-    private static void Exercise_Result_Setup(SQLiteDatabase db){
-
-        //db.execSQL("INSERT INTO " + DATABASE_TABLE4 + " (week, day, timeofday, exerciseNum, paused, completed, dizziness ) Values (1, 1, 'Morning Exercise#1',  0, 0, 1, 8)");
         Cursor cur;
         cur = db.query(DATABASE_TABLE3, new String[] {
                         KEY_WEEK,
@@ -318,13 +330,21 @@ public class Database_Manager {
 
         cur.moveToFirst();
         do{
-            db.execSQL("INSERT INTO " + DATABASE_TABLE4 + " (week, day, timeofday, exerciseNum, paused, completed, dizziness ) Values ("+ cur.getInt(0) +", "+ cur.getInt(1) +", '"+ cur.getString(2) +"',  '"+ cur.getString(3) +"', 0, 0, 8)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE4 + " ( user_id, week, day, timeofday, exerciseNum, paused, completed, dizziness ) Values (" + user_id + ", "+ cur.getInt(0) +", "+ cur.getInt(1) +", '"+ cur.getString(2) +"',  '"+ cur.getString(3) +"', 0, 0, 8)");
         }while (cur.moveToNext());
         cur.close();
     }
+    private static void Exercise_times(SQLiteDatabase db){
+        db.execSQL("INSERT INTO " + DATABASE_TABLE5 + " ( timeofday, timeHours, timeMinutes ) Values ('Morning Exercise#1', 9, 0)");
+        db.execSQL("INSERT INTO " + DATABASE_TABLE5 + " ( timeofday, timeHours, timeMinutes ) Values ('Morning Exercise#2', 11, 30)");
+        db.execSQL("INSERT INTO " + DATABASE_TABLE5 + " ( timeofday, timeHours, timeMinutes ) Values ('Afternoon Exercise#1', 2, 0)");
+        db.execSQL("INSERT INTO " + DATABASE_TABLE5 + " ( timeofday, timeHours, timeMinutes ) Values ('Afternoon Exercise#2', 4, 0)");
+        db.execSQL("INSERT INTO " + DATABASE_TABLE5 + " ( timeofday, timeHours, timeMinutes ) Values ('Evening Exercise', 6, 0)");
+
+    }
 
     public Database_Manager open() throws SQLException{
-        db = DBHelper.getWritableDatabase();
+        SQLiteDatabase = DBHelper.getWritableDatabase();
         return this;
     }
     public void close()
@@ -333,20 +353,25 @@ public class Database_Manager {
     }
 
     public long insertUser(String name, String email, String pass){
+
+        ContentValues args = new ContentValues();
+        args.put(KEY_LOGGEDIN, 0);
+        SQLiteDatabase.update(DATABASE_TABLE1, args, null, null);
+
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_NAME, name);
         initialValues.put(KEY_EMAIL, email);
         initialValues.put(KEY_PASSWORD, pass);
         initialValues.put(KEY_EXCOUNT, 0);
         initialValues.put(KEY_LOGGEDIN, 1);
-        return db.insert(DATABASE_TABLE1, null, initialValues);
+        initialValues.put(KEY_POINTSIZE, 1);
+        return SQLiteDatabase.insert(DATABASE_TABLE1, null, initialValues);
     }
-
     public boolean getUserLogin(String name, String pass) throws SQLException{
         boolean check = false;
         Cursor mCursor =
-                db.query(true, DATABASE_TABLE1, new String[] {
-                                KEY_USERID
+                SQLiteDatabase.query(true, DATABASE_TABLE1, new String[] {
+                                KEY_ID
                         },
                         KEY_NAME + "='" + name + "'" + " and " + KEY_PASSWORD + "='" + pass + "'" ,
                         null,
@@ -370,12 +395,11 @@ public class Database_Manager {
 
         return check;
     }
-
-    public String getUserID(String name, String pass) throws SQLException{
-        String UserID;
+    public int getUserID(String name, String pass) throws SQLException{
+        int UserID = -1;
         Cursor Cur =
-                db.query(true, DATABASE_TABLE1, new String[] {
-                                KEY_USERID
+                SQLiteDatabase.query(true, DATABASE_TABLE1, new String[] {
+                                KEY_ID
                         },
                         KEY_NAME + "='" + name + "'" + " and " + KEY_PASSWORD + "='" + pass + "'" ,
                         null,
@@ -386,22 +410,17 @@ public class Database_Manager {
 
         if (Cur != null) {
             Cur.moveToFirst();
-            UserID = Cur.getString(0);
+            UserID = Cur.getInt(0);
             Cur.close();
-        }
-        else
-        {
-            UserID = "0";
         }
 
         return UserID;
     }
-
-    public String isUserLoggedIn() throws SQLException{
-        String userid = "";
+    public int isUserLoggedIn() throws SQLException{
+        int userid = -1;
         Cursor Cur =
-                db.query(true, DATABASE_TABLE1, new String[] {
-                                KEY_USERID,
+                SQLiteDatabase.query(true, DATABASE_TABLE1, new String[] {
+                                KEY_ID,
                         },
                         KEY_LOGGEDIN + "='" + 1 + "'",
                         null,
@@ -414,20 +433,19 @@ public class Database_Manager {
             Cur.moveToFirst();
             if( Cur.getCount() > 0)
             {
-                userid = Cur.getString(0);
+                userid = Cur.getInt(0);
             }
             Cur.close();
         }
         return userid;
     }
-
-    public int getExerciseCount(String email) throws SQLException{
+    public int getExerciseCount(int user_id) throws SQLException{
         int count  = 0;
         Cursor cur =
-                db.query(true, DATABASE_TABLE1, new String[] {
+                SQLiteDatabase.query(true, DATABASE_TABLE1, new String[] {
                                 KEY_EXCOUNT
                         },
-                        KEY_EMAIL + "='" + email + "'",
+                        KEY_ID + "='" + user_id + "'",
                         null,
                         null,
                         null,
@@ -445,13 +463,13 @@ public class Database_Manager {
 
         return count;
     }
-    public int getpointsize(String email) throws SQLException{
+    public int getpointsize(int user_id) throws SQLException{
         int count  = 0;
         Cursor cur =
-                db.query(true, DATABASE_TABLE1, new String[] {
+                SQLiteDatabase.query(true, DATABASE_TABLE1, new String[] {
                                 KEY_POINTSIZE
                         },
-                        KEY_EMAIL + "='" + email + "'",
+                        KEY_ID + "='" + user_id + "'",
                         null,
                         null,
                         null,
@@ -469,8 +487,8 @@ public class Database_Manager {
         return count;
     }
 
-    public Cursor getUser(String email) throws SQLException{
-        return db.query(true, DATABASE_TABLE1, new String[] {
+    public Cursor getUser(int user_id) throws SQLException{
+        return SQLiteDatabase.query(true, DATABASE_TABLE1, new String[] {
                         KEY_NAME,
                         KEY_EMAIL,
                         KEY_PASSWORD,
@@ -480,7 +498,7 @@ public class Database_Manager {
                         KEY_POINTSIZE,
                         KEY_LOGGEDIN
                 },
-                KEY_EMAIL + "='" + email + "'",
+                KEY_ID + "='" + user_id + "'",
                 null,
                 null,
                 null,
@@ -488,8 +506,7 @@ public class Database_Manager {
                 null);
     }
     public Cursor getExerciseDescriptions(){
-        return db.query(DATABASE_TABLE2, new String[] {
-                        KEY_DID,
+        return SQLiteDatabase.query(DATABASE_TABLE2, new String[] {
                         KEY_NAME,
                         KEY_DESC,
                         KEY_URL},
@@ -501,7 +518,7 @@ public class Database_Manager {
     }
     public String getExerciseDescription(int pos ){
         String Desc = "";
-        Cursor cur = db.query(DATABASE_TABLE2,new String[] {
+        Cursor cur = SQLiteDatabase.query(DATABASE_TABLE2,new String[] {
                         KEY_DESC
                 },
                 null,
@@ -519,8 +536,7 @@ public class Database_Manager {
         return Desc;
     }
     public Cursor getExerciseListforDay(int day){
-        return db.query(DATABASE_TABLE3, new String[] {
-                        KEY_LID,
+        return SQLiteDatabase.query(DATABASE_TABLE3, new String[] {
                         KEY_WEEK,
                         KEY_DAY,
                         KEY_TIMEOFDAY,
@@ -536,9 +552,8 @@ public class Database_Manager {
                 null,
                 null);
     }
-    public Cursor getExericseResultsforDay(int day){
-        return db.query(DATABASE_TABLE4, new String[] {
-                        KEY_LID,
+    public Cursor getExericseResultsforDay(int user_id, int day){
+        return SQLiteDatabase.query(DATABASE_TABLE4, new String[] {
                         KEY_WEEK,
                         KEY_DAY,
                         KEY_TIMEOFDAY,
@@ -546,7 +561,34 @@ public class Database_Manager {
                         KEY_PAUSED,
                         KEY_COMPLETED,
                         KEY_DIZZINESS},
-                KEY_DAY + "='" + day + "'",
+                KEY_USERID + "='" + user_id + "'" + " and " +  KEY_DAY + "='" + day + "'",
+                null,
+                null,
+                null,
+                null,
+                null);
+    }
+    public Cursor getExerciseTimes(){
+        return SQLiteDatabase.query(DATABASE_TABLE5, new String[] {
+                        KEY_TIMEOFDAY,
+                        KEY_TIMEHOURS,
+                        KEY_TIMEMINUTES},
+                null,
+                null,
+                null,
+                null,
+                null);
+    }
+    public Cursor getCompleteExerciseList(){
+        return SQLiteDatabase.query(DATABASE_TABLE3, new String[] {
+                        KEY_WEEK,
+                        KEY_DAY,
+                        KEY_TIMEOFDAY,
+                        KEY_EXERCISENUM,
+                        KEY_EXTYPE,
+                        KEY_DURATION,
+                        KEY_GIF,
+                        KEY_SPEED},
                 null,
                 null,
                 null,
@@ -556,7 +598,7 @@ public class Database_Manager {
 
     public int getExerciseNum(int day, int week, String timeofday, int pos ){
         int exerciseNum = 0;
-        Cursor cur = db.query(DATABASE_TABLE3,new String[] {
+        Cursor cur = SQLiteDatabase.query(DATABASE_TABLE3,new String[] {
                         KEY_EXERCISENUM
                 },
                 KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'",
@@ -574,35 +616,38 @@ public class Database_Manager {
 
         return exerciseNum;
     }
-    public Cursor getCompleteExerciseList(){
-        return db.query(DATABASE_TABLE3, new String[] {
-                        KEY_LID,
-                        KEY_WEEK,
-                        KEY_DAY,
-                        KEY_TIMEOFDAY,
-                        KEY_EXERCISENUM,
-                        KEY_EXTYPE,
-                        KEY_DURATION,
-                        KEY_GIF,
-                        KEY_SPEED},
+    public int getPausedCount(int user_id, int day, int week, String timeofday, int pos ){
+        int PausedCount = 0;
+        Cursor cur = SQLiteDatabase.query(DATABASE_TABLE4,new String[] {
+                        KEY_PAUSED
+                },
+                KEY_USERID + "='" + user_id + "'" + " and " + KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'",
                 null,
                 null,
                 null,
                 null,
                 null);
+
+        if (cur != null) {
+            cur.moveToPosition(pos);
+            PausedCount = cur.getInt(0);
+            cur.close();
+        }
+
+        return PausedCount;
     }
 
-    public void updateExerciseCount(String email, int ExerciseCount){
+    public void updateExerciseCount(int user_id, int ExerciseCount){
         Log.d("Update Count", "" + ExerciseCount);
         ContentValues args = new ContentValues();
         args.put(KEY_EXCOUNT, ExerciseCount);
-        db.update(DATABASE_TABLE1, args, KEY_EMAIL + "='" + email + "'", null) ;
+        SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_ID + "='" + user_id + "'", null) ;
     }
-    public void updateLastActive(String email, String LastActive){
+    public void updateLastActive(int user_id, String LastActive){
         Log.d("Update Count", "" + LastActive);
         ContentValues args = new ContentValues();
         args.put(KEY_LASTACTIVE, LastActive);
-        db.update(DATABASE_TABLE1, args, KEY_EMAIL + "='" + email + "'", null) ;
+        SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_ID + "='" + user_id + "'", null) ;
     }
     public void updateUSER(String email, String name, String password, String country, int pointsize){
         ContentValues args = new ContentValues();
@@ -611,18 +656,18 @@ public class Database_Manager {
         args.put(KEY_PASSWORD, password);
         args.put(KEY_COUNRTY, country);
         args.put(KEY_POINTSIZE, pointsize);
-        db.update(DATABASE_TABLE1, args, KEY_EMAIL + "='" + email + "'", null);
+        SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_EMAIL + "='" + email + "'", null);
         //Log.d("Pointsize", "" + pointsize);
     }
 
     public void CompleteEx(int day, int week, String timeofday, int exerciseNum){
         ContentValues args = new ContentValues();
         args.put(KEY_COMPLETED, 1);
-        db.update(DATABASE_TABLE4, args,  KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'" + " and " + KEY_EXERCISENUM + "='" + exerciseNum + "'", null);
+        SQLiteDatabase.update(DATABASE_TABLE4, args, KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'" + " and " + KEY_EXERCISENUM + "='" + exerciseNum + "'", null);
 
     }
     public void updatePausedCount(int day, int week, String timeofday, int exerciseNum){
-        Cursor cur =  db.query(DATABASE_TABLE4, new String[] {
+        Cursor cur =  SQLiteDatabase.query(DATABASE_TABLE4, new String[] {
                         KEY_PAUSED,},
                 KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'",
                 null,
@@ -638,40 +683,20 @@ public class Database_Manager {
 
             ContentValues args = new ContentValues();
             args.put(KEY_PAUSED, PauseCount);
-            db.update(DATABASE_TABLE4, args, KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'" + " and " + KEY_EXERCISENUM + "='" + exerciseNum + "'", null);
+            SQLiteDatabase.update(DATABASE_TABLE4, args, KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'" + " and " + KEY_EXERCISENUM + "='" + exerciseNum + "'", null);
 
             cur.close();
         }
     }
-    public int getPausedCount(int day, int week, String timeofday, int pos ){
-        int exerciseNum = 0;
-        Cursor cur = db.query(DATABASE_TABLE4,new String[] {
-                        KEY_PAUSED
-                },
-                KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'",
-                null,
-                null,
-                null,
-                null,
-                null);
 
-        if (cur != null) {
-            cur.moveToPosition(pos);
-            exerciseNum = cur.getInt(0);
-            cur.close();
-        }
-
-        return exerciseNum;
-    }
-
-    public void LogoutUSER (String userid){
+    public void LogoutUSER (int userid){
         ContentValues args = new ContentValues();
         args.put(KEY_LOGGEDIN, 0);
-        db.update(DATABASE_TABLE1, args, KEY_USERID + "='" + userid + "'", null);
+        SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_ID + "='" + userid + "'", null);
     }
-    public void LoginUSER (String userid){
+    public void LoginUSER (int userid){
         ContentValues args = new ContentValues();
         args.put(KEY_LOGGEDIN, 1);
-        db.update(DATABASE_TABLE1, args, KEY_USERID + "='" + userid + "'", null);
+        SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_ID + "='" + userid + "'", null);
     }
 }
