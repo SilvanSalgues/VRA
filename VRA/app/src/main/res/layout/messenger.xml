@@ -11,7 +11,8 @@
         android:layout_height="fill_parent"
         android:background="@color/Ligher_Green"
         android:orientation="horizontal"
-        android:focusable="true">
+        android:focusable="true"
+        android:baselineAligned="false">
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -55,7 +56,8 @@
                 android:background="@android:drawable/ic_input_add"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                tools:ignore="ContentDescription" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -90,9 +92,9 @@
                 android:contentDescription="default_profile"
                 android:focusable="false"
                 android:background="@drawable/default_profile"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:padding="2dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="3dp">
             </ImageView>
@@ -103,33 +105,38 @@
                 android:layout_height="28dp"
                 android:layout_alignTop="@+id/Person"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp" />
+                android:layout_marginEnd="10dp" />
 
 
-            <ListView
-                android:id="@+id/SMS_listview"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/row_sms_received"
-                android:padding="6dp"
                 android:layout_above="@+id/NewMSG"
-                android:headerDividersEnabled="false"
-                android:layout_below="@+id/icon_person"
-                android:background="@color/Ligher_Green"
-                android:layout_marginTop="4dp"
-                android:dividerHeight="0dp"
-                android:divider="@null"
-                >
+                android:layout_below="@+id/icon_person">
 
-            </ListView>
+                <ListView
+                    tools:listitem="@layout/row_sms_received"
+                    android:id="@+id/SMS_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp"
+                    android:headerDividersEnabled="false"
+                    android:background="@color/Ligher_Green"
+                    android:layout_marginTop="4dp"
+                    android:dividerHeight="0dp"
+                    android:divider="@null"
+                    >
 
+                </ListView>
 
+            </android.support.v4.widget.SwipeRefreshLayout>
             <RelativeLayout
                 android:id="@+id/NewMSG"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:background="@color/Ligher_Green"
                 android:layout_alignParentEnd="true">
 
@@ -146,7 +153,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
-                    android:paddingLeft="8dp">
+                    android:paddingStart="8dp">
                     <requestFocus />
                 </EditText>
 

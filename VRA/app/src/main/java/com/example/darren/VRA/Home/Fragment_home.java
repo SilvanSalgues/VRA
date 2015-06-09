@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,6 +44,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -70,8 +72,12 @@ public class Fragment_home extends Fragment{
 
     AlertDialog diaBox;
 
+    int profile_image_size;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View InputFragmentView = inflater.inflate(R.layout.home, container, false);
+
+        profile_image_size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
 
         outPutFile = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
 
@@ -104,7 +110,6 @@ public class Fragment_home extends Fragment{
         }
         else last_active_time.setText("No Exercise Record");
 
-        db.close();
 
 
         DataPoint[] data = new DataPoint[] {
@@ -141,6 +146,13 @@ public class Fragment_home extends Fragment{
 
 
         profile = (ImageButton) InputFragmentView.findViewById(R.id.profile);
+
+        // The user already has a photo. Set the profile picture as that photo
+        if (db.getUserImage(db.isUserLoggedIn()) != null && db.getUserImage(db.isUserLoggedIn()).length > 0){
+            Bitmap photo = getImage(db.getUserImage(db.isUserLoggedIn()));
+            profile.setImageBitmap(roundIMG(photo));
+        }
+
         profile.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,6 +184,8 @@ public class Fragment_home extends Fragment{
             }
         });
 
+        db.close();
+
         return InputFragmentView;
     }
     private void selectImageOption() {
@@ -186,18 +200,20 @@ public class Fragment_home extends Fragment{
                 if (items[item].equals("Capture Photo")) {
 
                     try {
+                        Log.d("Capture Image Intent", "Should be!");
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp1.jpg");
                         ImageUri = Uri.fromFile(f);
+                        Log.d("Temp File location", "" + ImageUri);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, ImageUri);
                         startActivityForResult(intent, CAMERA_CODE);
                     }
-                        catch(ActivityNotFoundException e){
-                            //display an error message
-                            String errorMessage = "Device doesn't support capturing images!";
-                            Toast toast = Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
+                    catch(ActivityNotFoundException e){
+                        //display an error message
+                        String errorMessage = "Device doesn't support capturing images!";
+                        Toast toast = Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
 
                 } else if (items[item].equals("Choose from Gallery")) {
 
@@ -223,6 +239,7 @@ public class Fragment_home extends Fragment{
 
                 ImageUri = data.getData();
                 Log.d("Gallery Image URI : ", "" + ImageUri);
+
                 cropIMG();
 
             }
@@ -230,6 +247,7 @@ public class Fragment_home extends Fragment{
             else if (requestCode == CAMERA_CODE && resultCode == Activity.RESULT_OK) {
 
                 Log.d("Camera Image URI : ", "" + ImageUri);
+
                 cropIMG();
 
             }
@@ -238,14 +256,25 @@ public class Fragment_home extends Fragment{
                 try {
                     if (outPutFile.exists()) {
                         Bitmap photo = decodeFile(outPutFile);
+
                         profile.setImageBitmap(roundIMG(photo));
+                        Log.d("profile set", "Should be!");
+                        //Storing Byte array in sqlite database
+                        //db.open();
+                        //byte [] storage = getBytes(photo);
+                        //if (storage != null) {
+                        //    db.updateUSERPhoto(db.isUserLoggedIn(), storage);
+                        //}
+                        //db.close();
                     } else {
                         Toast.makeText(getActivity(), "Error while saving image", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.d("CROPING_CODE : ", "" + e);
                 }
             }
+            else
+                Log.d("requestCode not right: ", "" + requestCode);
         }
     }
 
@@ -253,6 +282,7 @@ public class Fragment_home extends Fragment{
 
         final ArrayList<CropingOption> cropOptions = new ArrayList<>();
 
+        Log.d("Calling Crop Intent", "Should be!");
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setType("image/*");
 
@@ -270,20 +300,20 @@ public class Fragment_home extends Fragment{
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(outPutFile));
 
             if (size == 1) {
-                Intent i   = new Intent(intent);
+                Intent i = new Intent(intent);
                 ResolveInfo res = list.get(0);
 
-                i.setComponent( new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+                i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
 
                 startActivityForResult(i, CROPING_CODE);
             } else {
                 for (ResolveInfo res : list) {
                     final CropingOption co = new CropingOption();
 
-                    co.title  = getActivity().getPackageManager().getApplicationLabel(res.activityInfo.applicationInfo);
-                    co.icon  = getActivity().getPackageManager().getApplicationIcon(res.activityInfo.applicationInfo);
-                    co.appIntent= new Intent(intent);
-                    co.appIntent.setComponent( new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+                    co.title = getActivity().getPackageManager().getApplicationLabel(res.activityInfo.applicationInfo);
+                    co.icon = getActivity().getPackageManager().getApplicationIcon(res.activityInfo.applicationInfo);
+                    co.appIntent = new Intent(intent);
+                    co.appIntent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
                     cropOptions.add(co);
                 }
 
@@ -292,22 +322,22 @@ public class Fragment_home extends Fragment{
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Choose Croping App");
                 builder.setCancelable(false);
-                builder.setAdapter( adapter, new DialogInterface.OnClickListener() {
-                    public void onClick( DialogInterface dialog, int item ) {
-                        startActivityForResult( cropOptions.get(item).appIntent, CROPING_CODE);
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        startActivityForResult(cropOptions.get(item).appIntent, CROPING_CODE);
                     }
                 });
 
-                builder.setOnCancelListener( new DialogInterface.OnCancelListener() {
+                builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
-                    public void onCancel( DialogInterface dialog ) {
+                    public void onCancel(DialogInterface dialog) {
 
-                        if (ImageUri != null ) {
-                            getActivity().getContentResolver().delete(ImageUri, null, null );
+                        if (ImageUri != null) {
+                            getActivity().getContentResolver().delete(ImageUri, null, null);
                             ImageUri = null;
                         }
                     }
-                } );
+                });
 
                 AlertDialog alert = builder.create();
                 alert.show();
@@ -315,18 +345,19 @@ public class Fragment_home extends Fragment{
         }
     }
 
-    private Bitmap roundIMG(Bitmap scaleBitmapImage) {
-        int targetSize= 206;
 
-        Bitmap targetBitmap = Bitmap.createBitmap(targetSize,
-                targetSize, Bitmap.Config.ARGB_8888);
+    private Bitmap roundIMG(Bitmap scaleBitmapImage) {
+
+
+        Bitmap targetBitmap = Bitmap.createBitmap(profile_image_size,
+                profile_image_size, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(targetBitmap);
         Path path = new Path();
         path.addCircle(
-                ((float) targetSize - 1) / 2,
-                ((float) targetSize - 1) / 2,
-                (Math.min(((float) targetSize), ((float) targetSize)) / 2),
+                ((float) profile_image_size - 1) / 2,
+                ((float) profile_image_size - 1) / 2,
+                (Math.min(((float) profile_image_size), ((float) profile_image_size)) / 2),
                 Path.Direction.CCW);
 
         canvas.clipPath(path);
@@ -335,8 +366,8 @@ public class Fragment_home extends Fragment{
         canvas.drawBitmap(
                 sourceBitmap,
                 new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap
-                        .getHeight()), new Rect(0, 0, targetSize,
-                        targetSize), null);
+                        .getHeight()), new Rect(0, 0, profile_image_size,
+                        profile_image_size), null);
         return targetBitmap;
     }
     private Bitmap decodeFile(File f) {
@@ -346,12 +377,10 @@ public class Fragment_home extends Fragment{
             o.inJustDecodeBounds = true;
             BitmapFactory.decodeStream(new FileInputStream(f), null, o);
 
-            // Find the correct scale value. It should be the power of 2.
-            final int REQUIRED_SIZE = 206;
             int width_tmp = o.outWidth, height_tmp = o.outHeight;
             int scale = 1;
             while (true) {
-                if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE)
+                if (width_tmp / 2 < profile_image_size || height_tmp / 2 < profile_image_size)
                     break;
                 width_tmp /= 2;
                 height_tmp /= 2;
@@ -423,7 +452,7 @@ public class Fragment_home extends Fragment{
                 }
                 else {
 
-                    db.updateUSER(curUser.getString(1), update_name.getText().toString(), update_password.getText().toString(), update_country.getText().toString(), numberPicker.getValue());
+                    db.updateUSER(db.isUserLoggedIn(), update_name.getText().toString(), update_password.getText().toString(), update_country.getText().toString(), numberPicker.getValue());
                     db.close();
                     Name.setText(update_name.getText().toString());
                     dialog.dismiss();
@@ -432,6 +461,19 @@ public class Fragment_home extends Fragment{
         });
         dialog.show();
     }
+
+    // convert from bitmap to byte array
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
+    }
+
+    // convert from byte array to bitmap
+    public static Bitmap getImage(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }
+
 
     private AlertDialog CreateDialog( String message ){
         return new AlertDialog.Builder(getActivity())

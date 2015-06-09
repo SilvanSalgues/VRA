@@ -17,18 +17,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+    }
 }
 
 dependencies {
     compile 'com.jjoe64:graphview:4.0.0'
     compile 'com.google.guava:guava:18.0'
+    //noinspection GradleDependency
     compile 'com.google.android.gms:play-services:7.0.0'
     compile 'com.google.code.gson:gson:2.3'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.2'
-    compile 'com.microsoft.azure:azure-mobile-services-android-sdk:2.0.2-beta'
+    compile 'com.microsoft.azure:azure-mobile-services-android-sdk:2.0.2'
     compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@jar'
     compile 'com.github.bluejamesbond:textjustify-android:2.1.0'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+    //noinspection GradleDependency
     compile 'com.android.support:support-v13:22.0.0'
-    //compile 'com.google.apis:google-api-services-youtube:v3-rev129-1.19.1'
+    compile files('libs/activation.jar')
+    compile files('libs/additionnal.jar')
+    compile files('libs/mail.jar')
+
 }

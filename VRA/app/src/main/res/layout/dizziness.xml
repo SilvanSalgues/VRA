@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dizziness Scale"
+        android:id="@+id/dizziness_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp"
+        android:textSize="35dp"
+        android:textColor="@color/Dark_Green" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date : 04/07/2014"
+        android:id="@+id/dizziness_date"
+        android:layout_below="@+id/dizziness_title"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/Dark_Green"
+        android:layout_alignParentEnd="true"/>
+
+    <SeekBar
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/dizziness_seekBar"
+        android:rotation="270"
+        android:max="10"
+        android:background="#51fffefc"
+        android:layout_above="@+id/dizziness_submit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:focusableInTouchMode="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/dizziness_submit"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="42dp"
+        android:layout_marginBottom="33dp"
+        android:textColor="@android:color/white"
+        android:background="@color/Lime_Green"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Please rate your level of dizziness"
+        android:id="@+id/day_no"
+        android:layout_below="@+id/dizziness_date"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/Dark_Green" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Value"
+        android:id="@+id/value"
+        android:textColor="@color/Dark_Green"
+        android:layout_alignBottom="@+id/dizziness_seekBar"
+        android:layout_alignEnd="@+id/dizziness_title"/>
+
+</RelativeLayout>

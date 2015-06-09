@@ -8,23 +8,39 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/sms_rounded_edges"
         android:paddingLeft="6dp"
         android:paddingTop="3dp"
         android:paddingRight="6dp"
         android:paddingBottom="3dp"
         android:layout_alignParentEnd="false"
         android:layout_alignParentStart="true"
-        android:layout_marginRight="100dp">
+        android:layout_marginEnd="100dp"
+        android:id="@+id/relativeLayout"
+        android:minWidth="50dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="smsText"
-        android:id="@+id/smsText"
-        android:textSize="20sp"
-        android:padding="3dp"
-        android:layout_alignParentEnd="false"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="start">
 
-</RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="smsText"
+                android:id="@+id/smsText"
+                android:textSize="16sp"
+                android:padding="3dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="time"
+                android:id="@+id/createdAt"
+                android:textSize="10sp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp" />
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

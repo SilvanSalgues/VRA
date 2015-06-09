@@ -110,8 +110,8 @@
         android:background="@color/Light_Grey">
 
         <ImageButton
-            android:layout_width="203px"
-            android:layout_height="203px"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/profile"
             android:background="@drawable/default_profile"
             android:visibility="visible"

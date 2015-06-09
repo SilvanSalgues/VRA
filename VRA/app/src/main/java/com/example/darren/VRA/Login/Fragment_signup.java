@@ -12,17 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.darren.VRA.Main.Activity_container;
 import com.example.darren.VRA.Database.Database_Manager;
+import com.example.darren.VRA.Main.Activity_container;
 import com.example.darren.VRA.R;
 
 public class Fragment_signup extends Fragment {
 
-    TextView up_signup;
-    Button up_create;
+    Button up_signup, up_create;
     EditText up_name, up_email, up_pass, up_verifypass;
     FragmentManager fm;
     Database_Manager db;
@@ -31,7 +29,7 @@ public class Fragment_signup extends Fragment {
         View InputFragmentView = inflater.inflate(R.layout.signup, container, false);
 
         db = new Database_Manager(getActivity());
-        up_signup = (TextView) InputFragmentView.findViewById(R.id.up_signin);
+        up_signup = (Button) InputFragmentView.findViewById(R.id.up_signin);
         up_create = (Button) InputFragmentView.findViewById(R.id.up_create);
         up_name = (EditText) InputFragmentView.findViewById(R.id.up_name);
         up_email = (EditText) InputFragmentView.findViewById(R.id.up_email);

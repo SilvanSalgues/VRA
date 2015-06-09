@@ -184,10 +184,11 @@ public class Fragment_sensor extends Fragment implements BluetoothAdapter.LeScan
         super.onStart();
 
         // Find Device
-        bluetoothAdapter.startLeScan(new UUID[]{Bluetooth_RFduinoService.UUID_SERVICE}, this);
+        if (bluetoothAdapter != null) {
+            bluetoothAdapter.startLeScan(new UUID[]{Bluetooth_RFduinoService.UUID_SERVICE}, this);
 
-        getActivity().registerReceiver(rfduinoReceiver, Bluetooth_RFduinoService.getIntentFilter());
-
+            getActivity().registerReceiver(rfduinoReceiver, Bluetooth_RFduinoService.getIntentFilter());
+        }
     }
     @Override
     public void onStop() {                       //When the app is closed, this runs

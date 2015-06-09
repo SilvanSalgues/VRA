@@ -126,9 +126,6 @@ public class Fragment_exercise extends Fragment {
                 else{
                     db.updateExerciseCount(db.isUserLoggedIn(), 0);
                 }
-
-
-
                 db.close();
 
                 FragmentManager fm = getFragmentManager();
@@ -160,6 +157,7 @@ public class Fragment_exercise extends Fragment {
 
         long minutes;
         long seconds;
+        Fragment myFragment;
 
         public MyCountDownTimer() {
             super(remainingTime, 1000);     // 1000 is an interval of one second
@@ -168,6 +166,24 @@ public class Fragment_exercise extends Fragment {
         @Override
         public void onFinish() {
             timer.setText("Time's up!");
+
+
+            db.open();
+            if (exercise < exerc.size()) {
+                db.CompleteEx(exerc.get(exercise).getDay(), exerc.get(exercise).getWeek(), exerc.get(exercise).getTimeOfDay(), exerc.get(exercise).getexerciseNum());
+                db.updateExerciseCount(db.isUserLoggedIn(), ++exercise);
+            }
+            else{
+                db.updateExerciseCount(db.isUserLoggedIn(), 0);
+            }
+            db.close();
+
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            myFragment = new Fragment_dizziness();
+            ft.replace(R.id.content_layout, myFragment)
+                    .addToBackStack(null);
+            ft.commit();
         }
 
         @Override
@@ -179,7 +195,7 @@ public class Fragment_exercise extends Fragment {
         }
     }
 
-/*    @Override
+   @Override
     public void onDestroyView() {
         super.onDestroyView();
         InputFragmentView = null; // now cleaning up!
@@ -188,7 +204,7 @@ public class Fragment_exercise extends Fragment {
         ExerciseFragment.onDestroyView();
 
         Log.d("Fragment Exercise", "DestroyView Called");
-    }*/
+    }
 }
 
 
