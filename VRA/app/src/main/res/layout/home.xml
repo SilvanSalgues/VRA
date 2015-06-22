@@ -114,7 +114,7 @@
             android:layout_height="100dp"
             android:id="@+id/profile"
             android:background="@drawable/default_profile"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="20dp"
@@ -170,7 +170,7 @@
             android:textStyle="normal|bold"
             android:layout_above="@+id/exercise_complete"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="45dp" />
+            android:layout_marginRight="95dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -181,7 +181,7 @@
             android:textSize="28sp"
             android:textIsSelectable="false"
             android:textStyle="bold"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="110dp"
             android:layout_alignTop="@+id/profile"
             android:layout_toEndOf="@+id/profile"
             android:layout_marginTop="5dp" />
@@ -192,7 +192,8 @@
             android:id="@+id/camera_icon"
             android:background="@drawable/camera_btn"
             android:layout_alignBottom="@+id/profile"
-            android:layout_alignEnd="@+id/profile"/>
+            android:layout_alignEnd="@+id/profile"
+            android:visibility="gone" />
 
         <Button
             android:layout_width="115dp"

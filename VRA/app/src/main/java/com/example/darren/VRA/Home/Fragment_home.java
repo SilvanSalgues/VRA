@@ -246,7 +246,7 @@ public class Fragment_home extends Fragment{
             // If the Camera has produced a result then run this code
             else if (requestCode == CAMERA_CODE && resultCode == Activity.RESULT_OK) {
 
-                Log.d("Camera Image URI : ", "" + ImageUri);
+                //Log.d("Camera Image URI : ", "" + ImageUri);
 
                 cropIMG();
 
@@ -260,12 +260,12 @@ public class Fragment_home extends Fragment{
                         profile.setImageBitmap(roundIMG(photo));
                         Log.d("profile set", "Should be!");
                         //Storing Byte array in sqlite database
-                        //db.open();
+                        //SQLiteDatabase.open();
                         //byte [] storage = getBytes(photo);
                         //if (storage != null) {
-                        //    db.updateUSERPhoto(db.isUserLoggedIn(), storage);
+                        //    SQLiteDatabase.updateUSERPhoto(SQLiteDatabase.isUserLoggedIn(), storage);
                         //}
-                        //db.close();
+                        //SQLiteDatabase.close();
                     } else {
                         Toast.makeText(getActivity(), "Error while saving image", Toast.LENGTH_SHORT).show();
                     }

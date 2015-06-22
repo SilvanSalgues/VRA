@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="list_images">
+        <item>@drawable/blue_bg</item>
+        <item>@drawable/green_bg</item>
         <item>@drawable/illusion1</item>
         <item>@drawable/illusion2</item>
         <item>@drawable/illusion3</item>

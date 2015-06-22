@@ -62,6 +62,25 @@ public class Activity_container extends Activity {
         }
     }
 
+    public void load_exercise_intro(){
+        enabletabs();
+        exercise_btn.setEnabled(false);
+        newFragment = new Fragment_exercise_intro();
+
+        toggleicons(home_btn);
+        toggleicons(exercise_btn);
+        toggleicons(revise_btn);
+        toggleicons(sensor_btn);
+        toggleicons(messenger_btn);
+
+
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction ft1 = fm1.beginTransaction();
+        ft1.replace(R.id.content_layout, newFragment)
+                .addToBackStack(null);
+        ft1.commit();
+    }
+
     ImageButton.OnClickListener BtnOnClickListener = new ImageButton.OnClickListener() {
         @Override
         public void onClick(View v) {

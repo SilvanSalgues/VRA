@@ -63,7 +63,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             tick.setBackgroundResource(R.drawable.icon_yellow_blank);
         }
 
-
         return ChildView;
     }
 

@@ -1,5 +1,3 @@
-// Copyright 2015 Darren McNeely. All Rights Reserved.
-
 package com.example.darren.VRA.Revise;
 
 import android.content.Context;
@@ -28,7 +26,7 @@ public class ExpandableListDataPump {
         db = new Database_Manager(context);
     }
 
-    public ArrayList<ExerciseList>  getData(int day) {
+    public ArrayList<ExerciseList>  getData(int week, int day) {
 
         exerc = new ArrayList<>();    // Holds a list of exercises
         exdesc = new ArrayList<>();    // Holds a list of exercises descriptions
@@ -40,7 +38,7 @@ public class ExpandableListDataPump {
             exdesc.add(new Exercise_description(cur_desc.getString(0), cur_desc.getString(1), cur_desc.getString(2)));
         }while (cur_desc.moveToNext());
 
-        cur_list = db.getExerciseListforDay(day);
+        cur_list = db.getExerciseListforDay(week, day);
         cur_list.moveToPosition(0);
         do{
             Exercise_Type Type;
@@ -102,7 +100,7 @@ public class ExpandableListDataPump {
         }
 
 
-        cur_Results = db.getExericseResultsforDay(db.isUserLoggedIn(), day);
+        cur_Results = db.getExericseResultsforDay(db.isUserLoggedIn(), week, day);
         cur_Results.moveToFirst();
         //Log.d("Got this far", "" + cur_Results.getString(3));
 

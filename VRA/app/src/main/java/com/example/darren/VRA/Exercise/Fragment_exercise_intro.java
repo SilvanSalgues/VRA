@@ -32,34 +32,34 @@ import java.util.List;
 public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.OnInitializedListener{
 
     Fragment myFragment;
-    TextView day, Duration;
+    TextView exercise_name, day, Duration;
     Button start_exercise;
     ImageView btn_info_intro;
-    int exercise = 0;
-
-    TextView exercise_name;
     com.bluejamesbond.text.DocumentView general_desc;
+    int cur_index, exercise_id;
 
     static List<Exercise_properties> exerc = new ArrayList<>();    // Holds a list of exercises
     static List<Exercise_description> exdesc = new ArrayList<>();    // Holds a list of exercises descriptions
     Database_Manager db;
     Cursor cur_desc, cur_list;
 
+    View InputFragmentView;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View InputFragmentView = inflater.inflate(R.layout.exercise_intro, container, false);
+        InputFragmentView = inflater.inflate(R.layout.exercise_intro, container, false);
 
 
-
-        /*String ExName = "Side to side head rotation exercise, 6-8 feet away";
+        /*String ExName = "Side to side head rotation cur_index, 6-8 feet away";
         String Description = "Place tablet on a shelf or ledge at roughly eye level. Stand 6-8 feet away. " +
                 "The screen has an ‘E’ letter in the middle of the screen. Move your head from side to side " +
                 "while focusing on the letter. If the letter starts to go out of focus then slow down. Continue " +
-                "this exercise until timer has finished.";*/
+                "this cur_index until timer has finished.";*/
 
         db = new Database_Manager(getActivity());
         db.open();
 
-        exercise = db.getExerciseCount(db.isUserLoggedIn());
+        exercise_id = db.getExerciseId(db.isUserLoggedIn());
+        cur_index = exercise_id -1;
+        Log.d("Exercise ID intro", "" + cur_index);
 
         // Get all Exercise Descriptions from database
         //-----------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
 
         Log.d("exerc size", "" + exerc.size());
         day = (TextView) InputFragmentView.findViewById(R.id.day);
-        day.setText("Day " + exerc.get(exercise).getDay() + ": " + exerc.get(exercise).getTimeOfDay());
+        day.setText("Day " + exerc.get(cur_index).getDay() + ": " + exerc.get(cur_index).getTimeOfDay());
         btn_info_intro = (ImageView) InputFragmentView.findViewById(R.id.btn_info_intro);
         btn_info_intro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +109,7 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
 
                         "\n\nDuring exercises, don’t forget to blink. If you neck becomes sore use a heating pad or " +
                         "ice pack. If it is not better after three days call your physiotherapist. The exercises " +
-                        "may make you dizzy but the dizziness should settle when you finish the exercise." +
+                        "may make you dizzy but the dizziness should settle when you finish the cur_index." +
                         "\n");
                 diaBox.show();
             }
@@ -121,14 +121,14 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
         transaction.replace(R.id.youtube_fragment, youTubePlayerFragment).commit();
 
         exercise_name = (TextView) InputFragmentView.findViewById(R.id.exercise_name);
-        exercise_name.setText(exdesc.get(exerc.get(exercise).getexerciseNum()).getName());
+        exercise_name.setText(exdesc.get(exerc.get(cur_index).getexerciseNum()).getName());
 
         // Loads custom widget for Textview that allows for justification of text
         general_desc = (com.bluejamesbond.text.DocumentView) InputFragmentView.findViewById(R.id.general_desc);
-        general_desc.setText(exdesc.get(exerc.get(exercise).getexerciseNum()).getDescription());
+        general_desc.setText(exdesc.get(exerc.get(cur_index).getexerciseNum()).getDescription());
 
         Duration = (TextView) InputFragmentView.findViewById(R.id.Duration);
-        Duration.setText("Duration : " +exerc.get(exercise).getDuration());
+        Duration.setText("Duration : " +exerc.get(cur_index).getDuration());
 
         start_exercise = (Button) InputFragmentView.findViewById(R.id.start_exercise);
         start_exercise.setOnClickListener(new View.OnClickListener() {
@@ -148,18 +148,26 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
                 ft.commit();
             }
         });
+
         return InputFragmentView;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        exerc.clear();
+        exdesc.clear();
+        InputFragmentView = null; // now cleaning up!
+    }
 
-    // If the Youtube Player has been successfully created, load the video for the current exercise you are on.
+    // If the Youtube Player has been successfully created, load the video for the current cur_index you are on.
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         // If a video has not already been loaded into the player
         if(!wasRestored)
         {
             // The cueVideo method takes in the youtube video url identifier in a String format. Exercise 1 for example => pOcgcPUp1_g
-            player.cueVideo(exdesc.get(exerc.get(exercise).getexerciseNum()).getIntro_Video());
+            player.cueVideo(exdesc.get(exerc.get(cur_index).getexerciseNum()).getIntro_Video());
         }
     }
 

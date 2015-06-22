@@ -1,5 +1,3 @@
-// Copyright © 2015 Darren McNeely. All Rights Reserved.
-
 package com.example.darren.VRA.Database;
 
 import android.content.ContentValues;
@@ -7,9 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database_Manager {
 
@@ -22,7 +22,7 @@ public class Database_Manager {
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "pass";
     public static final String KEY_LASTACTIVE = "last_active";
-    public static final String KEY_EXCOUNT = "exercise_count";
+    public static final String KEY_CURRENTEX = "current_ex";
     public static final String KEY_COUNRTY = "country";
     public static final String KEY_POINTSIZE = "pointsize";
     public static final String KEY_LOGGEDIN = "loggedIn";
@@ -31,7 +31,6 @@ public class Database_Manager {
     private static final String DATABASE_TABLE2 = "Ex_description";
     public static final String KEY_DESC = "description";
     public static final String KEY_URL = "url";
-
 
     private static final String DATABASE_TABLE3 = "Ex_List";
     public static final String KEY_WEEK = "week";
@@ -53,6 +52,9 @@ public class Database_Manager {
     public static final String KEY_TIMEHOURS = "timeHours";
     public static final String KEY_TIMEMINUTES = "timeMinutes";
 
+    private static final String DATABASE_TABLE6 = "PausedTable";
+    public static final String KEY_PAUSEAT = "pausedAt";
+
     Context context;
 
     private DatabaseHelper DBHelper;
@@ -62,7 +64,8 @@ public class Database_Manager {
 
     public Database_Manager(Context ctx){
         this.context = ctx;
-        DBHelper = new DatabaseHelper(context);
+        this.DBHelper = new DatabaseHelper(context);
+        this.SQLiteDatabase = DBHelper.getWritableDatabase();
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
@@ -80,7 +83,7 @@ public class Database_Manager {
                     "email TEXT not null, "+
                     "pass TEXT not null, " +
                     "last_active TEXT, " +
-                    "exercise_count INTEGER, " +
+                    "current_ex INTEGER, " +
                     "country TEXT, " +
                     "pointsize INTEGER, " +
                     "loggedIn INTEGER," +
@@ -112,13 +115,23 @@ public class Database_Manager {
                     "exerciseNum INTEGER not null, " +
                     "paused INTEGER null, " +
                     "completed INTEGER not null, " +
+                    "duration INTEGER not null, " +
                     "dizziness INTEGER null);";
 
             // Creating Ex_times table
             String DATA5_CREATE = "create table " + DATABASE_TABLE5 + "(_id INTEGER primary key autoincrement, "+
                     "timeofday TEXT not null, " +
-                    "timeHours INTEGER not null," +
+                    "timeHours INTEGER not null, " +
                     "timeMinutes INTEGER not null);";
+
+            // PausedTable
+            String DATA6_CREATE = "create table " + DATABASE_TABLE6 + "(_id INTEGER primary key autoincrement, "+
+                    "user_id INTEGER not null, " +
+                    "week INTEGER not null, " +
+                    "day INTEGER not null, " +
+                    "timeofday TEXT not null, " +
+                    "exerciseNum INTEGER not null, " +
+                    "pausedAt INTEGER not null);";
 
             // Create Tables
             db.execSQL(DATA1_CREATE);
@@ -126,13 +139,10 @@ public class Database_Manager {
             db.execSQL(DATA3_CREATE);
             db.execSQL(DATA4_CREATE);
             db.execSQL(DATA5_CREATE);
-
-            //default inserts
-            //SQLiteDatabase.execSQL("INSERT INTO " + DATABASE_TABLE1 + " (name, email, pass, exercise_count, pointsize, loggedIn) Values ('admin', 'email@admin.com', 'admin', 0, 1, 1)");
+            db.execSQL(DATA6_CREATE);
 
             Exercise_descriptions(db);
             Exercise_List(db);
-            //Exercise_Result_Setup(SQLiteDatabase);
             Exercise_times(db);
         }
 
@@ -144,6 +154,7 @@ public class Database_Manager {
             db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE3);
             db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE4);
             db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE5);
+            db.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE6);
 
             // create table
             this.onCreate(db);
@@ -224,98 +235,102 @@ public class Database_Manager {
                 "to go out of focus then slow down. Continue this exercise until timer has finished.', " +
                 "'1kfldT6fvxI')");
     }
-    private static void Exercise_List(SQLiteDatabase db){
-        // Day 1
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Afternoon Exercise#2',  2, 'Exercise_Type1', 60, 2, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Afternoon Exercise#2',  3, 'Exercise_Type1', 60, 3, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Afternoon Exercise#2',  4, 'Exercise_Type2', 60, 4, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Afternoon Exercise#2',  5, 'Exercise_Type1', 60, 5, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Afternoon Exercise#2',  6, 'Exercise_Type1', 60, 6, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Afternoon Exercise#2',  7, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Evening Exercise',      8, 'Exercise_Type1', 60, 2, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 1, 'Evening Exercise',      9, 'Exercise_Type1', 60, 3, 0.3)");
+    private static void Exercise_List(SQLiteDatabase db) {
 
-        //Day 2
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 2, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 2, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 2, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 2, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 3, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 2, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 4, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 2, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 5, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 2, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 6, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 2, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 2, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 2, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 2, 'Evening Exercise',      0, 'Exercise_Type1', 60, 3, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 2, 'Evening Exercise',      1, 'Exercise_Type1', 60, 4, 0.3)");
+        for (int week = 1; week < 7; week++) {
+            Log.d("Week ", "" + week);
+            // Day 1
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Afternoon Exercise#2',  2, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Afternoon Exercise#2',  3, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Afternoon Exercise#2',  4, 'Exercise_Type2', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Afternoon Exercise#2',  5, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Afternoon Exercise#2',  6, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Afternoon Exercise#2',  7, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Evening Exercise',      8, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 1, 'Evening Exercise',      9, 'Exercise_Type1', 60, 1, 0.3)");
 
-        //Day 3
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 3, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 3, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 2, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 3, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 3, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 3, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 3, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 4, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 3, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 3, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 5, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 3, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 3, 'Evening Exercise',      0, 'Exercise_Type1', 60, 6, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 3, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
+            //Day 2
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 2, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 2, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 2, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 2, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 2, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 2, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 2, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 2, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 2, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 2, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
 
-        //Day 4
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 4, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 2, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 4, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 4, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 4, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 4, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 4, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 3, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 4, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 2, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 4, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 5, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 4, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 6, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 4, 'Evening Exercise',      0, 'Exercise_Type1', 60, 3, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 4, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
+            //Day 3
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 3, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 3, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 3, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 3, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 3, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 3, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 3, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 3, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 3, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 3, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
 
-        //Day 5
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 5, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 5, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 5, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 5, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 5, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 5, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 5, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 5, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 5, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 5, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
+            //Day 4
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 4, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 4, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 4, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 4, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 4, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 4, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 4, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 4, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 4, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 4, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
 
-        //Day 6
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 6, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 6, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 6, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 6, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 6, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 6, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 6, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 6, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 6, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 6, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
+            //Day 5
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 5, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 5, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 5, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 5, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 5, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 5, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 5, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 5, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 5, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 5, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
 
-        //Day 7
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
-        db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (1, 7, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
+            //Day 6
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 6, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 6, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 6, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 6, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 6, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 6, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 6, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 6, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 1, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 6, 'Evening Exercise',      0, 'Exercise_Type1', 60, 0, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 6, 'Evening Exercise',      1, 'Exercise_Type1', 60, 1, 0.3)");
+
+            //Day 7
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 7, 'Morning Exercise#1',    0, 'Exercise_Type1', 60, 2, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 7, 'Morning Exercise#1',    1, 'Exercise_Type1', 60, 3, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 7, 'Morning Exercise#2',    0, 'Exercise_Type1', 60, 4, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 7, 'Morning Exercise#2',    1, 'Exercise_Type1', 60, 5, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 7, 'Afternoon Exercise#1',  0, 'Exercise_Type1', 60, 6, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 7, 'Afternoon Exercise#1',  1, 'Exercise_Type1', 60, 7, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 7, 'Afternoon Exercise#2',  0, 'Exercise_Type1', 60, 8, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 7, 'Afternoon Exercise#2',  1, 'Exercise_Type1', 60, 9, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 7, 'Evening Exercise',      0, 'Exercise_Type1', 60, 10, 0.3)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE3 + " (week, day, timeofday, exerciseNum, type, duration, gifposition, speed ) Values (" + week + ", 7, 'Evening Exercise',      1, 'Exercise_Type1', 60, 2, 0.3)");
+        }
     }
     public void Exercise_Result_Setup(SQLiteDatabase db, int user_id){
 
@@ -330,10 +345,9 @@ public class Database_Manager {
                 null,
                 null,
                 null);
-
         cur.moveToFirst();
         do{
-            db.execSQL("INSERT INTO " + DATABASE_TABLE4 + " ( user_id, week, day, timeofday, exerciseNum, paused, completed, dizziness ) Values (" + user_id + ", "+ cur.getInt(0) +", "+ cur.getInt(1) +", '"+ cur.getString(2) +"',  '"+ cur.getString(3) +"', 0, 0, 8)");
+            db.execSQL("INSERT INTO " + DATABASE_TABLE4 + " ( user_id, week, day, timeofday, exerciseNum, paused, completed, duration, dizziness ) Values (" + user_id + ", "+ cur.getInt(0) +", "+ cur.getInt(1) +", '"+ cur.getString(2) +"',  '"+ cur.getString(3) +"', 0, 0, 0, 0)");
         }while (cur.moveToNext());
         cur.close();
     }
@@ -365,7 +379,7 @@ public class Database_Manager {
         initialValues.put(KEY_NAME, name);
         initialValues.put(KEY_EMAIL, email);
         initialValues.put(KEY_PASSWORD, pass);
-        initialValues.put(KEY_EXCOUNT, 0);
+        initialValues.put(KEY_CURRENTEX, 1);
         initialValues.put(KEY_LOGGEDIN, 1);
         initialValues.put(KEY_POINTSIZE, 1);
         return SQLiteDatabase.insert(DATABASE_TABLE1, null, initialValues);
@@ -442,30 +456,6 @@ public class Database_Manager {
         }
         return userid;
     }
-    public int getExerciseCount(int user_id) throws SQLException{
-        int count  = 0;
-        Cursor cur =
-                SQLiteDatabase.query(true, DATABASE_TABLE1, new String[] {
-                                KEY_EXCOUNT
-                        },
-                        KEY_ID + "='" + user_id + "'",
-                        null,
-                        null,
-                        null,
-                        null,
-                        null);
-
-
-        if (cur != null) {
-            cur.moveToFirst();
-
-            count = cur.getInt(0);
-            //Log.d("Count ", "" + cur.getInt(0));
-            cur.close();
-        }
-
-        return count;
-    }
     public int getpointsize(int user_id) throws SQLException{
         int count  = 0;
         Cursor cur =
@@ -496,7 +486,7 @@ public class Database_Manager {
                         KEY_EMAIL,
                         KEY_PASSWORD,
                         KEY_LASTACTIVE,
-                        KEY_EXCOUNT,
+                        KEY_CURRENTEX,
                         KEY_COUNRTY,
                         KEY_POINTSIZE,
                         KEY_LOGGEDIN
@@ -558,7 +548,7 @@ public class Database_Manager {
 
         return Desc;
     }
-    public Cursor getExerciseListforDay(int day){
+    public Cursor getExerciseListforDay(int week, int day){
         return SQLiteDatabase.query(DATABASE_TABLE3, new String[] {
                         KEY_WEEK,
                         KEY_DAY,
@@ -568,14 +558,14 @@ public class Database_Manager {
                         KEY_DURATION,
                         KEY_GIF,
                         KEY_SPEED},
-                KEY_DAY + "='" + day + "'",
+                KEY_WEEK + "='" + week + "'" + " and " +  KEY_DAY + "='" + day + "'",
                 null,
                 null,
                 null,
                 null,
                 null);
     }
-    public Cursor getExericseResultsforDay(int user_id, int day){
+    public Cursor getExericseResultsforDay(int user_id, int week, int day){
         return SQLiteDatabase.query(DATABASE_TABLE4, new String[] {
                         KEY_WEEK,
                         KEY_DAY,
@@ -584,7 +574,7 @@ public class Database_Manager {
                         KEY_PAUSED,
                         KEY_COMPLETED,
                         KEY_DIZZINESS},
-                KEY_USERID + "='" + user_id + "'" + " and " +  KEY_DAY + "='" + day + "'",
+                KEY_USERID + "='" + user_id + "'" + " and " +  KEY_WEEK + "='" + week + "'" + " and " +  KEY_DAY + "='" + day + "'",
                 null,
                 null,
                 null,
@@ -639,7 +629,48 @@ public class Database_Manager {
 
         return exerciseNum;
     }
-    public int getPausedCount(int user_id, int day, int week, String timeofday, int pos ){
+    public int getExerciseId(int day, int week, String timeofday, int exerciseNum ){
+        int exerciseId = 0;
+        Cursor cur = SQLiteDatabase.query(DATABASE_TABLE3,new String[] {
+                        KEY_ID
+                },
+                KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'" + " and " + KEY_EXERCISENUM + "='" + exerciseNum + "'",
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        if (cur.getCount() !=0) {
+            cur.moveToFirst();
+            exerciseId = cur.getInt(0);
+            cur.close();
+        }
+
+        return exerciseId;
+    }
+    public int getExerciseId(int user_id) throws SQLException{
+        int exerciseId  = 0;
+        Cursor cur =
+                SQLiteDatabase.query(true, DATABASE_TABLE1, new String[] {
+                                KEY_CURRENTEX
+                        },
+                        KEY_ID + "='" + user_id + "'",
+                        null,
+                        null,
+                        null,
+                        null,
+                        null);
+
+
+        if (cur.getCount() !=0) {
+            cur.moveToFirst();
+            exerciseId = cur.getInt(0);
+            cur.close();
+        }
+        return (exerciseId);
+    }
+    public int getPausedCount(int user_id, int day, int week, String timeofday, int exerciseNum ){
         int PausedCount = 0;
         Cursor cur = SQLiteDatabase.query(DATABASE_TABLE4,new String[] {
                         KEY_PAUSED
@@ -651,20 +682,99 @@ public class Database_Manager {
                 null,
                 null);
 
-        if (cur != null) {
-            cur.moveToPosition(pos);
+        if (cur.getCount() !=0) {
+            cur.moveToPosition(exerciseNum);
             PausedCount = cur.getInt(0);
             cur.close();
         }
 
         return PausedCount;
     }
+    public List<Integer> getPausedTimes(int user_id, int day, int week, String timeofday, int exerciseNum){
+        List<Integer> PausedAt = new ArrayList<>();
+        Cursor cur = SQLiteDatabase.query(DATABASE_TABLE6,new String[] {
+                        KEY_PAUSEAT
+                },
+                KEY_USERID + "='" + user_id + "'" + " and " + KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'" + " and " + KEY_EXERCISENUM + "='" + exerciseNum + "'",
+                null,
+                null,
+                null,
+                null,
+                null);
 
-    public void updateExerciseCount(int user_id, int ExerciseCount){
-        Log.d("Update Count", "" + ExerciseCount);
+        if (cur.getCount() !=0) {
+            cur.moveToFirst();
+
+            while(!cur.isAfterLast()) {
+                PausedAt.add(cur.getInt(0));
+                cur.moveToNext();
+            }
+            cur.close();
+        }
+        return PausedAt;
+    }
+    public int getDuration(int user_id, int day, int week, String timeofday, int exerciseNum ){
+        int duration = 0;
+        Cursor cur = SQLiteDatabase.query(DATABASE_TABLE4,new String[] {
+                        KEY_DURATION
+                },
+                KEY_USERID + "='" + user_id + "'" + " and " + KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'",
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        if (cur != null) {
+            cur.moveToPosition(exerciseNum);
+            duration = cur.getInt(0);
+            cur.close();
+        }
+        return duration;
+    }
+    public int getDizziness(int user_id, int day, int week, String timeofday, int exerciseNum ){
+        int dizziness = 0;
+        Cursor cur = SQLiteDatabase.query(DATABASE_TABLE4,new String[] {
+                        KEY_DIZZINESS
+                },
+                KEY_USERID + "='" + user_id + "'" + " and " + KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'",
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        if (cur.getCount() !=0) {
+            cur.moveToPosition(exerciseNum);
+            dizziness = cur.getInt(0);
+            cur.close();
+        }
+        return dizziness;
+    }
+
+    public void IncrementExerciseCount(int user_id, int ExerciseCount){
+
         ContentValues args = new ContentValues();
-        args.put(KEY_EXCOUNT, ExerciseCount);
+        args.put(KEY_CURRENTEX, ++ExerciseCount);
+        Log.d("Update Exercise Count", "" + ExerciseCount);
         SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_ID + "='" + user_id + "'", null) ;
+    }
+    public void updateExerciseCount(int user_id, int ExerciseCount){
+        Log.d("Update Exercise Count", "" + (ExerciseCount));
+        ContentValues args = new ContentValues();
+        args.put(KEY_CURRENTEX, ExerciseCount);
+        SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_ID + "='" + user_id + "'", null) ;
+    }
+
+    public long insertPauseTime(int user_id, int week, int day, String timeofday, int exerciseNum, int pausetime){
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(KEY_USERID, user_id);
+        initialValues.put(KEY_WEEK, week);
+        initialValues.put(KEY_DAY, day);
+        initialValues.put(KEY_TIMEOFDAY, timeofday);
+        initialValues.put(KEY_EXERCISENUM, exerciseNum);
+        initialValues.put(KEY_PAUSEAT, pausetime);
+        return SQLiteDatabase.insert(DATABASE_TABLE6, null, initialValues);
     }
     public void updateLastActive(int user_id, String LastActive){
         Log.d("Update Count", "" + LastActive);
@@ -682,15 +792,11 @@ public class Database_Manager {
         SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_ID + "='" + user_id + "'", null);
 
     }
-    public void updateUSERPhoto( int user_id, byte[] photo) throws SQLiteException {
-        ContentValues args= new  ContentValues();
-        args.put(KEY_PHOTO, photo);
-        SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_ID + "='" + user_id + "'", null);
-    }
 
-    public void CompleteEx(int day, int week, String timeofday, int exerciseNum){
+    public void CompleteEx(int day, int week, String timeofday, int exerciseNum, int duration){
         ContentValues args = new ContentValues();
         args.put(KEY_COMPLETED, 1);
+        args.put(KEY_DURATION, duration);
         SQLiteDatabase.update(DATABASE_TABLE4, args, KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'" + " and " + KEY_EXERCISENUM + "='" + exerciseNum + "'", null);
 
     }
@@ -716,6 +822,12 @@ public class Database_Manager {
             cur.close();
         }
     }
+    public void updateDizziness(int exercise_id, int dizziness){
+        ContentValues args = new ContentValues();
+        args.put(KEY_DIZZINESS, dizziness);
+        SQLiteDatabase.update(DATABASE_TABLE4, args, KEY_ID + "='" + exercise_id + "'", null);
+
+    }
 
     public void LogoutUSER (int userid){
         ContentValues args = new ContentValues();
@@ -727,4 +839,11 @@ public class Database_Manager {
         args.put(KEY_LOGGEDIN, 1);
         SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_ID + "='" + userid + "'", null);
     }
+
+     /*public void updateUSERPhoto( int user_id, byte[] photo) throws SQLiteException {
+        ContentValues args= new  ContentValues();
+        args.put(KEY_PHOTO, photo);
+        SQLiteDatabase.update(DATABASE_TABLE1, args, KEY_ID + "='" + user_id + "'", null);
+    }*/
+
 }

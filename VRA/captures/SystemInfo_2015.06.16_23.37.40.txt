@@ -1,0 +1,146 @@
+AGGREGATED OVER LAST 24 HOURS:
+Per-Package Stats:
+  * com.example.darren.VRA / u0a187:
+      * com.example.darren.VRA / u0a187:
+               TOTAL: 17% (153MB-153MB-155MB/150MB-151MB-153MB over 60)
+                 Top: 17% (153MB-153MB-155MB/150MB-151MB-153MB over 60)
+          (Last Act): 0.09% (148MB-148MB-148MB/146MB-146MB-146MB over 1)
+            (Cached): 2.1%
+  * com.example.darren.VRA / u0a188:
+      * com.example.darren.VRA / u0a188:
+               TOTAL: 18% (16MB-42MB-161MB/15MB-41MB-158MB over 64)
+                 Top: 18% (16MB-42MB-161MB/15MB-41MB-158MB over 64)
+          (Last Act): 0.02%
+            (Cached): 0.00%
+  * com.example.darren.VRA / u0a189:
+      * com.example.darren.VRA / u0a189:
+               TOTAL: 59% (15MB-63MB-155MB/14MB-61MB-153MB over 209)
+                 Top: 59% (15MB-63MB-155MB/14MB-61MB-153MB over 209)
+          (Last Act): 0.02%
+            (Cached): 0.30% (34MB-35MB-36MB/33MB-34MB-34MB over 2)
+  * com.example.darren.VRA / u0a190:
+      * com.example.darren.VRA / u0a190:
+               TOTAL: 0.42% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+                 Top: 0.42% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+          (Last Act): 0.02%
+            (Cached): 0.23% (85MB-85MB-85MB/83MB-83MB-83MB over 1)
+  * com.example.darren.VRA / u0a191:
+      * com.example.darren.VRA / u0a191:
+               TOTAL: 0.17% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+                 Top: 0.17% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+
+Summary:
+  * com.example.darren.VRA / u0a189:
+           TOTAL: 59% (15MB-63MB-155MB/14MB-61MB-153MB over 209)
+             Top: 59% (15MB-63MB-155MB/14MB-61MB-153MB over 209)
+      (Last Act): 0.02%
+        (Cached): 0.30% (34MB-35MB-36MB/33MB-34MB-34MB over 2)
+  * com.example.darren.VRA / u0a188:
+           TOTAL: 18% (16MB-42MB-161MB/15MB-41MB-158MB over 64)
+             Top: 18% (16MB-42MB-161MB/15MB-41MB-158MB over 64)
+      (Last Act): 0.02%
+        (Cached): 0.00%
+  * com.example.darren.VRA / u0a187:
+           TOTAL: 17% (153MB-153MB-155MB/150MB-151MB-153MB over 60)
+             Top: 17% (153MB-153MB-155MB/150MB-151MB-153MB over 60)
+      (Last Act): 0.09% (148MB-148MB-148MB/146MB-146MB-146MB over 1)
+        (Cached): 2.1%
+  * com.example.darren.VRA / u0a190:
+           TOTAL: 0.42% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+             Top: 0.42% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+      (Last Act): 0.02%
+        (Cached): 0.23% (85MB-85MB-85MB/83MB-83MB-83MB over 1)
+  * com.example.darren.VRA / u0a191:
+           TOTAL: 0.17% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+             Top: 0.17% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+
+Run time Stats:
+  SOff/Norm: +1h54m16s671ms
+       Mod : +1s744ms
+  SOn /Norm: +9h37m49s658ms
+      TOTAL: +11h32m8s73ms
+
+          Start time: 2015-06-15 22:00:36
+  Total elapsed time: +1d1h37m5s835ms (partial) libdvm.so chromeview
+
+AGGREGATED OVER LAST 3 HOURS:
+Per-Package Stats:
+  * com.example.darren.VRA / u0a189:
+      * com.example.darren.VRA / u0a189:
+               TOTAL: 88% (22MB-67MB-95MB/21MB-65MB-92MB over 53)
+                 Top: 88% (22MB-67MB-95MB/21MB-65MB-92MB over 53)
+          (Last Act): 0.06%
+            (Cached): 0.75% (34MB-34MB-34MB/33MB-33MB-33MB over 1)
+  * com.example.darren.VRA / u0a190:
+      * com.example.darren.VRA / u0a190:
+               TOTAL: 2.5% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+                 Top: 2.5% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+          (Last Act): 0.10%
+            (Cached): 1.4% (85MB-85MB-85MB/83MB-83MB-83MB over 1)
+  * com.example.darren.VRA / u0a191:
+      * com.example.darren.VRA / u0a191:
+               TOTAL: 1.0% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+                 Top: 1.0% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+
+Summary:
+  * com.example.darren.VRA / u0a189:
+           TOTAL: 88% (22MB-67MB-95MB/21MB-65MB-92MB over 53)
+             Top: 88% (22MB-67MB-95MB/21MB-65MB-92MB over 53)
+      (Last Act): 0.06%
+        (Cached): 0.75% (34MB-34MB-34MB/33MB-33MB-33MB over 1)
+  * com.example.darren.VRA / u0a190:
+           TOTAL: 2.5% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+             Top: 2.5% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+      (Last Act): 0.10%
+        (Cached): 1.4% (85MB-85MB-85MB/83MB-83MB-83MB over 1)
+  * com.example.darren.VRA / u0a191:
+           TOTAL: 1.0% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+             Top: 1.0% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+
+Run time Stats:
+  SOn /Norm: +1h56m42s309ms
+      TOTAL: +1h56m42s309ms
+
+          Start time: 2015-06-16 21:41:00
+  Total elapsed time: +1h56m42s310ms (partial) libdvm.so chromeview
+
+CURRENT STATS:
+Per-Package Stats:
+  * com.example.darren.VRA / u0a189:
+      * com.example.darren.VRA / u0a189:
+               TOTAL: 88% (22MB-67MB-95MB/21MB-65MB-92MB over 53)
+                 Top: 88% (22MB-67MB-95MB/21MB-65MB-92MB over 53)
+          (Last Act): 0.06%
+            (Cached): 0.75% (34MB-34MB-34MB/33MB-33MB-33MB over 1)
+  * com.example.darren.VRA / u0a190:
+      * com.example.darren.VRA / u0a190:
+               TOTAL: 2.5% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+                 Top: 2.5% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+          (Last Act): 0.10%
+            (Cached): 1.4% (85MB-85MB-85MB/83MB-83MB-83MB over 1)
+  * com.example.darren.VRA / u0a191:
+      * com.example.darren.VRA / u0a191:
+               TOTAL: 1.0% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+                 Top: 1.0% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+
+Summary:
+  * com.example.darren.VRA / u0a189:
+           TOTAL: 88% (22MB-67MB-95MB/21MB-65MB-92MB over 53)
+             Top: 88% (22MB-67MB-95MB/21MB-65MB-92MB over 53)
+      (Last Act): 0.06%
+        (Cached): 0.75% (34MB-34MB-34MB/33MB-33MB-33MB over 1)
+  * com.example.darren.VRA / u0a190:
+           TOTAL: 2.5% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+             Top: 2.5% (16MB-44MB-85MB/15MB-42MB-83MB over 3)
+      (Last Act): 0.10%
+        (Cached): 1.4% (85MB-85MB-85MB/83MB-83MB-83MB over 1)
+  * com.example.darren.VRA / u0a191:
+           TOTAL: 1.0% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+             Top: 1.0% (16MB-49MB-81MB/15MB-47MB-79MB over 2)
+
+Run time Stats:
+  SOn /Norm: +1h56m42s76ms (running)
+      TOTAL: +1h56m42s76ms
+
+          Start time: 2015-06-16 21:41:00
+  Total elapsed time: +1h56m42s337ms (partial) libdvm.so chromeview

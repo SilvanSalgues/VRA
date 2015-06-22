@@ -1,5 +1,3 @@
-// Copyright 2015 Darren McNeely. All Rights Reserved.
-
 package com.example.darren.VRA.Exercise;
 
 import android.app.Fragment;
@@ -23,7 +21,7 @@ import java.util.List;
 
 public class Fragment_exercise extends Fragment {
 
-    int exercise = 0;
+    int cur_index, exercise_id, duration;
 
     public View InputFragmentView;
     public long remainingTime;
@@ -33,6 +31,8 @@ public class Fragment_exercise extends Fragment {
     TextView exercise_name;
     Button Pause_btn, Stop_btn;
     Fragment ExerciseFragment;
+
+    List<Integer> pausetimes = new ArrayList<>();
 
     static List<Exercise_properties> exerc = new ArrayList<>();    // Holds a list of exercises
     static List<Exercise_description> exdesc = new ArrayList<>();    // Holds a list of exercises descriptions
@@ -44,10 +44,15 @@ public class Fragment_exercise extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         InputFragmentView = inflater.inflate(R.layout.exercise, container, false);
 
+        exdesc.clear();
+        exerc.clear();
+
         db = new Database_Manager(getActivity());
         db.open();
 
-        exercise = db.getExerciseCount(db.isUserLoggedIn());
+        exercise_id = db.getExerciseId(db.isUserLoggedIn());
+        cur_index = exercise_id -1;
+        Log.d("exercise screen","" + cur_index);
 
         //Get all Exercise Descriptions from database
         //-----------------------------------------------------------------------------------------
@@ -82,8 +87,7 @@ public class Fragment_exercise extends Fragment {
         timer = (TextView)  InputFragmentView.findViewById(R.id.timer_txt);
         timer .setText(String.valueOf(remainingTime / 1000));
 
-
-        remainingTime = exerc.get(exercise).getDuration() * 1000;   // Gets the time of the exercise
+        remainingTime = exerc.get(cur_index).getDuration() * 1000;   // Gets the time of the cur_index
         countDownTimer = new MyCountDownTimer();
         countDownTimer.start();
 
@@ -97,9 +101,10 @@ public class Fragment_exercise extends Fragment {
                     Pause_btn.setText("CONTINUE");
 
                     db.open();
-                    db.updatePausedCount(exerc.get(exercise).getDay(), exerc.get(exercise).getWeek(), exerc.get(exercise).getTimeOfDay(), exerc.get(exercise).getexerciseNum());
+                    db.updatePausedCount(exerc.get(cur_index).getDay(), exerc.get(cur_index).getWeek(), exerc.get(cur_index).getTimeOfDay(), exerc.get(cur_index).getexerciseNum());
                     db.close();
 
+                    pausetimes.add(duration);
                     countDownTimer.cancel();
                     TimerActive = false;
                 }
@@ -117,15 +122,14 @@ public class Fragment_exercise extends Fragment {
             @Override
             public void onClick(View v) {
 
-
                 db.open();
-                if (exercise < exerc.size()) {
-                    db.CompleteEx(exerc.get(exercise).getDay(), exerc.get(exercise).getWeek(), exerc.get(exercise).getTimeOfDay(), exerc.get(exercise).getexerciseNum());
-                    db.updateExerciseCount(db.isUserLoggedIn(), ++exercise);
+
+                for (int pausetime : pausetimes ) {
+                    db.insertPauseTime(db.isUserLoggedIn(), exerc.get(cur_index).getDay(), exerc.get(cur_index).getWeek(), exerc.get(cur_index).getTimeOfDay(), exerc.get(cur_index).getexerciseNum(), pausetime);
+                    Log.d("Paused Times", "" + pausetime);
                 }
-                else{
-                    db.updateExerciseCount(db.isUserLoggedIn(), 0);
-                }
+                pausetimes.clear();
+
                 db.close();
 
                 FragmentManager fm = getFragmentManager();
@@ -141,14 +145,14 @@ public class Fragment_exercise extends Fragment {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        ExerciseFragment = exerc.get(exercise).getType().newInstance(exerc.get(exercise).getGifposition());
+        ExerciseFragment = exerc.get(cur_index).getType().newInstance(exerc.get(cur_index).getGifposition());
         ft.replace(R.id.exercise_container, ExerciseFragment)
                 .addToBackStack(null);
         ft.commit();
 
 
-        exercise_name.setText("Exercise | " + exdesc.get(exerc.get(exercise).getexerciseNum()).getName());  // Sets the Exercise_No text box as the current exercise number
-        //Speed.setText("Speed : " + exerc.get(exercise).speed + "Hz");        // Sets the Speed text box as the speed of head movement of the exercise
+        exercise_name.setText("Exercise | " + exdesc.get(exerc.get(cur_index).getexerciseNum()).getName());  // Sets the Exercise_No text box as the current cur_index number
+        //Speed.setText("Speed : " + exerc.get(cur_index).speed + "Hz");        // Sets the Speed text box as the speed of head movement of the cur_index
 
         return InputFragmentView;
     }
@@ -159,6 +163,7 @@ public class Fragment_exercise extends Fragment {
         long seconds;
         Fragment myFragment;
 
+
         public MyCountDownTimer() {
             super(remainingTime, 1000);     // 1000 is an interval of one second
         }
@@ -167,11 +172,18 @@ public class Fragment_exercise extends Fragment {
         public void onFinish() {
             timer.setText("Time's up!");
 
-
             db.open();
-            if (exercise < exerc.size()) {
-                db.CompleteEx(exerc.get(exercise).getDay(), exerc.get(exercise).getWeek(), exerc.get(exercise).getTimeOfDay(), exerc.get(exercise).getexerciseNum());
-                db.updateExerciseCount(db.isUserLoggedIn(), ++exercise);
+            db.CompleteEx(exerc.get(cur_index).getDay(), exerc.get(cur_index).getWeek(), exerc.get(cur_index).getTimeOfDay(), exerc.get(cur_index).getexerciseNum(), duration);
+
+            for (int pausetime : pausetimes ) {
+                db.insertPauseTime(db.isUserLoggedIn(), exerc.get(cur_index).getDay(), exerc.get(cur_index).getWeek(), exerc.get(cur_index).getTimeOfDay(), exerc.get(cur_index).getexerciseNum(), pausetime);
+                Log.d("Paused Times", "" + pausetime);
+            }
+            pausetimes.clear();
+
+            //Log.d("cur_index", "" + cur_index);
+            if (cur_index < exerc.size()) {
+                db.IncrementExerciseCount(db.isUserLoggedIn(), exercise_id);
             }
             else{
                 db.updateExerciseCount(db.isUserLoggedIn(), 0);
@@ -180,7 +192,8 @@ public class Fragment_exercise extends Fragment {
 
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            myFragment = new Fragment_dizziness();
+
+            myFragment = new Fragment_dizziness().newInstance(exercise_id);
             ft.replace(R.id.content_layout, myFragment)
                     .addToBackStack(null);
             ft.commit();
@@ -188,17 +201,19 @@ public class Fragment_exercise extends Fragment {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            remainingTime = millisUntilFinished;             //Gets the remaining time left on the timer in seconds
-            minutes = (remainingTime /1000) / 60;       // Breaks the number of seconds down into minutes
-            seconds = (remainingTime /1000) % 60;       // Gets the remaining seconds excluding the minutes
+            remainingTime = millisUntilFinished;                    // Gets the remaining time left on the timer in seconds
+            minutes = (remainingTime /1000) / 60;                   // Breaks the number of seconds down into minutes
+            seconds = (remainingTime /1000) % 60;                   // Gets the remaining seconds excluding the minutes
             timer.setText(String.format("Remaining %d:%02d", minutes, seconds));  // Updates the timer text box
+
+            duration = (int)(exerc.get(cur_index).getDuration() - (remainingTime /1000));
         }
     }
 
-   @Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        InputFragmentView = null; // now cleaning up!
+        InputFragmentView = null;   // now cleaning up!
         countDownTimer.cancel();
         countDownTimer = null;
         ExerciseFragment.onDestroyView();

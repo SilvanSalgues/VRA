@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.darren.VRA"
-        minSdkVersion 18
+        minSdkVersion 17
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -38,5 +38,5 @@ dependencies {
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/mail.jar')
-
+    
 }

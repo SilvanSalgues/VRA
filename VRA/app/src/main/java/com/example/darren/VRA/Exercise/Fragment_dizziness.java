@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.darren.VRA.Database.Database_Manager;
 import com.example.darren.VRA.R;
 
 import java.util.Calendar;
@@ -20,15 +22,34 @@ import java.util.Calendar;
  */
 public class Fragment_dizziness extends Fragment {
 
+
+    public Fragment_dizziness(){
+        super();
+    }
+
+    public Fragment_dizziness newInstance(int exercise_id) {
+        Fragment_dizziness fragment = new Fragment_dizziness();
+        Bundle bundle = new Bundle(1);
+        bundle.putInt("exercise_id", exercise_id);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     View InputFragmentView;
     Button submit;
     TextView dizziness_date, value;
     SeekBar dizziness_seekBar;
     Fragment myFragment;
+    Database_Manager db;
+    int exercise_id;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         InputFragmentView = inflater.inflate(R.layout.dizziness, container, false);
+        db = new Database_Manager(getActivity());
+
+        exercise_id = getArguments().getInt("exercise_id");
+        Log.d("exercise_id", "" + exercise_id);
 
         value = (TextView) InputFragmentView.findViewById(R.id.value);
         dizziness_date = (TextView) InputFragmentView.findViewById(R.id.dizziness_date);
@@ -38,7 +59,10 @@ public class Fragment_dizziness extends Fragment {
         {
             public void onClick(View v)
             {
-                // Perform action on click
+                db.open();
+                db.updateDizziness(exercise_id, dizziness_seekBar.getProgress());
+                db.close();
+
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 myFragment = new Fragment_exercise_intro();

@@ -1,5 +1,3 @@
-// Copyright 2015 Darren McNeely. All Rights Reserved.
-
 package com.example.darren.VRA.Login;
 
 import android.app.Fragment;
