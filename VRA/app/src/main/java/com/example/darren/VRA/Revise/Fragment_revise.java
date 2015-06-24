@@ -130,8 +130,9 @@ public class Fragment_revise extends Fragment {
     }
 
 
-    private void loadExercises(int week)
+    private void loadExercises(int wk)
     {
+        final int week = wk;
         // This for loop currently loads up 7 days
         for(int i = 0; i<7; i++) {
 
@@ -178,11 +179,12 @@ public class Fragment_revise extends Fragment {
             });
 */
             final int day = i;
+
             expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-                    open_Dialog(day, groupPosition, childPosition);
+                    open_Dialog(week, day, groupPosition, childPosition);
                     return false;
                 }
             });
@@ -190,14 +192,13 @@ public class Fragment_revise extends Fragment {
         }
     }
 
-    private void open_Dialog(int day, int groupPos, int childPos) {
+    private void open_Dialog(int week, int day, int groupPos, int childPos) {
         // custom dialog
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.exercise_dialog);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
-        int week = 1;
         /*Log.d("Revise, Child List", "Day " + (day + 1) + ", Week " + week + ", Title " +
                 expandableListTitle.get(groupPos) + ", ChildPosition" + childPos +
                 "" + listAllExercises.get(day).get(groupPos).getExList().get(childPos));*/
@@ -242,7 +243,7 @@ public class Fragment_revise extends Fragment {
             status.setText("Status : Completed");
         } else if (statusNo == 2) {
             tick.setBackgroundResource(R.drawable.icon_red_x);
-            status.setText("Status : Missed");
+            status.setText("Status : Stopped");
         } else {
             tick.setBackgroundResource(R.drawable.icon_yellow_blank);
             status.setText("Status : To be completed");

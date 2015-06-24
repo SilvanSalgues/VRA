@@ -793,13 +793,20 @@ public class Database_Manager {
 
     }
 
-    public void CompleteEx(int day, int week, String timeofday, int exerciseNum, int duration){
+    public void completeEx(int day, int week, String timeofday, int exerciseNum, int duration){
         ContentValues args = new ContentValues();
         args.put(KEY_COMPLETED, 1);
         args.put(KEY_DURATION, duration);
         SQLiteDatabase.update(DATABASE_TABLE4, args, KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'" + " and " + KEY_EXERCISENUM + "='" + exerciseNum + "'", null);
-
     }
+
+    public void stoppedEx(int day, int week, String timeofday, int exerciseNum, int duration){
+        ContentValues args = new ContentValues();
+        args.put(KEY_COMPLETED, 2);
+        args.put(KEY_DURATION, duration);
+        SQLiteDatabase.update(DATABASE_TABLE4, args, KEY_DAY + "='" + day + "'" + " and " + KEY_WEEK + "='" + week + "'" + " and " + KEY_TIMEOFDAY + "='" + timeofday + "'" + " and " + KEY_EXERCISENUM + "='" + exerciseNum + "'", null);
+    }
+
     public void updatePausedCount(int day, int week, String timeofday, int exerciseNum){
         Cursor cur =  SQLiteDatabase.query(DATABASE_TABLE4, new String[] {
                         KEY_PAUSED,},

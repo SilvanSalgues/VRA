@@ -124,6 +124,8 @@ public class Fragment_exercise extends Fragment {
 
                 db.open();
 
+                db.stoppedEx(exerc.get(cur_index).getDay(), exerc.get(cur_index).getWeek(), exerc.get(cur_index).getTimeOfDay(), exerc.get(cur_index).getexerciseNum(), duration);
+
                 for (int pausetime : pausetimes ) {
                     db.insertPauseTime(db.isUserLoggedIn(), exerc.get(cur_index).getDay(), exerc.get(cur_index).getWeek(), exerc.get(cur_index).getTimeOfDay(), exerc.get(cur_index).getexerciseNum(), pausetime);
                     Log.d("Paused Times", "" + pausetime);
@@ -173,7 +175,7 @@ public class Fragment_exercise extends Fragment {
             timer.setText("Time's up!");
 
             db.open();
-            db.CompleteEx(exerc.get(cur_index).getDay(), exerc.get(cur_index).getWeek(), exerc.get(cur_index).getTimeOfDay(), exerc.get(cur_index).getexerciseNum(), duration);
+            db.completeEx(exerc.get(cur_index).getDay(), exerc.get(cur_index).getWeek(), exerc.get(cur_index).getTimeOfDay(), exerc.get(cur_index).getexerciseNum(), duration);
 
             for (int pausetime : pausetimes ) {
                 db.insertPauseTime(db.isUserLoggedIn(), exerc.get(cur_index).getDay(), exerc.get(cur_index).getWeek(), exerc.get(cur_index).getTimeOfDay(), exerc.get(cur_index).getexerciseNum(), pausetime);
