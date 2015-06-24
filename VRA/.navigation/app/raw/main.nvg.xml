@@ -6,7 +6,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.darren.VRA.Main.Activity_container"/>
+        className = "com.rehabilitation.VRA.Main.Activity_container"/>
       <point      
         x = "1644"      
         y = "712"/>
@@ -14,7 +14,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.darren.VRA.Login.Activity_login"/>
+        className = "com.rehabilitation.VRA.Login.Activity_login"/>
       <point      
         x = "1464"      
         y = "908"/>

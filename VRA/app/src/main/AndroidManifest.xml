@@ -37,12 +37,12 @@
         </receiver>
 
         <activity
-            android:name=".Main.Activity_container"
+            android:name="com.rehabilitation.VRA.Main.Activity_container"
             android:hardwareAccelerated="true"
             android:screenOrientation="landscape">
         </activity>
         <activity
-            android:name=".Login.Activity_login"
+            android:name="com.rehabilitation.VRA.Login.Activity_login"
             android:hardwareAccelerated="true"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -54,7 +54,7 @@
         <!-- Required for applications which use Google Play Services. -->
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 
-        <service android:name=".Sensor.Bluetooth_RFduinoService" />
+        <service android:name="com.rehabilitation.VRA.Sensor.Bluetooth_RFduinoService" />
     </application>
 
 </manifest>
