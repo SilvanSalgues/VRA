@@ -4,11 +4,15 @@ package com.rehabilitation.VRA.Messenger;
 
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.darren.VRA.R;
@@ -32,11 +36,14 @@ public class Adapter_SMS extends ArrayAdapter<Type_SMS> {
      */
     int mLayoutResourceId;
 
-    public Adapter_SMS(Context context, int layoutResourceId) {
+    Fragment_messenger fragment;
+
+    public Adapter_SMS(Context context, int layoutResourceId, Fragment_messenger fragment) {
         super(context, layoutResourceId);
 
         mContext = context;
         mLayoutResourceId = layoutResourceId;
+        this.fragment = fragment;
     }
 
     /**
@@ -47,68 +54,56 @@ public class Adapter_SMS extends ArrayAdapter<Type_SMS> {
     {
         final Type_SMS currentItem = getItem(position);
 
-        String user = "" + currentItem.getUser();
-
         if (row == null) {
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
 
-            if(user.equals(Notification_Handler.getHandle())){
+            //if(user.equals(Notification_Handler.getHandle())){
+            //
+          //  if(!currentItem.getattachedId().isEmpty())
+          //  {
                 row = inflater.inflate(R.layout.row_sms_sent, parent, false);
-            }
-            else
-            {
-                row = inflater.inflate(R.layout.row_sms_received, parent, false);
-            }
+           // }
+//            else {
+//                row = inflater.inflate(R.layout.row_sms_main, parent, false);
+//
+//                final EditText row_reply = (EditText) row.findViewById(R.id.row_reply);
+//                Button row_send = (Button) row.findViewById(R.id.row_send);
+//                row_send.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (!row_reply.getText().toString().isEmpty())
+//                        {
+//                            Log.d("Row Text", "" + row_reply.getText());
+//                            fragment.addItem(row_reply.getText().toString(), currentItem.getId());
+//                            row_reply.setText("");
+//                        }
+//
+//                    }
+//                });
+//            }
+            //}
+            //else
+            //{
+            //    row = inflater.inflate(R.layout.row_sms_received, parent, false);
+            //}
         }
         row.setTag(currentItem);
+
+        // Places the message content
         TextView smsText = (TextView) row.findViewById(R.id.smsText);
         smsText.setText(currentItem.getText());
 
+        // Places the current user name with the massage
+        TextView username = (TextView) row.findViewById(R.id.username);
+        username.setText(currentItem.getUsername());
+
+        // Places the time since the message has been posted
         TextView createdAt = (TextView) row.findViewById(R.id.createdAt);
-
-
-        if(currentItem.getCreatedAt() == null)
-        {
+        if(currentItem.getCreatedAt() == null) {
             createdAt.setText("Sending..");
         }
         else {
-
-            SimpleDateFormat sm = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss", Locale.UK);
-            Date date = new Date();
-            long diff = date.getTime() - currentItem.getCreatedAt().getTime();
-            //System.out.println(sm.format(diff));
-
-            long diffSeconds = diff / 1000 % 60;
-            long diffMinutes = diff / (60 * 1000) % 60;
-            long diffHours = diff / (60 * 60 * 1000);
-            long diffDays = diff / (60 * 60 * 1000 * 24);
-
-            if (diffDays != 0) {
-                if (diffDays == 1) {
-                    createdAt.setText(diffDays + " Day ago");
-                } else
-                    createdAt.setText(diffDays + " Days ago");
-            } else if (diffHours != 0) {
-                if (diffHours == 1) {
-                    createdAt.setText(diffHours + " Hour ago");
-                } else
-                    createdAt.setText(diffHours + " Hours ago");
-            } else if (diffMinutes != 0) {
-                if (diffMinutes == 1) {
-                    createdAt.setText(diffMinutes + " Minute ago");
-                } else
-                    createdAt.setText(diffMinutes + " Minutes ago");
-            } else{
-                createdAt.setText(diffSeconds + " Seconds ago");
-            }
-
-        }
-
-        if(!user.equals(Notification_Handler.getHandle())) {
-            smsText.setTextColor(mContext.getResources().getColor(R.color.Light_Blue));
-        }
-        else{
-            smsText.setTextColor(mContext.getResources().getColor(R.color.Black));
+            createdAt.setText(currentItem.getTimeSince());
         }
 
         return row;

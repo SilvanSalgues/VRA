@@ -51,6 +51,9 @@ public class Fragment_exercise extends Fragment {
         db.open();
 
         exercise_id = db.getExerciseId(db.isUserLoggedIn());
+
+        /* Due to the _id in the sqlite starting at 1 and the cursor index starting at 0
+        * the cur_index is one less than the exercise_id*/
         cur_index = exercise_id -1;
         Log.d("exercise screen","" + cur_index);
 

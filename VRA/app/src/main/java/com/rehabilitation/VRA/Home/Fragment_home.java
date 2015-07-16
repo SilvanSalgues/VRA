@@ -2,28 +2,13 @@
 
 package com.rehabilitation.VRA.Home;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,11 +17,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rehabilitation.VRA.Database.Database_Manager;
 import com.example.darren.VRA.R;
@@ -44,22 +27,16 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Fragment_home extends Fragment{
 
-    static final int CAMERA_CODE = 101, GALLERY_CODE = 201, CROPING_CODE = 301;
-    Uri ImageUri;
-    File outPutFile = null;
+    //static final int CAMERA_CODE = 101, GALLERY_CODE = 201, CROPING_CODE = 301;
+    //Uri ImageUri;
+    //File outPutFile = null;
 
     TextView exercise_complete_number, last_active_time, Name, useremail, Pixels;
-    Button camera_icon, edit_profile;
-    ImageButton profile;
+    Button edit_profile;
+    //Button camera_icon;
+    //ImageButton profile;
     ImageView info_home;
 
     Database_Manager db;
@@ -72,14 +49,14 @@ public class Fragment_home extends Fragment{
 
     AlertDialog diaBox;
 
-    int profile_image_size;
+    //int profile_image_size;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View InputFragmentView = inflater.inflate(R.layout.home, container, false);
 
-        profile_image_size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+        //profile_image_size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
 
-        outPutFile = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
+        //outPutFile = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
 
         // Font path
         //String fontPath = "fonts/pali-helvetica-bold.ttf";
@@ -145,9 +122,9 @@ public class Fragment_home extends Fragment{
         graph.getViewport().setMaxX(7);
 
 
-        profile = (ImageButton) InputFragmentView.findViewById(R.id.profile);
+        //profile = (ImageButton) InputFragmentView.findViewById(R.id.profile);
 
-        // The user already has a photo. Set the profile picture as that photo
+        /*// The user already has a photo. Set the profile picture as that photo
         if (db.getUserImage(db.isUserLoggedIn()) != null && db.getUserImage(db.isUserLoggedIn()).length > 0){
             Bitmap photo = getImage(db.getUserImage(db.isUserLoggedIn()));
             profile.setImageBitmap(roundIMG(photo));
@@ -166,7 +143,7 @@ public class Fragment_home extends Fragment{
                 selectImageOption();
             }
         });
-
+*/
         edit_profile = (Button) InputFragmentView.findViewById(R.id.edit_profile);
         edit_profile.setOnClickListener(new OnClickListener() {
             @Override
@@ -188,7 +165,7 @@ public class Fragment_home extends Fragment{
 
         return InputFragmentView;
     }
-    private void selectImageOption() {
+   /* private void selectImageOption() {
         final CharSequence[] items = { "Capture Photo", "Choose from Gallery", "Cancel" };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -226,9 +203,9 @@ public class Fragment_home extends Fragment{
             }
         });
         builder.show();
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -276,15 +253,15 @@ public class Fragment_home extends Fragment{
             else
                 Log.d("requestCode not right: ", "" + requestCode);
         }
-    }
+    }*/
 
-    private void cropIMG() {
+   /* private void cropIMG() {
 
         final ArrayList<CropingOption> cropOptions = new ArrayList<>();
 
         Log.d("Calling Crop Intent", "Should be!");
         Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setType("image/*");
+        intent.setType("image*//*");
 
         List<ResolveInfo> list = getActivity().getPackageManager().queryIntentActivities(intent, 0);
         int size = list.size();
@@ -396,7 +373,7 @@ public class Fragment_home extends Fragment{
             //
         }
         return null;
-    }
+    }*/
 
     private void open_Dialog() {
         // custom dialog
@@ -461,6 +438,7 @@ public class Fragment_home extends Fragment{
         });
         dialog.show();
     }
+/*
 
     // convert from bitmap to byte array
     public static byte[] getBytes(Bitmap bitmap) {
@@ -473,6 +451,7 @@ public class Fragment_home extends Fragment{
     public static Bitmap getImage(byte[] image) {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
+*/
 
 
     private AlertDialog CreateDialog( String message ){

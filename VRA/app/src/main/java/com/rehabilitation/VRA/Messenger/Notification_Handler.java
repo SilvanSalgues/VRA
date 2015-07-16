@@ -70,7 +70,7 @@ public class Notification_Handler extends NotificationsHandler {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(ctx)
                         .setSmallIcon(R.drawable.icon_notification)
-                        .setContentTitle("New Message")
+                        .setContentTitle("New Board Post")
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(msg))
                         .setContentText(msg);

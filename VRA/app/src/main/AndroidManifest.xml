@@ -8,10 +8,10 @@
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
 
     <!-- Camera -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera" />-->
 
     <!-- Azure GCM Notifications -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -39,12 +39,14 @@
         <activity
             android:name="com.rehabilitation.VRA.Main.Activity_container"
             android:hardwareAccelerated="true"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
         <activity
             android:name="com.rehabilitation.VRA.Login.Activity_login"
             android:hardwareAccelerated="true"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

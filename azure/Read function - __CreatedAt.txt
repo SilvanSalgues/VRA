@@ -1,0 +1,7 @@
+function read(query, user, request) {
+    
+    request.execute({
+            systemProperties: ['__createdAt', '__updatedAt']
+    });
+
+}

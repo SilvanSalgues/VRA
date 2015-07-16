@@ -498,6 +498,28 @@ public class Database_Manager {
                 null,
                 null);
     }
+
+    public String getUsername(int user_id){
+        String Username = null;
+        Cursor cur =  SQLiteDatabase.query(true, DATABASE_TABLE1, new String[] {
+                        KEY_NAME
+                },
+                KEY_ID + "='" + user_id + "'",
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        if (cur.getCount() !=0) {
+            cur.moveToFirst();
+            Username = cur.getString(0);
+            cur.close();
+        }
+
+        return Username;
+    }
+
     public byte [] getUserImage(int user_id){
         byte [] image = null;
         Cursor cur =  SQLiteDatabase.query(true, DATABASE_TABLE1, new String[] {

@@ -4,22 +4,23 @@
     android:layout_height="fill_parent"
     android:padding="4dp">
 
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/sms_rounded_edges"
-        android:id="@+id/relativeLayout4"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="100dp"
+        android:id="@+id/relativeLayout"
         android:minWidth="300dp"
-        android:padding="6dp"
-        android:layout_alignParentEnd="true">
+        android:padding="6dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="start"
-            android:id="@+id/relativeLayout3" >
+            android:id="@+id/relativeLayout2">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -34,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/smsText"
-                android:layout_alignParentStart="true" >
+                android:layout_alignParentStart="true">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -53,8 +54,35 @@
                     android:id="@+id/createdAt"
                     android:textSize="14sp"
                     android:paddingLeft="3dp"
-                    android:paddingRight="3dp" />
+                    android:paddingRight="3dp"/>
+
             </LinearLayout>
+
         </RelativeLayout>
+
     </RelativeLayout>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/row_reply"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignParentStart="true"
+        android:hint="Reply"
+        android:layout_toStartOf="@+id/row_send"
+        android:layout_alignBottom="@+id/row_send"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/row_send"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:textColor="@color/white"
+        android:background="@color/Lime_Green"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignEnd="@+id/relativeLayout"
+        android:textSize="14sp" />
 </RelativeLayout>

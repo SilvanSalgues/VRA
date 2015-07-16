@@ -58,6 +58,9 @@ public class Fragment_exercise_intro extends Fragment implements YouTubePlayer.O
         db.open();
 
         exercise_id = db.getExerciseId(db.isUserLoggedIn());
+
+        /* Due to the _id in the sqlite starting at 1 and the cursor index starting at 0
+        * the cur_index is one less than the exercise_id*/
         cur_index = exercise_id -1;
         Log.d("Exercise ID intro", "" + cur_index);
 
