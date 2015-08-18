@@ -40,7 +40,7 @@ public class Notification_Handler extends NotificationsHandler {
         new AsyncTask<Void, Void, Void>() {
             protected Void doInBackground(Void... params) {
                 try {
-                    Fragment_messenger.AzureClient.getPush().register(gcmRegistrationId, null);
+                    Azure.AzureClient.getPush().register(gcmRegistrationId, null);
                     return null;
                 }
                 catch(Exception e) {

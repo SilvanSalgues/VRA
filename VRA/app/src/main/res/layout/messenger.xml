@@ -4,7 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--xmlns:tools="http://schemas.android.com/tools">-->
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -56,46 +55,30 @@
 
 
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headerMessage"
+        android:layout_above="@+id/NewMSG">
 
-       <!-- <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_container"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">-->
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listboardposts"
+            android:layout_below="@+id/headerMessage"
+            android:layout_above="@+id/NewMSG" />
 
-        <!--<ScrollView-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:id="@+id/scrollView2"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_below="@+id/headerMessage"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_above="@+id/NewMSG">-->
-
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/boardposts_layout"
-                android:focusableInTouchMode="false"
-                android:background="@color/Light_Grey"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/headerMessage"
-                android:layout_above="@+id/NewMSG">
-            </LinearLayout>
-        <!--</ScrollView>-->
-        <!--</android.support.v4.widget.SwipeRefreshLayout>-->
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
     <RelativeLayout
         android:id="@+id/NewMSG"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="62dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="@color/Ligher_Green"
+        android:background="@color/Dark_Green"
         android:layout_alignParentEnd="true">
 
         <EditText
@@ -107,11 +90,13 @@
             android:textIsSelectable="false"
             android:inputType="none"
             android:layout_toStartOf="@+id/addSMSbtn"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:paddingStart="8dp">
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:paddingStart="8dp"
+            android:textSize="20sp"
+            android:hint="Post New Topic"
+            android:layout_alignBottom="@+id/addSMSbtn"
+            android:layout_alignTop="@+id/addSMSbtn">
             <requestFocus />
         </EditText>
 
@@ -126,8 +111,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginTop="4dp" />
 
     </RelativeLayout>
 

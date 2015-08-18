@@ -97,7 +97,12 @@ public class Type_SMS {
 			} else
 				TimeSince = diffMinutes + " Minutes ago";
 		} else{
-			TimeSince = diffSeconds + " Seconds ago";
+			if (diffSeconds < 0){
+				TimeSince = "0 Seconds ago";
+			}
+			else {
+				TimeSince = diffSeconds + " Seconds ago";
+			}
 		}
 
 		return TimeSince;

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="smsText"
+        android:id="@+id/smsText"
+        android:textSize="22sp"
+        android:padding="3dp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:layout_below="@+id/smsText"
+        android:layout_alignEnd="@+id/send_btn"
+        android:layout_alignStart="@+id/smsText">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:id="@+id/username"
+            android:textSize="18sp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="time"
+            android:id="@+id/time"
+            android:textSize="20sp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp" />
+
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_above="@+id/reply"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_replies"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_above="@+id/send_btn"
+        android:layout_alignStart="@+id/linearLayout3"
+        android:layout_alignEnd="@+id/linearLayout3"
+        android:divider="@null"
+        android:dividerHeight="0dp" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reply"
+        android:hint="Reply"
+        android:textSize="20sp"
+        android:layout_alignTop="@+id/send_btn"
+        android:layout_alignStart="@+id/swipe_container"
+        android:layout_toStartOf="@+id/send_btn"
+        android:layout_alignBottom="@+id/send_btn" />
+
+    <Button
+        android:id="@+id/send_btn"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:textColor="@color/white"
+        android:background="@color/Lime_Green"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="14sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp" />
+</RelativeLayout>

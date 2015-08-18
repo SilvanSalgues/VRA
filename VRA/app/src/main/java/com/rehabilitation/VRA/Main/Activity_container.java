@@ -12,12 +12,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.darren.VRA.R;
 import com.rehabilitation.VRA.Database.Database_Manager;
 import com.rehabilitation.VRA.Exercise.Fragment_exercise_intro;
 import com.rehabilitation.VRA.Home.Fragment_home;
 import com.rehabilitation.VRA.Messenger.Fragment_messenger;
 import com.rehabilitation.VRA.Login.Activity_login;
-import com.example.darren.VRA.R;
 import com.rehabilitation.VRA.Revise.Fragment_revise;
 import com.rehabilitation.VRA.Sensor.Fragment_sensor;
 
