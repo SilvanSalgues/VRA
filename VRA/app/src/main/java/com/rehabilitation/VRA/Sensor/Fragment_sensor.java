@@ -191,20 +191,22 @@ public class Fragment_sensor extends Fragment implements BluetoothAdapter.LeScan
         }
     }
     @Override
-    public void onStop() {                       //When the app is closed, this runs
-        super.onStop();
+    public void onStop() {
+        if (bluetoothAdapter != null){
+            bluetoothAdapter.stopLeScan(this);
 
-        bluetoothAdapter.stopLeScan(this);
+            //unregisterReceiver(bluetoothStateReceiver);
+            getActivity().unregisterReceiver(rfduinoReceiver);
 
-        //unregisterReceiver(bluetoothStateReceiver);
-        getActivity().unregisterReceiver(rfduinoReceiver);
-
-        if(bound) {     // IF a connection has been made to the RFduino service
-            getActivity().unbindService(rfduinoServiceConnection);    // Disconnect RFduino service
-            bound = false;                              // Boolean to show if the service is connected
+            if(bound) { // IF a connection has been made to the RFduino service
+                getActivity().unbindService(rfduinoServiceConnection); // Disconnect RFduino service
+                bound = false; // Boolean to show if the service is connected
+            }
         }
 
+        super.onStop();
     }
+
     @Override
     public void onResume() {      //When the app is brought back into focus
         super.onResume();
@@ -212,6 +214,8 @@ public class Fragment_sensor extends Fragment implements BluetoothAdapter.LeScan
         //Check if the device has bluetooth LE capabilities and enable bluetooth if it has not been already.
         enable_bluetooth();
 
+        //TODO (jos || tariq) I don't know why this is here but it should never call lifecycle methods
+        // It may be related to the enabling ble - refactor code to get rid of these two calls
         onStop();
         onStart();
     }

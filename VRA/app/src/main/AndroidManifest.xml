@@ -7,12 +7,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
 
-    <!-- Camera -->
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera" />-->
-
     <!-- Azure GCM Notifications -->
     <uses-permission android:name="android.permission.INTERNET" />
     <permission android:name="com.example.darren.VRA.permission.C2D_MESSAGE" android:protectionLevel="signature" />
