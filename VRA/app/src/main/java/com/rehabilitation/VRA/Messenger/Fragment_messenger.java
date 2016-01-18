@@ -122,15 +122,15 @@ public class Fragment_messenger extends Boardpost_Fragment {
     }
 
     @Override
-    public void add_boardpost(Type_SMS Topic){
+    public void addBoardPost(Type_SMS Topic){
         boardpost_adapter.add(Topic);
         //Log.d("Fragment Messenger"," Add_boardpost");
     }
 
     @Override
-    public void remove_boardpost(Type_SMS Topic){
+    public void removeBoardPost(Type_SMS Topic){
         boardpost_adapter.remove(Topic);
-        //Log.d("Fragment Messenger", " remove_boardpost");
+        //Log.d("Fragment Messenger", " removeBoardPost");
     }
 
     public void refresh_boardposts(){

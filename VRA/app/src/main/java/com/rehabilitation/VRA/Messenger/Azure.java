@@ -263,7 +263,7 @@ public class Azure {
                             for (Type_SMS item : results) {
                                 if (item.getattachedId().isEmpty()) {
                                     //Log.d("main topic", "" + item);
-                                    boardpost_fragment.add_boardpost(item);
+                                    boardpost_fragment.addBoardPost(item);
                                 }
                             }
                         }
@@ -298,7 +298,7 @@ public class Azure {
                             for (Type_SMS item : results) {
                                 if (item.getattachedId().equals(topic.getId())) {
                                     //wLog.d("main topic", "" + item);
-                                    boardpost_fragment.add_boardpost(item);
+                                    boardpost_fragment.addBoardPost(item);
                                 }
                             }
                         }
@@ -405,7 +405,7 @@ public class Azure {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
                         removeItem(currentItem);
-                        boardpost_fragment.remove_boardpost(currentItem);
+                        boardpost_fragment.removeBoardPost(currentItem);
                         dialog.dismiss();
                     }
 

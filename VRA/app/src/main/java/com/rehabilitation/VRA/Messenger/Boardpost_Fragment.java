@@ -20,9 +20,9 @@ public abstract class Boardpost_Fragment extends Fragment {
 
     Fragment newFragment;
 
-    public void add_boardpost(Type_SMS Topic){}
+    public abstract void addBoardPost(Type_SMS Topic);
 
-    public void remove_boardpost(Type_SMS Topic){}
+    public abstract void removeBoardPost(Type_SMS Topic);
 
     public void dismissProgressBar() {
         getActivity().runOnUiThread(new Runnable() {

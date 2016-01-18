@@ -136,14 +136,14 @@ public class Fragment_replies extends Boardpost_Fragment {
     }
 
     @Override
-    public void add_boardpost(Type_SMS Topic){
+    public void addBoardPost(Type_SMS Topic){
         reply_adapter.add(Topic);
         //Log.d("Fragment replies", " Add_boardpost");
     }
 
     @Override
-    public void remove_boardpost(Type_SMS Topic){
+    public void removeBoardPost(Type_SMS Topic){
         reply_adapter.remove(Topic);
-        //Log.d("Fragment replies", " remove_boardpost");
+        //Log.d("Fragment replies", " removeBoardPost");
     }
 }
