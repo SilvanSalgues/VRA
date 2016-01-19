@@ -33,14 +33,10 @@ import javax.mail.internet.MimeMessage;
 
 public class Fragment_signin extends Fragment {
 
-    Session session = null;
     Button in_signin, in_Login, forgottenPass;
     FragmentManager fm;
     EditText in_email, in_pass;
     Database_Manager db;
-    ProgressDialog pdialog = null;
-    Context context = null;
-    String rec,  textMessage;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View InputFragmentView = inflater.inflate(R.layout.signin, container, false);
@@ -80,6 +76,7 @@ public class Fragment_signin extends Fragment {
                         @Override
                         public void run() {
                             try {
+                                //TODO (jos || tariq) check with Darren if this is actually working.
                                 sendEmail("darrenmcn@gmail.com", "darrenmcn@gmail.com", "VRA Forgotten Password", "Pass");
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -119,7 +116,7 @@ public class Fragment_signin extends Fragment {
                         startActivity(intent);
                         getActivity().finish();
                     }
-                    // otherwise - toast sayin error !
+                    // otherwise - toast saying error !
                     else {
                         Toast.makeText(getActivity().getApplicationContext(), "No matching username and password found",
                                 Toast.LENGTH_LONG).show();
@@ -139,9 +136,6 @@ public class Fragment_signin extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // if (count == 0)
-                //     in_email.setError( "USERNAME is required!" );
-
                 if (in_pass.getText().toString().length() == 0)
                     in_pass.setError("PASSWORD is required!");
             }
