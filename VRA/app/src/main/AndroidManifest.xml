@@ -39,7 +39,6 @@
         <activity
             android:name="com.rehabilitation.VRA.Login.Activity_login"
             android:hardwareAccelerated="true"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
