@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.LayoutInflater;
@@ -74,18 +75,17 @@ public class Fragment_sensor extends Fragment implements BluetoothAdapter.LeScan
         //the old static bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         BluetoothManager manager = (BluetoothManager) getActivity().getSystemService(Context.BLUETOOTH_SERVICE);
         bluetoothAdapter = manager.getAdapter();
+        //TODO (jos | tariq) if bluetoothAdapter is null here, there's no need to continue with the fragment.
+        // There's a method enable_bluetooth later in the file. This should be consistent.
 
         // 3d Cube
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         if (savedInstanceState == null) {
             newFragment = new _3D_object();
-                       ft.replace(R.id.container_3D, newFragment);
-                       ft.commit();
-                   }
-
-        //Check if the device has bluetooth LE capabilities and enable bluetooth if it has not been already.
-        enable_bluetooth();
+            ft.replace(R.id.container_3D, newFragment);
+            ft.commit();
+        }
 
         // TextViews
         deviceInfoText = (TextView) InputFragmentView.findViewById(R.id.d_Info);
@@ -227,16 +227,19 @@ public class Fragment_sensor extends Fragment implements BluetoothAdapter.LeScan
 
         if (!getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(getActivity(), "No Bluetooth LE Support", Toast.LENGTH_SHORT).show();
-            getActivity().finish();
+            deviceInfoText.setText(" No Bluetooth LE Support in the device. This functionality cannot be used.");
+            deviceInfoText.setTextColor(Color.RED);
+            return;
         }
 
         // Ensures Bluetooth is available on the device and it is enabled. If not,
         // force enables Bluetooth.
 
-        if (bluetoothAdapter == null)
-        {
+        if (bluetoothAdapter == null) {
             Toast.makeText( getActivity().getApplicationContext(), "Device does not have bluetooth", Toast.LENGTH_SHORT).show();
-            getActivity().finish();
+            deviceInfoText.setText(" No Bluetooth Support in the device. This functionality cannot be used.");
+            deviceInfoText.setTextColor(Color.RED);
+            return;
         }
         else if (!bluetoothAdapter.isEnabled()) {
             // Force Enable Bluetooth
