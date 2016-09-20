@@ -1,7 +1,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MyActivity" >
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+    <item android:id="@+id/action_progress"
+        android:title="@string/action_progress"
         android:orderInCategory="100" />
+
+    <item android:id="@+id/action_message"
+        android:title="@string/action_message"
+        android:orderInCategory="100" />
+
+    <item android:id="@+id/action_deconnection"
+        android:title="@string/action_deconnection"
+        android:orderInCategory="100" />
+
+    <item
+        android:id="@+id/action_sensor"
+        android:icon="@drawable/icon_sensor_selected"
+        android:title="@string/action_sensor"/>
+
+    <item
+        android:id="@+id/action_exercise"
+        android:icon="@drawable/icon_exercise_unselected"
+        android:title="@string/action_exercise" />
 </menu>

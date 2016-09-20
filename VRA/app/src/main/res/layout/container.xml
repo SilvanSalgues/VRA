@@ -15,7 +15,7 @@
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_toEndOf="@+id/menu_container"
         android:id="@+id/content_layout"
-        />
+        android:layout_toEndOf="@+id/menu_container" />
+
 </RelativeLayout>

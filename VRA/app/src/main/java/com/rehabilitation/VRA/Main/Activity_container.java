@@ -9,6 +9,10 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -21,7 +25,7 @@ import com.rehabilitation.VRA.Login.Activity_login;
 import com.rehabilitation.VRA.Revise.Fragment_revise;
 import com.rehabilitation.VRA.Sensor.Fragment_sensor;
 
-public class Activity_container extends Activity {
+public class Activity_container extends AppCompatActivity {
 
     ImageButton exercise_btn, revise_btn, sensor_btn,messenger_btn, home_btn, logout_btn;
     Fragment newFragment;
@@ -29,16 +33,16 @@ public class Activity_container extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.container);
+        setContentView(R.layout.my_container);
 
         db = new Database_Manager(this);
         // Hides the action bar that would usual be at the top of the layout
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
 
-        home_btn = (ImageButton) findViewById(R.id.home_btn);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        /*home_btn = (ImageButton) findViewById(R.id.home_btn);
         exercise_btn = (ImageButton) findViewById(R.id.exercise_btn);
         revise_btn = (ImageButton) findViewById(R.id.revise_btn);
         sensor_btn = (ImageButton) findViewById(R.id.sensor_btn);
@@ -50,7 +54,7 @@ public class Activity_container extends Activity {
         revise_btn.setOnClickListener(BtnOnClickListener);
         sensor_btn.setOnClickListener(BtnOnClickListener);
         messenger_btn.setOnClickListener(BtnOnClickListener);
-        logout_btn.setOnClickListener(BtnOnClickListener);
+        logout_btn.setOnClickListener(BtnOnClickListener);*/
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -62,7 +66,7 @@ public class Activity_container extends Activity {
         }
     }
 
-    public void load_exercise_intro(){
+    /*public void load_exercise_intro(){
         enabletabs();
         exercise_btn.setEnabled(false);
         newFragment = new Fragment_exercise_intro();
@@ -134,17 +138,17 @@ public class Activity_container extends Activity {
             ft1.commit();
         }
 
-    };
+    };*/
 
-    void enabletabs(){
+    /*void enabletabs(){
         home_btn.setEnabled(true);
         exercise_btn.setEnabled(true);
         revise_btn.setEnabled(true);
         sensor_btn.setEnabled(true);
         messenger_btn.setEnabled(true);
-    }
+    }*/
 
-    void toggleicons(ImageButton button)
+    /*void toggleicons(ImageButton button)
     {
         if (button.isEnabled()){
 
@@ -187,6 +191,29 @@ public class Activity_container extends Activity {
             else
                 button.setBackground(getResources().getDrawable(R.drawable.icon_home_selected));
         }
+    }*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sensor:
+                return true;
+            case R.id.action_exercise:
+                return true;
+            case R.id.action_progress:
+                return true;
+            case R.id.action_message:
+                return true;
+            case R.id.action_deconnection:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

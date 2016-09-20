@@ -9,13 +9,14 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.rehabilitation.VRA.Main.Activity_container;
 import com.rehabilitation.VRA.Database.Database_Manager;
 import com.example.darren.VRA.R;
 
 
-public class Activity_login extends Activity {
+public class Activity_login extends AppCompatActivity {
 
     Fragment myFragment;
     Database_Manager db;

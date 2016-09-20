@@ -283,7 +283,7 @@ public class Fragment_revise extends Fragment {
             public void onClick(View v) {
                 db.open();
                 db.updateExerciseCount(db.isUserLoggedIn(), ExerciseId);
-                ((Activity_container)getActivity()).load_exercise_intro();
+                /*((Activity_container)getActivity()).load_exercise_intro();*/
                 db.close();
                 dialog.dismiss();
             }
